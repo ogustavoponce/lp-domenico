@@ -1,8 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    // --- ANIMAÇÃO ESCALONADA DE CARDS ---
+    const cards = document.querySelectorAll('.dashboard-grid .card');
+    cards.forEach((card, index) => {
+        // Adiciona um atraso crescente para cada card
+        card.style.animation = `fadeInUp 0.5s ease-out ${index * 0.1}s forwards`;
+    });
+
     // --- CONTROLE UNIVERSAL DE TEMA (LIGHT/DARK) ---
     const themeToggles = document.querySelectorAll('#theme-toggle');
-
+    // ... (o resto do código do script.js permanece o mesmo)
     const applyTheme = (theme) => {
         if (theme === 'dark-mode') {
             document.documentElement.classList.add('dark-mode');
@@ -12,10 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggles.forEach(toggle => toggle.textContent = '🌙');
         }
     };
-
     const savedTheme = localStorage.getItem('theme') || 'light-mode';
     applyTheme(savedTheme);
-
     themeToggles.forEach(toggle => {
         toggle.addEventListener('click', () => {
             const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
@@ -23,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
             applyTheme(currentTheme);
         });
     });
-
 
     // --- SAUDAÇÃO DINÂMICA (APENAS NO INDEX) ---
     const greetingElement = document.getElementById('welcome-greeting');
@@ -33,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
         let saudacao = horaAtual >= 5 && horaAtual < 12 ? "Bom dia" : horaAtual >= 12 && horaAtual < 18 ? "Boa tarde" : "Boa noite";
         greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha uma ótima ${saudacao.split(' ')[1]}.`;
     }
-
 
     // --- VALIDAÇÃO DE CADASTRO ---
     const cadastroForm = document.getElementById('cadastro-form');
@@ -48,7 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // --- VISUALIZAÇÃO DE SENHA ---
     const toggleButtons = document.querySelectorAll('.password-toggle');
     toggleButtons.forEach(button => {
@@ -59,5 +61,4 @@ document.addEventListener('DOMContentLoaded', () => {
             button.textContent = type === 'password' ? '👁️' : '🙈';
         });
     });
-
 });
