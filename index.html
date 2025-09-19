@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma do Professor</title>
+    <title>Contato</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,80 +14,31 @@
     <header class="main-header">
         <div class="header-content">
             <div class="logo">
-                <img src="https://via.placeholder.com/40" alt="Logo">
-                <span>Minha Disciplina</span>
+                <a href="index.html" style="text-decoration: none; color: inherit;">Professor Domenico</a>
             </div>
             <nav class="main-nav">
-                <ul>
-                    <li><a href="#" class="active">Início</a></li>
-                    <li><a href="#">Atividades</a></li>
-                    <li><a href="#">Materiais</a></li>
-                    <li><a href="#">Alunos</a></li>
-                    <li><a href="#">Contato</a></li>
+                 <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="#">Apostila</a></li>
+                    <li><a href="contato.html" class="active">Contato</a></li>
                 </ul>
             </nav>
+            <div class="header-actions">
+                <a href="login.html" class="btn-secondary">Sair</a>
+            </div>
         </div>
     </header>
 
     <main class="container">
-        <section class="banner">
-            <h1>Bem-vindo(a) à nossa turma!</h1>
-            <p>Fique por dentro dos últimos avisos e atividades.</p>
-        </section>
-
-        <div class="dashboard-grid">
-            <section class="main-feed">
-                <h2>📢 Mural de Avisos</h2>
-                <article class="card">
-                    <div class="card-header">
-                        <h3>Lembrete: Prova na Próxima Semana</h3>
-                        <span>Postado em 18 de Setembro</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Pessoal, não se esqueçam que nossa avaliação será na próxima quarta-feira. O conteúdo abrange os capítulos 3 e 4.</p>
-                    </div>
-                </article>
-                <article class="card">
-                    <div class="card-header">
-                        <h3>Material Complementar Disponível</h3>
-                        <span>Postado em 15 de Setembro</span>
-                    </div>
-                    <div class="card-body">
-                        <p>Adicionei uma lista de vídeos na seção "Materiais" para ajudar nos estudos. Bom proveito!</p>
-                    </div>
-                </article>
-            </section>
-
-            <aside class="side-panel">
-                <section>
-                    <h2>📝 Próximas Atividades</h2>
-                    <div class="card activity-card">
-                        <div class="card-body">
-                            <h4>Exercício de Fixação 05</h4>
-                            <p class="due-date">Prazo: 23 de Setembro de 2025</p>
-                            <a href="#" class="btn">Enviar Resposta</a>
-                        </div>
-                    </div>
-                </section>
-               
-                <section>
-                    <h2>📚 Progresso do Aluno</h2>
-                    <div class="card progress-card">
-                        <div class="card-body">
-                            <p>Conclusão das atividades</p>
-                            <div class="progress-bar-container">
-                                <div class="progress-bar" style="width: 75%;"></div>
-                            </div>
-                            <span>75% Concluído</span>
-                        </div>
-                    </div>
-                </section>
-            </aside>
+         <div class="contact-card">
+            <h2>Informações de Contato</h2>
+            <p>Para dúvidas sobre a matéria, entre em contato pelo e-mail abaixo:</p>
+            <a href="mailto:email.do.domenico@exemplo.com" class="email-link">email.do.domenico@exemplo.com</a>
         </div>
     </main>
 
     <footer class="main-footer">
-        <p>&copy; 2025 Nome do Professor. Todos os direitos reservados.</p>
+        <p>&copy; 2025 Professor Domenico. Todos os direitos reservados.</p>
     </footer>
 
 </body>
