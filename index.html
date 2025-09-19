@@ -1,17 +1,17 @@
 <!DOCTYPE html>
-<html lang="pt-br"> <head>
+<html lang="pt-br">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma do Professor Domenico</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header class="main-header">
         <div class="header-content">
-            <div class="logo">
-                <span>Professor Domenico</span>
-            </div>
+            <a href="index.html" class="logo">Professor Domenico</a>
             <div class="header-right">
                 <nav class="main-nav">
                     <ul>
@@ -27,61 +27,41 @@
             </div>
         </div>
     </header>
-
     <main class="container">
         <section class="welcome-banner card">
-            <h1 id="welcome-greeting">Carregando saudação...</h1>
+            <h1 id="welcome-greeting">Carregando...</h1>
             <p>Que bom ter você por aqui! Confira as últimas atualizações da plataforma.</p>
         </section>
-
         <div class="dashboard-layout">
             <div class="main-content">
                 <div class="card">
-                    <div class="card-title">
-                        <h2>📢 Mural de Avisos</h2>
-                    </div>
-                    <p>Fique atento aos comunicados mais recentes do professor.</p>
-                    <div class="avisos-list">
-                        <div class="aviso-item">
-                            <h4>Boas-vindas à Turma</h4>
-                            <p>Sejam todos bem-vindos! Utilizaremos este espaço para comunicados. A apostila já está disponível no menu superior. <span>(Atualizado em: 19/09)</span></p>
-                        </div>
+                    <div class="card-title"><h2>📢 Mural de Avisos</h2></div>
+                    <div class="aviso-item">
+                        <h4>Boas-vindas à Turma</h4>
+                        <p>Sejam todos bem-vindos! Utilizaremos este espaço para comunicados. A apostila já está disponível no menu superior.<span>Atualizado em: 19/09</span></p>
                     </div>
                 </div>
-                 <div class="card">
-                    <div class="card-title">
-                        <h2>💬 Fórum de Dúvidas</h2>
-                    </div>
-                    <p>Um espaço para colaborar com seus colegas e tirar dúvidas sobre a matéria. Clique no botão abaixo para acessar.</p>
+                <div class="card">
+                    <div class="card-title"><h2>💬 Fórum de Dúvidas</h2></div>
+                    <p>Um espaço para colaborar com seus colegas e tirar dúvidas sobre a matéria.</p>
                     <a href="#" class="btn-card" style="margin-top: 1rem;">Acessar Fórum</a>
                 </div>
             </div>
-
             <div class="sidebar">
                 <div class="card">
-                    <div class="card-title">
-                        <h2>📝 Atividades</h2>
-                    </div>
-                    <div class="atividade-item">
-                        <h4>Exercício de Fixação 05</h4>
-                        <p class="due-date">Prazo: 23 de Setembro de 2025</p>
-                        <a href="#" class="btn-card">Enviar Resposta</a>
-                    </div>
+                    <div class="card-title"><h2>📝 Atividades</h2></div>
+                    <h4>Exercício de Fixação 05</h4>
+                    <p class="due-date">Prazo: 23 de Setembro de 2025</p>
+                    <a href="#" class="btn-card">Enviar Resposta</a>
                 </div>
                 <div class="card">
-                    <div class="card-title">
-                        <h2>📈 Progresso</h2>
-                    </div>
+                    <div class="card-title"><h2>📈 Progresso</h2></div>
                     <p>Total de atividades concluídas</p>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar" style="width: 75%;"></div>
-                    </div>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
                     <strong>75%</strong>
                 </div>
-                 <div class="card">
-                    <div class="card-title">
-                        <h2>📚 Recursos</h2>
-                    </div>
+                <div class="card">
+                    <div class="card-title"><h2>📚 Recursos</h2></div>
                     <ul class="resource-list">
                         <li><a href="#">📅 Calendário de Provas</a></li>
                         <li><a href="#">🔗 Links Úteis</a></li>
@@ -90,11 +70,7 @@
             </div>
         </div>
     </main>
-
-    <footer class="main-footer">
-        <p>&copy; 2025 Professor Domenico. Todos os direitos reservados.</p>
-    </footer>
-
+    <footer class="main-footer"><p>&copy; 2025 Professor Domenico</p></footer>
     <script src="script.js"></script>
 </body>
 </html>

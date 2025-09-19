@@ -1,36 +1,31 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- 1. CONTROLE DO TEMA (LIGHT/DARK) ---
-    const themeToggle = document.getElementById('theme-toggle');
-    const htmlElement = document.documentElement;
+    // --- CONTROLE UNIVERSAL DE TEMA (LIGHT/DARK) ---
+    const themeToggles = document.querySelectorAll('#theme-toggle');
 
-    // Verifica se já existe um tema salvo no navegador
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-        htmlElement.classList.add(savedTheme);
-        themeToggle.textContent = savedTheme === 'dark-mode' ? '☀️' : '🌙';
-    } else {
-        // Se não houver tema salvo, define o padrão
-        themeToggle.textContent = '🌙';
-    }
-
-    themeToggle.addEventListener('click', () => {
-        // Alterna a classe no elemento <html>
-        htmlElement.classList.toggle('dark-mode');
-
-        // Salva a preferência no navegador
-        if (htmlElement.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark-mode');
-            themeToggle.textContent = '☀️';
+    const applyTheme = (theme) => {
+        if (theme === 'dark-mode') {
+            document.documentElement.classList.add('dark-mode');
+            themeToggles.forEach(toggle => toggle.textContent = '☀️');
         } else {
-            localStorage.setItem('theme', 'light-mode'); // Salva como 'light-mode'
-            localStorage.removeItem('theme'); // Ou remove para usar o padrão
-            themeToggle.textContent = '🌙';
+            document.documentElement.classList.remove('dark-mode');
+            themeToggles.forEach(toggle => toggle.textContent = '🌙');
         }
+    };
+
+    const savedTheme = localStorage.getItem('theme') || 'light-mode';
+    applyTheme(savedTheme);
+
+    themeToggles.forEach(toggle => {
+        toggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        });
     });
 
 
-    // --- 2. SAUDAÇÃO DINÂMICA ---
+    // --- SAUDAÇÃO DINÂMICA (APENAS NO INDEX) ---
     const greetingElement = document.getElementById('welcome-greeting');
     if (greetingElement) {
         const nomeDoUsuario = "Gustavo"; // Simulado
@@ -40,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 3. VERIFICAÇÃO DE SENHA NO CADASTRO ---
+    // --- VALIDAÇÃO DE CADASTRO ---
     const cadastroForm = document.getElementById('cadastro-form');
     if (cadastroForm) {
         cadastroForm.addEventListener('submit', (event) => {
@@ -54,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- 4. FUNCIONALIDADE DE "VER/OCULTAR" SENHA ---
+    // --- VISUALIZAÇÃO DE SENHA ---
     const toggleButtons = document.querySelectorAll('.password-toggle');
     toggleButtons.forEach(button => {
         button.addEventListener('click', () => {
