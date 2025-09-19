@@ -8,40 +8,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="container centered-container">
-        <div class="form-container">
-            <h2>Crie sua Conta para Acessar</h2>
-            <p>O cadastro é obrigatório para novos alunos.</p>
-            <form id="cadastro-form" action="index.html">
-                <div class="input-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" name="nome" required>
-                </div>
-                <div class="input-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="input-group">
-                    <label for="senha">Crie uma Senha</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="senha" name="senha" required>
-                        <span class="password-toggle">👁️</span>
-                    </div>
-                </div>
-                <div class="input-group">
-                    <label for="confirmar-senha">Confirme sua Senha</label>
-                    <div class="password-wrapper">
-                        <input type="password" id="confirmar-senha" name="confirmar-senha" required>
-                        <span class="password-toggle">👁️</span>
-                    </div>
-                </div>
-                <button type="submit" class="btn-submit">Cadastrar e Entrar</button>
-            </form>
-            <div class="form-footer">
-                <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+    <div class="auth-container">
+        <div class="auth-branding">
+            <div class="branding-content">
+                <h2>Plataforma do Professor Domenico</h2>
+                <p>Um ambiente de aprendizado moderno e interativo.</p>
             </div>
         </div>
-    </main>
+        <div class="auth-form">
+            <button id="theme-toggle" class="theme-button auth-theme-button">☀️</button>
+            <div class="form-container">
+                <h2>Crie sua Conta</h2>
+                <p>O cadastro é rápido e fácil.</p>
+                <form id="cadastro-form" action="index.html">
+                    <div class="input-group">
+                        <label for="nome">Nome Completo</label>
+                        <input type="text" id="nome" name="nome" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Crie uma Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="senha" name="senha" required>
+                            <span class="password-toggle">👁️</span>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label for="confirmar-senha">Confirme sua Senha</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="confirmar-senha" name="confirmar-senha" required>
+                            <span class="password-toggle">👁️</span>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-submit">Cadastrar e Entrar</button>
+                </form>
+                <div class="form-footer">
+                    <p>Já tem uma conta? <a href="login.html">Faça login aqui</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
