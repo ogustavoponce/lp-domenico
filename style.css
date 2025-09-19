@@ -1,19 +1,20 @@
 /* ==========================================================================
-   CSS DEFINITIVO - TEMA CLARO, ALINHADO E COM RECURSOS COMPLETOS
+   CSS DEFINITIVO v2 - COM MENU ALINHADO E EFEITOS DINÂMICOS
    ========================================================================== */
 
 /* 1. PALETA DE CORES (TEMA CLARO) E FONTES
    -------------------------------------------------------------------------- */
 :root {
-    --cor-fundo: #f4f6f9;          /* Cinza muito claro, suave */
-    --cor-superficie: #ffffff;     /* Branco puro para cards e cabeçalho */
-    --cor-borda: #dee2e6;          /* Borda cinza clara e sutil */
-    --cor-primaria: #007bff;       /* Azul profissional e vibrante */
-    --cor-texto-principal: #212529;/* Cinza escuro, quase preto, para leitura */
-    --cor-texto-secundario: #6c757d;/* Cinza secundário para detalhes */
+    --cor-fundo: #f4f6f9;
+    --cor-superficie: #ffffff;
+    --cor-borda: #dee2e6;
+    --cor-primaria: #007bff;
+    --cor-texto-principal: #212529;
+    --cor-texto-secundario: #6c757d;
     
     --fonte-principal: 'Poppins', sans-serif;
     --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.08);
+    --sombra-hover: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra mais forte para hover */
 }
 
 /* 2. CONFIGURAÇÕES GLOBAIS
@@ -34,24 +35,10 @@ body {
 a {
     color: var(--cor-primaria);
     text-decoration: none;
+    transition: color 0.3s ease; /* Transição suave para links */
 }
 
-/* 3. CONTAINERS E LAYOUT
-   -------------------------------------------------------------------------- */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 2rem;
-}
-
-.centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-/* 4. CABEÇALHO E NAVEGAÇÃO
+/* 3. CABEÇALHO E NAVEGAÇÃO
    -------------------------------------------------------------------------- */
 .main-header {
     background-color: var(--cor-superficie);
@@ -72,9 +59,11 @@ a {
     font-weight: 600;
 }
 
-.main-nav {
-    margin: 0 auto;
-    padding-left: 100px;
+/* 3.1 - AJUSTE DE ALINHAMENTO DO CABEÇALHO */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem; /* Espaço entre o menu e o botão 'Sair' */
 }
 
 .main-nav ul {
@@ -86,80 +75,59 @@ a {
 .main-nav a {
     font-weight: 500;
     color: var(--cor-texto-secundario);
+    transition: color 0.3s ease;
 }
 
 .main-nav a.active, .main-nav a:hover {
     color: var(--cor-primaria);
 }
 
-/* 5. FORMULÁRIOS (LOGIN E CADASTRO)
-   -------------------------------------------------------------------------- */
-.form-container {
-    width: 100%;
-    max-width: 450px;
-    background-color: var(--cor-superficie);
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: var(--sombra-suave);
-    text-align: center;
-}
+/* (As outras seções do CSS permanecem as mesmas) */
+
+/* 4. LAYOUT, CONTAINERS, FORMULÁRIOS, BOTÕES... */
+.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.centered-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
+.main-feed h2, .side-panel h2 { font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px solid var(--cor-borda); padding-bottom: 0.5rem; }
+.side-panel section:not(:last-child) { margin-bottom: 2rem; }
+.form-container { width: 100%; max-width: 450px; background-color: var(--cor-superficie); padding: 2.5rem; border-radius: 8px; box-shadow: var(--sombra-suave); text-align: center; }
 .form-container h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
 .form-container p { margin-bottom: 2rem; color: var(--cor-texto-secundario); }
 .input-group { margin-bottom: 1.5rem; text-align: left; }
 .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-.input-group input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    font-size: 1rem;
-    border: 1px solid var(--cor-borda);
-    border-radius: 6px;
-}
+.input-group input { width: 100%; padding: 0.8rem 1rem; font-size: 1rem; border: 1px solid var(--cor-borda); border-radius: 6px; transition: border-color 0.3s ease, box-shadow 0.3s ease; } /* Transição adicionada */
 .form-footer { margin-top: 1.5rem; }
+.btn-submit { width: 100%; padding: 0.9rem; font-size: 1.1rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; } /* Transição adicionada */
+.btn-secondary { font-weight: 500; color: var(--cor-texto-principal); background-color: var(--cor-superficie); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 6px; transition: background-color 0.3s ease; } /* Transição adicionada */
+.btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 6px; transition: background-color 0.3s ease; } /* Transição adicionada */
+.contact-card { text-align: center; }
+.email-link { font-size: 1.2rem; font-weight: 500; }
+.main-footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-secundario); }
+.progress-bar-container { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; margin: 1rem 0 0.5rem; }
+.progress-bar { height: 100%; background-color: var(--cor-primaria); border-radius: 4px; }
+@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .header-right { gap: 1rem; } .main-nav { display: none; } }
 
-/* 6. BOTÕES
+
+/* 5. ANIMAÇÕES E EFEITOS DINÂMICOS (CSS PURO)
    -------------------------------------------------------------------------- */
-.btn-submit {
-    width: 100%;
-    padding: 0.9rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #fff;
-    background-color: var(--cor-primaria);
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-.btn-submit:hover { background-color: #0056b3; }
 
-.btn-secondary {
-    font-weight: 500;
-    color: var(--cor-texto-principal);
-    background-color: var(--cor-superficie);
-    border: 1px solid var(--cor-borda);
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-}
-.btn-secondary:hover { background-color: #e9ecef; }
-
-/* 7. LAYOUT DA PÁGINA INICIAL (COM GRID)
-   -------------------------------------------------------------------------- */
-.dashboard-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr; /* Coluna principal 2x maior que a lateral */
-    gap: 2rem; /* Espaço entre as colunas */
+/* Animação de entrada suave para o conteúdo principal */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.main-feed h2, .side-panel h2 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid var(--cor-borda);
-    padding-bottom: 0.5rem;
+.dashboard-grid, .form-container, .contact-card {
+    animation: fadeInUp 0.6s ease-out forwards;
 }
-.side-panel section:not(:last-child) { margin-bottom: 2rem; }
 
-/* 8. CARDS
-   -------------------------------------------------------------------------- */
+/* Efeito de "flutuar" nos cards */
 .card {
     background-color: var(--cor-superficie);
     border: 1px solid var(--cor-borda);
@@ -167,31 +135,22 @@ a {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     box-shadow: var(--sombra-suave);
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
 }
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+
+.card:hover {
+    transform: translateY(-5px); /* Efeito de levantar */
+    box-shadow: var(--sombra-hover); /* Sombra mais destacada */
 }
-.card-header h3 { font-size: 1.2rem; }
-.card-header span { font-size: 0.9rem; color: var(--cor-texto-secundario); }
 
-/* Card de Atividade e Progresso */
-.activity-card .due-date { color: var(--cor-texto-secundario); margin: 0.25rem 0 1rem; }
-.btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 6px; }
-.progress-bar-container { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; margin: 1rem 0 0.5rem; }
-.progress-bar { height: 100%; background-color: var(--cor-primaria); border-radius: 4px; }
+/* Feedback visual em botões */
+.btn-submit:hover { background-color: #0056b3; transform: translateY(-2px); }
+.btn-secondary:hover { background-color: #e9ecef; }
+.btn-card:hover { background-color: #0056b3; }
 
-/* 9. RODAPÉ E OUTROS
-   -------------------------------------------------------------------------- */
-.contact-card { text-align: center; }
-.email-link { font-size: 1.2rem; font-weight: 500; }
-.main-footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-secundario); }
-
-/* 10. RESPONSIVIDADE
-   -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
-    .dashboard-grid { grid-template-columns: 1fr; }
-    .main-nav { display: none; }
+/* Feedback visual em campos de formulário */
+.input-group input:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); /* Brilho suave */
 }
