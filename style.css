@@ -111,3 +111,26 @@ a { color: var(--cor-primaria); text-decoration: none; transition: color 0.3s ea
 .btn-card:hover { background-color: #0056b3; }
 .input-group input:focus { outline: none; border-color: var(--cor-primaria); box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); }
 @media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .header-right { gap: 1rem; } .main-nav { display: none; } }
+/* (Todo o código CSS anterior permanece o mesmo) */
+/* ... */
+
+/* NOVO: ESTILO PARA O WRAPPER DA SENHA E ÍCONE DE VISUALIZAÇÃO */
+.password-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.password-wrapper input {
+    width: 100%;
+    padding-right: 3rem; /* Espaço para o ícone não sobrepor o texto */
+}
+
+.password-toggle {
+    position: absolute;
+    right: 1rem;
+    cursor: pointer;
+    user-select: none; /* Impede que o ícone seja selecionado como texto */
+    font-size: 1.2rem;
+    color: var(--cor-texto-secundario);
+}
