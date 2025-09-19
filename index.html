@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma do Professor Domenico</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -22,27 +20,47 @@
                     <li><a href="contato.html">Contato</a></li>
                 </ul>
             </nav>
-            <div class="header-actions">
-                <a href="login.html" class="btn-secondary">Sair</a>
-            </div>
+            <a href="login.html" class="btn-secondary">Sair</a>
         </div>
     </header>
+
     <main class="container">
-        <section class="banner">
-            <h1>Mural de Avisos</h1>
-        </section>
-        <div class="avisos-container">
-            <article class="card">
-                <div class="card-header">
-                    <h3>Boas-vindas à Turma</h3>
-                    <span>Atualizado em: 19 de Setembro de 2025</span>
-                </div>
-                <div class="card-body">
-                    <p>Sejam todos bem-vindos! Utilizaremos este espaço para comunicados. A apostila já está disponível no menu superior.</p>
-                </div>
-            </article>
+        <div class="dashboard-grid">
+            <section class="main-feed">
+                <h2>Mural de Avisos</h2>
+                <article class="card">
+                    <div class="card-header">
+                        <h3>Boas-vindas à Turma</h3>
+                        <span>Atualizado em: 19 de Setembro de 2025</span>
+                    </div>
+                    <div class="card-body">
+                        <p>Sejam todos bem-vindos! Utilizaremos este espaço para comunicados. A apostila já está disponível no menu superior.</p>
+                    </div>
+                </article>
+            </section>
+            <aside class="side-panel">
+                <section>
+                    <h2>Próximas Atividades</h2>
+                    <div class="card activity-card">
+                        <h4>Exercício de Fixação 05</h4>
+                        <p class="due-date">Prazo: 23 de Setembro de 2025</p>
+                        <a href="#" class="btn-card">Enviar Resposta</a>
+                    </div>
+                </section>
+                <section>
+                    <h2>Progresso do Aluno</h2>
+                    <div class="card">
+                        <p>Total de atividades concluídas</p>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" style="width: 75%;"></div>
+                        </div>
+                        <strong>75%</strong>
+                    </div>
+                </section>
+            </aside>
         </div>
     </main>
+
     <footer class="main-footer">
         <p>&copy; 2025 Professor Domenico. Todos os direitos reservados.</p>
     </footer>
