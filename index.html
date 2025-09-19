@@ -3,24 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato</title>
+    <title>Plataforma do Professor Domenico</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
     <header class="main-header">
         <div class="header-content">
             <div class="logo">
-                <a href="index.html" style="text-decoration: none; color: inherit;">Professor Domenico</a>
+                <span>Professor Domenico</span>
             </div>
             <nav class="main-nav">
-                 <ul>
-                    <li><a href="index.html">Início</a></li>
+                <ul>
+                    <li><a href="index.html" class="active">Início</a></li>
                     <li><a href="#">Apostila</a></li>
-                    <li><a href="contato.html" class="active">Contato</a></li>
+                    <li><a href="contato.html">Contato</a></li>
                 </ul>
             </nav>
             <div class="header-actions">
@@ -28,18 +27,24 @@
             </div>
         </div>
     </header>
-
     <main class="container">
-         <div class="contact-card">
-            <h2>Informações de Contato</h2>
-            <p>Para dúvidas sobre a matéria, entre em contato pelo e-mail abaixo:</p>
-            <a href="mailto:email.do.domenico@exemplo.com" class="email-link">email.do.domenico@exemplo.com</a>
+        <section class="banner">
+            <h1>Mural de Avisos</h1>
+        </section>
+        <div class="avisos-container">
+            <article class="card">
+                <div class="card-header">
+                    <h3>Boas-vindas à Turma</h3>
+                    <span>Atualizado em: 19 de Setembro de 2025</span>
+                </div>
+                <div class="card-body">
+                    <p>Sejam todos bem-vindos! Utilizaremos este espaço para comunicados. A apostila já está disponível no menu superior.</p>
+                </div>
+            </article>
         </div>
     </main>
-
     <footer class="main-footer">
         <p>&copy; 2025 Professor Domenico. Todos os direitos reservados.</p>
     </footer>
-
 </body>
 </html>
