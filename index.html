@@ -3,10 +3,99 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma do Professor Domenico</title>
+    <title>Plataforma do Professor Domenico - Versão Final</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==========================================================================
+           CSS FINAL E SEGURO - TUDO EM UM ARQUIVO
+           ========================================================================== */
+
+        /* 1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS */
+        :root {
+            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #dee2e6;
+            --cor-primaria: #007bff; --cor-primaria-hover: #0056b3;
+            --cor-texto-principal: #212529; --cor-texto-secundario: #6c757d;
+            --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.07);
+            --sombra-hover: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        html.dark-mode {
+            --cor-fundo: #121212; --cor-superficie: #1e1e1e; --cor-borda: #3a3a3a;
+            --cor-primaria: #8ab4f8; --cor-primaria-hover: #a3c7f9;
+            --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
+            --sombra-suave: 0 5px 15px rgba(0, 0, 0, 0.2);
+            --sombra-hover: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); transition: background-color 0.3s ease, color 0.3s ease; line-height: 1.6; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 2. CABEÇALHO E NAVEGAÇÃO */
+        .main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 1rem 2rem; position: sticky; top: 0; z-index: 1000; }
+        .header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
+        .header-right { display: flex; align-items: center; gap: 2.5rem; }
+        .header-actions { display: flex; align-items: center; gap: 1rem; }
+        .main-nav ul { list-style: none; display: flex; gap: 2rem; }
+        .main-nav a { font-weight: 500; color: var(--cor-texto-secundario); text-decoration: none; }
+        .main-nav a.active, .main-nav a:hover { color: var(--cor-primaria); }
+
+        /* 3. LAYOUT DO DASHBOARD (ESTÁVEL COM FLEXBOX) */
+        .dashboard-layout {
+            display: flex;
+            align-items: flex-start; /* Alinha os itens no topo */
+            flex-wrap: wrap; /* Permite quebrar em telas menores */
+            gap: 2rem;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        .main-content {
+            flex: 2; /* Ocupa 2/3 do espaço */
+            min-width: 350px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        .sidebar {
+            flex: 1; /* Ocupa 1/3 do espaço */
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* 4. CARDS E CONTEÚDO VISUAL */
+        .card { background-color: var(--cor-superficie); border-radius: 12px; padding: 1.5rem; box-shadow: var(--sombra-suave); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--sombra-hover); }
+        .card-title { display: flex; align-items: center; gap: 0.75rem; border-bottom: 1px solid var(--cor-borda); padding-bottom: 1rem; margin-bottom: 1rem; }
+        .card-title svg { color: var(--cor-primaria); }
+        .card-title h2 { font-size: 1.3rem; margin: 0; padding: 0; border: none; }
+        .welcome-banner { text-align: center; border-left: 5px solid var(--cor-primaria); animation: fadeInUp 0.5s ease-out forwards; margin-bottom: 2rem; }
+        .welcome-banner h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .aviso-item { border-top: 1px solid var(--cor-borda); padding-top: 1.2rem; margin-top: 1.2rem; }
+        .aviso-item:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+        .aviso-item span { color: var(--cor-texto-secundario); font-size: 0.85rem; display: block; margin-top: 0.25rem; }
+        .due-date { color: var(--cor-texto-secundario); }
+        .progress-bar-container { height: 8px; background-color: var(--cor-fundo); border-radius: 4px; overflow: hidden; margin: 1rem 0 0.5rem; }
+        .progress-bar { height: 100%; background-color: var(--cor-primaria); border-radius: 4px; }
+        .resource-list { list-style: none; padding: 0; }
+        .resource-list li { margin-bottom: 0.5rem; }
+        
+        /* 5. BOTÕES (COM CORREÇÃO PARA LINKS) */
+        .theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); transition: all 0.3s ease; }
+        .theme-button:hover { background-color: var(--cor-fundo); transform: scale(1.1) rotate(15deg); }
+        .btn-secondary { color: var(--cor-texto-principal); background-color: transparent; border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none !important; display: inline-block; transition: background-color 0.3s ease; }
+        .btn-secondary:hover { background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
+        .btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 8px; font-weight: 500; text-decoration: none !important; }
+        .btn-card:hover { background-color: var(--cor-primaria-hover); }
+
+        /* 6. RODAPÉ E RESPONSIVIDADE */
+        .main-footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-secundario); }
+        @media (max-width: 900px) {
+            .main-content, .sidebar { min-width: 100%; flex-basis: 100%; }
+            .main-nav { display: none; }
+        }
+    </style>
 </head>
 <body>
     <header class="main-header">
@@ -32,7 +121,6 @@
             <h1 id="welcome-greeting">Carregando...</h1>
             <p>Que bom ter você por aqui! Confira as últimas atualizações da plataforma.</p>
         </section>
-
         <div class="dashboard-layout">
             <div class="main-content">
                 <div class="card">
@@ -87,6 +175,38 @@
         </div>
     </main>
     <footer class="main-footer"><p>&copy; 2025 Professor Domenico</p></footer>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- CONTROLE UNIVERSAL DE TEMA (LIGHT/DARK) ---
+            const themeToggles = document.querySelectorAll('#theme-toggle');
+            const applyTheme = (theme) => {
+                if (theme === 'dark-mode') {
+                    document.documentElement.classList.add('dark-mode');
+                    themeToggles.forEach(toggle => toggle.textContent = '☀️');
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                    themeToggles.forEach(toggle => toggle.textContent = '🌙');
+                }
+            };
+            const savedTheme = localStorage.getItem('theme') || 'light-mode';
+            applyTheme(savedTheme);
+            themeToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
+                    localStorage.setItem('theme', currentTheme);
+                    applyTheme(currentTheme);
+                });
+            });
+
+            // --- SAUDAÇÃO DINÂMICA (APENAS NO INDEX) ---
+            const greetingElement = document.getElementById('welcome-greeting');
+            if (greetingElement) {
+                const nomeDoUsuario = "Gustavo"; // Simulado
+                const horaAtual = new Date().getHours();
+                let saudacao = horaAtual >= 5 && horaAtual < 12 ? "Bom dia" : horaAtual >= 12 && horaAtual < 18 ? "Boa tarde" : "Boa noite";
+                greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha uma ${saudacao.split(' ')[0].toLowerCase()}.`;
+            }
+        });
+    </script>
 </body>
 </html>
