@@ -1,9 +1,61 @@
+/* (Todo o código CSS anterior permanece o mesmo) */
+/* ... */
+
+/* ESTILOS ADICIONADOS NO FINAL DO ARQUIVO */
+
+/* NOVO: BANNER DE BOAS-VINDAS */
+.welcome-banner {
+    background: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid var(--cor-primaria);
+}
+
+.welcome-banner h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto-principal);
+}
+
+.welcome-banner p {
+    font-size: 1.1rem;
+    color: var(--cor-texto-secundario);
+}
+
+/* NOVO: ESTILOS PARA CARDS DE RECURSOS */
+.resource-card h4 {
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.resource-card p {
+    font-size: 0.95rem;
+    color: var(--cor-texto-secundario);
+    line-height: 1.5;
+}
+
+.resource-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 0.5rem;
+}
+
+.resource-list li {
+    margin-bottom: 0.5rem;
+}
+
+.resource-list a {
+    font-weight: 500;
+}
+
+
 /* ==========================================================================
    CSS DEFINITIVO v2 - COM MENU ALINHADO E EFEITOS DINÂMICOS
    ========================================================================== */
 
-/* 1. PALETA DE CORES (TEMA CLARO) E FONTES
-   -------------------------------------------------------------------------- */
+/* 1. PALETA DE CORES (TEMA CLARO) E FONTES */
 :root {
     --cor-fundo: #f4f6f9;
     --cor-superficie: #ffffff;
@@ -14,143 +66,48 @@
     
     --fonte-principal: 'Poppins', sans-serif;
     --sombra-suave: 0 4px 12px rgba(0, 0, 0, 0.08);
-    --sombra-hover: 0 8px 20px rgba(0, 0, 0, 0.12); /* Sombra mais forte para hover */
+    --sombra-hover: 0 8px 20px rgba(0, 0, 0, 0.12);
 }
 
-/* 2. CONFIGURAÇÕES GLOBAIS
-   -------------------------------------------------------------------------- */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* 2. CONFIGURAÇÕES GLOBAIS */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--fonte-principal); background-color: var(--cor-fundo); color: var(--cor-texto-principal); line-height: 1.7; }
+a { color: var(--cor-primaria); text-decoration: none; transition: color 0.3s ease; }
 
-body {
-    font-family: var(--fonte-principal);
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-principal);
-    line-height: 1.7;
-}
+/* 3. CABEÇALHO E NAVEGAÇÃO */
+.main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 1rem 2rem; }
+.header-content { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; }
+.logo { font-size: 1.3rem; font-weight: 600; }
+.header-right { display: flex; align-items: center; gap: 2.5rem; }
+.main-nav ul { list-style: none; display: flex; gap: 2rem; }
+.main-nav a { font-weight: 500; color: var(--cor-texto-secundario); transition: color 0.3s ease; }
+.main-nav a.active, .main-nav a:hover { color: var(--cor-primaria); }
 
-a {
-    color: var(--cor-primaria);
-    text-decoration: none;
-    transition: color 0.3s ease; /* Transição suave para links */
-}
-
-/* 3. CABEÇALHO E NAVEGAÇÃO
-   -------------------------------------------------------------------------- */
-.main-header {
-    background-color: var(--cor-superficie);
-    border-bottom: 1px solid var(--cor-borda);
-    padding: 1rem 2rem;
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.logo {
-    font-size: 1.3rem;
-    font-weight: 600;
-}
-
-/* 3.1 - AJUSTE DE ALINHAMENTO DO CABEÇALHO */
-.header-right {
-    display: flex;
-    align-items: center;
-    gap: 2.5rem; /* Espaço entre o menu e o botão 'Sair' */
-}
-
-.main-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 2rem;
-}
-
-.main-nav a {
-    font-weight: 500;
-    color: var(--cor-texto-secundario);
-    transition: color 0.3s ease;
-}
-
-.main-nav a.active, .main-nav a:hover {
-    color: var(--cor-primaria);
-}
-
-/* (As outras seções do CSS permanecem as mesmas) */
-
-/* 4. LAYOUT, CONTAINERS, FORMULÁRIOS, BOTÕES... */
+/* 4. LAYOUT, FORMS, BOTÕES... */
 .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
 .centered-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 .dashboard-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; }
 .main-feed h2, .side-panel h2 { font-size: 1.4rem; margin-bottom: 1rem; border-bottom: 2px solid var(--cor-borda); padding-bottom: 0.5rem; }
 .side-panel section:not(:last-child) { margin-bottom: 2rem; }
 .form-container { width: 100%; max-width: 450px; background-color: var(--cor-superficie); padding: 2.5rem; border-radius: 8px; box-shadow: var(--sombra-suave); text-align: center; }
-.form-container h2 { margin-bottom: 0.5rem; font-size: 1.8rem; }
-.form-container p { margin-bottom: 2rem; color: var(--cor-texto-secundario); }
 .input-group { margin-bottom: 1.5rem; text-align: left; }
 .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-.input-group input { width: 100%; padding: 0.8rem 1rem; font-size: 1rem; border: 1px solid var(--cor-borda); border-radius: 6px; transition: border-color 0.3s ease, box-shadow 0.3s ease; } /* Transição adicionada */
-.form-footer { margin-top: 1.5rem; }
-.btn-submit { width: 100%; padding: 0.9rem; font-size: 1.1rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; } /* Transição adicionada */
-.btn-secondary { font-weight: 500; color: var(--cor-texto-principal); background-color: var(--cor-superficie); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 6px; transition: background-color 0.3s ease; } /* Transição adicionada */
-.btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 6px; transition: background-color 0.3s ease; } /* Transição adicionada */
-.contact-card { text-align: center; }
-.email-link { font-size: 1.2rem; font-weight: 500; }
-.main-footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-secundario); }
+.input-group input { width: 100%; padding: 0.8rem 1rem; font-size: 1rem; border: 1px solid var(--cor-borda); border-radius: 6px; transition: border-color 0.3s ease, box-shadow 0.3s ease; }
+.btn-submit { width: 100%; padding: 0.9rem; font-size: 1.1rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.3s ease, transform 0.2s ease; }
+.btn-secondary { font-weight: 500; color: var(--cor-texto-principal); background-color: var(--cor-superficie); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 6px; transition: background-color 0.3s ease; }
+.btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 6px; transition: background-color 0.3s ease; }
+.card { background-color: var(--cor-superficie); border: 1px solid var(--cor-borda); border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: var(--sombra-suave); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; }
 .progress-bar-container { height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; margin: 1rem 0 0.5rem; }
 .progress-bar { height: 100%; background-color: var(--cor-primaria); border-radius: 4px; }
-@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .header-right { gap: 1rem; } .main-nav { display: none; } }
+.main-footer { text-align: center; padding: 2rem; margin-top: 2rem; border-top: 1px solid var(--cor-borda); color: var(--cor-texto-secundario); }
 
-
-/* 5. ANIMAÇÕES E EFEITOS DINÂMICOS (CSS PURO)
-   -------------------------------------------------------------------------- */
-
-/* Animação de entrada suave para o conteúdo principal */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.dashboard-grid, .form-container, .contact-card {
-    animation: fadeInUp 0.6s ease-out forwards;
-}
-
-/* Efeito de "flutuar" nos cards */
-.card {
-    background-color: var(--cor-superficie);
-    border: 1px solid var(--cor-borda);
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: var(--sombra-suave);
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transição suave */
-}
-
-.card:hover {
-    transform: translateY(-5px); /* Efeito de levantar */
-    box-shadow: var(--sombra-hover); /* Sombra mais destacada */
-}
-
-/* Feedback visual em botões */
+/* 5. ANIMAÇÕES E EFEITOS DINÂMICOS */
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.dashboard-grid, .form-container, .contact-card, .welcome-banner { animation: fadeInUp 0.6s ease-out forwards; }
+.card:hover { transform: translateY(-5px); box-shadow: var(--sombra-hover); }
 .btn-submit:hover { background-color: #0056b3; transform: translateY(-2px); }
 .btn-secondary:hover { background-color: #e9ecef; }
 .btn-card:hover { background-color: #0056b3; }
-
-/* Feedback visual em campos de formulário */
-.input-group input:focus {
-    outline: none;
-    border-color: var(--cor-primaria);
-    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); /* Brilho suave */
-}
+.input-group input:focus { outline: none; border-color: var(--cor-primaria); box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.15); }
+@media (max-width: 900px) { .dashboard-grid { grid-template-columns: 1fr; } .header-right { gap: 1rem; } .main-nav { display: none; } }
