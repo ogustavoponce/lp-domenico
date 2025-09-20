@@ -8,51 +8,53 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-    <header class="main-header">
-        <div class="header-content">
-            <a href="plataforma_aluno.html" class="logo">Professor Domenico</a>
-            <div class="header-right">
-                <nav class="main-nav">
-                    <ul>
-                        <li><a href="plataforma_aluno.html" class="active">Início</a></li>
-                        <li><a href="#">Apostila</a></li>
-                        <li><a href="#">Contato</a></li>
-                    </ul>
-                </nav>
-                <div class="header-actions">
-                    <button id="theme-toggle" class="theme-button">☀️</button>
-                    <div class="profile-dropdown">
-                        <button class="profile-button">
-                            <img src="https://via.placeholder.com/40" alt="Foto do Usuário" class="profile-pic">
-                            <span>Gustavo</span>
-                        </button>
-                    </div>
-                    <a href="tela_login.html" class="btn-secondary">Sair</a>
-                </div>
-            </div>
+<body class="platform-body">
+
+    <aside class="platform-sidebar">
+        <div class="sidebar-header">
+            <a href="plataforma_aluno.html" class="logo">Plataforma LP</a>
         </div>
-    </header>
-    <main class="container">
+        <nav class="sidebar-nav">
+            <a href="plataforma_aluno.html" class="nav-item active">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Início</span>
+            </a>
+            <a href="#" class="nav-item">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v15H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                <span>Apostila</span>
+            </a>
+            <a href="#" class="nav-item">
+                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                <span>Contato</span>
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button id="theme-toggle" class="theme-button">☀️</button>
+            <a href="tela_login.html" class="btn-secondary">Sair</a>
+        </div>
+    </aside>
+
+    <main class="platform-content">
         <section class="welcome-banner card">
             <h1 id="welcome-greeting">Carregando...</h1>
             <p>Seja bem-vindo de volta! Aqui estão as últimas atualizações para você.</p>
         </section>
-        <div class="dashboard-layout">
-            <div class="main-content">
+
+        <div class="student-dashboard-layout">
+            <div class="student-main-feed">
                 <div class="card">
                     <div class="card-title"><h2>📢 Mural de Avisos</h2></div>
                     <div id="mural-avisos-list">
                         <div class="aviso-item">
                             <h4>Boas-vindas à Turma</h4>
-                            <p>Utilizaremos este espaço para comunicados. A apostila já está no menu.<span>Atualizado em: 19/09</span></p>
+                            <p>Utilizaremos este espaço para comunicados. A apostila já está no menu ao lado.<span>Atualizado em: 19/09</span></p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="sidebar">
+            <div class="student-sidebar-right">
                 <div class="card">
-                    <div class="card-title"><h2>📝 Próximas Atividades</h2></div>
+                    <div class="card-title"><h3>📝 Próximas Atividades</h3></div>
                     <div class="atividade-item">
                         <h4>Exercício de Fixação 05</h4>
                         <p class="due-date">Prazo: 23 de Setembro</p>
@@ -60,26 +62,18 @@
                     </div>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h2>📈 Seu Progresso</h2></div>
+                    <div class="card-title"><h3>📈 Seu Progresso</h3></div>
                     <p>Total de atividades concluídas</p>
                     <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
                     <strong>75%</strong>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h2>🗓️ Calendário</h2></div>
+                    <div class="card-title"><h3>🗓️ Calendário</h3></div>
                     <p><strong>Próximos eventos:</strong> Prova Bimestral (05/10), Entrega do Projeto (20/10).</p>
-                </div>
-                <div class="card">
-                    <div class="card-title"><h2>📚 Recursos e Fórum</h2></div>
-                    <ul class="resource-list">
-                        <li><a href="#">🔗 Links Úteis para Estudo</a></li>
-                        <li><a href="#">💬 Acessar Fórum de Dúvidas</a></li>
-                    </ul>
                 </div>
             </div>
         </div>
     </main>
-    <footer class="main-footer"><p>&copy; 2025 Professor Domenico</p></footer>
     <script src="script.js"></script>
 </body>
 </html>
