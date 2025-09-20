@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Plataforma LP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="index.html" class="logo">Plataforma LP</a>
+            <div class="header-right">
+                <button id="theme-toggle" class="theme-button">🌙</button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="card">
+            <div class="card-title"><h2>⚙️ Minhas Configurações</h2></div>
+            <form>
+                <div class="input-group profile-pic-upload">
+                    <img id="profile-pic-preview" src="https://via.placeholder.com/60" alt="Preview">
+                    <div>
+                        <label for="profile-pic-input">Alterar Foto de Perfil</label>
+                        <input type="file" id="profile-pic-input" accept="image/*">
+                    </div>
+                </div>
+                <div class="input-group"><label for="email">Email</label><input type="email" id="email" value="gustavo.exemplo@email.com"></div>
+                <div class="input-group"><label for="telefone">Telefone</label><input type="tel" id="telefone" placeholder="(XX) XXXXX-XXXX"></div>
+                <div class="input-group">
+                    <label for="senha-atual">Alterar Senha (digite a senha atual)</label>
+                    <div class="password-wrapper"><input type="password" id="senha-atual"><span class="password-toggle">👁️</span></div>
+                </div>
+                 <div class="input-group">
+                    <label for="nova-senha">Nova Senha</label>
+                    <div class="password-wrapper"><input type="password" id="nova-senha"><span class="password-toggle">👁️</span></div>
+                </div>
+                <button type="submit" class="btn-submit">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
