@@ -1,5 +1,5 @@
 // =========================================================================
-// SCRIPT FINAL CONSOLIDADO v16.0 - PLATAFORMA PROFESSOR DOMENICO
+// SCRIPT FINAL E ROBUSTO v17.0 - PLATAFORMA PROFESSOR DOMENICO
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tab.addEventListener('click', (e) => {
             e.preventDefault();
             tabItems.forEach(item => item.classList.remove('active'));
-            viewPanels.forEach(panel => panel.style.display = 'none');
+            viewPanels.forEach(panel => { if(panel) panel.style.display = 'none'; });
             tab.classList.add('active');
             const targetViewId = tab.dataset.view;
             const targetView = document.getElementById(`view-${targetViewId}`);
@@ -76,8 +76,17 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // (Outros módulos de login, saudação, etc. continuam válidos e podem ser adicionados
-    // a partir das versões anteriores, pois não conflitam)
+    // Publicar Aviso
+    const formPublicarAviso = document.getElementById('form-publicar-aviso');
+    if (formPublicarAviso) {
+        formPublicarAviso.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('SIMULAÇÃO: Aviso publicado com sucesso!');
+            formPublicarAviso.reset();
+        });
+    }
+
+    // --- (Outros módulos de login, saudação, etc. continuam válidos) ---
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
