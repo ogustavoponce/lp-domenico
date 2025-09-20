@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Gestor - Professor Domenico</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="plataforma_gestor.html" class="logo">Painel do Gestor</a>
+            <div class="header-right">
+                <div class="header-actions">
+                    <button id="theme-toggle" class="theme-button">☀️</button>
+                    <div class="profile-dropdown">
+                        <button class="profile-button">
+                            <img src="https://via.placeholder.com/40/007bff/ffffff?text=D" alt="Foto do Usuário" class="profile-pic">
+                            <span>Domenico</span>
+                        </button>
+                    </div>
+                    <a href="tela_login.html" class="btn-secondary">Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="dashboard-layout">
+            <div class="main-content">
+                <div class="card">
+                    <div class="card-title"><h2>📢 Publicar no Mural de Avisos</h2></div>
+                    <form id="form-publicar-aviso">
+                        <div class="input-group">
+                            <label for="aviso-titulo">Título do Aviso</label>
+                            <input type="text" id="aviso-titulo" required>
+                        </div>
+                        <div class="input-group">
+                            <label for="aviso-conteudo">Conteúdo</label>
+                            <textarea id="aviso-conteudo" rows="4" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">Publicar Aviso</button>
+                    </form>
+                </div>
+            </div>
+            <div class="sidebar">
+                <div class="card">
+                    <div class="card-title"><h2>👥 Gerenciar Alunos</h2></div>
+                    <table class="data-table">
+                        <thead><tr><th>Nome</th><th>Ações</th></tr></thead>
+                        <tbody id="lista-usuarios">
+                            <tr>
+                                <td>Gustavo Oliveira</td>
+                                <td><button class="btn-danger delete-user-btn">Apagar</button></td>
+                            </tr>
+                             <tr>
+                                <td>Maria Clara</td>
+                                <td><button class="btn-danger delete-user-btn">Apagar</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <form id="form-add-usuario" style="margin-top: 1rem; display: flex; gap: 0.5rem;">
+                        <input type="text" id="novo-usuario-nome" placeholder="Nome do novo aluno" style="width: 100%;">
+                        <button type="submit" class="btn-submit" style="width: auto; padding: 0.5rem 1rem;">+</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="main-footer"><p>&copy; 2025 Professor Domenico</p></footer>
+    <script src="script.js"></script>
+</body>
+</html>
