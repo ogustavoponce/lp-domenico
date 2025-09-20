@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informática I - Mural</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="class-header-nav">
+                <a href="admin_turmas.html" class="back-to-classes">← Voltar para Turmas</a>
+                <h2>Informática I</h2>
+            </div>
+            <div class="header-right">
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#" class="active">Mural</a></li>
+                        <li><a href="#">Atividades</a></li>
+                        <li><a href="#">Alunos</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button id="theme-toggle" class="theme-button">☀️</button>
+                    <a href="tela_login.html" class="btn-secondary">Sair</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="admin-dashboard-layout">
+            <div class="admin-main-content">
+                <div class="card publisher-card">
+                    <form id="form-publicar-aviso">
+                        <textarea id="aviso-conteudo" rows="3" placeholder="Anuncie algo para a turma de Informática I..."></textarea>
+                        <div class="publisher-actions">
+                            <div class="attachment-wrapper">
+                                <label for="aviso-anexo" class="btn-secondary">Anexar</label>
+                                <input type="file" id="aviso-anexo" hidden>
+                                <span id="attachment-name"></span>
+                            </div>
+                            <button type="submit" class="btn-submit">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="admin-feed" class="feed-container">
+                    <div class="card feed-item">
+                        <h4>Boas-vindas à Turma de Informática!</h4>
+                        <p>Utilizaremos este espaço para nossos comunicados.</p>
+                        <small>Publicado em 19 de Setembro</small>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-sidebar-right">
+                <div class="card">
+                    <div class="card-title"><h3>Próximas Atividades</h3></div>
+                    <p>Nenhuma atividade próxima.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
