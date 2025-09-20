@@ -1,81 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Turmas - Professor Domenico</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    <title>Painel de Turmas</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body class="platform-body">
-
-    <aside class="platform-sidebar">
-        <div class="sidebar-header">
-            <a href="admin_turmas.html" class="logo">Painel do Gestor</a>
-        </div>
-        <nav class="sidebar-nav">
-            <a href="admin_turmas.html" class="nav-item active">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M3 18v-2h18v2H3Zm0-5v-2h18v2H3Zm0-5V6h18v2H3Z"/></svg>
-                <span>Turmas</span>
-            </a>
-            </nav>
-        <div class="sidebar-footer">
-            <button id="theme-toggle" class="theme-button">☀️</button>
-             <a href="tela_login.html" class="btn-secondary">Sair</a>
-        </div>
-    </aside>
-
+    <aside class="platform-sidebar"></aside>
     <main class="platform-content">
-        <div class="main-content-header">
-            <h1>Suas Turmas</h1>
-            <button class="btn-submit" style="width: auto;">+ Criar Turma</button>
-        </div>
-
+        <div class="main-content-header"><h1>Suas Turmas</h1><button class="btn-submit" style="width: auto;">+ Criar Turma</button></div>
         <div class="class-grid">
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header informatica">
-                    <h3>Informática I</h3>
-                    <p>Integrado 2025</p>
-                </div>
-                <div class="class-card-body"></div>
-                <div class="class-card-footer">
-                    <p>Professor Domenico</p>
-                </div>
-            </a>
-            
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header mecanica">
-                    <h3>Mecânica II</h3>
-                    <p>Integrado 2025</p>
-                </div>
-                <div class="class-card-body"></div>
-                <div class="class-card-footer">
-                    <p>Professor Domenico</p>
-                </div>
-            </a>
-
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header jogos">
-                    <h3>Jogos Digitais</h3>
-                    <p>Subsequente 2025</p>
-                </div>
-                <div class="class-card-body"></div>
-                <div class="class-card-footer">
-                    <p>Professor Domenico</p>
-                </div>
-            </a>
-
-             <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header automacao">
-                    <h3>Automação Industrial</h3>
-                    <p>Superior 2025</p>
-                </div>
-                <div class="class-card-body"></div>
-                <div class="class-card-footer">
-                    <p>Professor Domenico</p>
-                </div>
-            </a>
+            <a href="admin_mural.html" class="class-card informatica"></a>
+            <a href="admin_mural.html" class="class-card mecanica"></a>
+            <a href="admin_mural.html" class="class-card jogos"></a>
+            <a href="admin_mural.html" class="class-card automacao"></a>
         </div>
     </main>
     <script src="script.js"></script>
