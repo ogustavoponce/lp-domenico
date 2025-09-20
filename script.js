@@ -1,5 +1,5 @@
 // =========================================================================
-// SCRIPT FINAL E ROBUSTO v13.0 - PLATAFORMA PROFESSOR DOMENICO
+// SCRIPT FINAL E ROBUSTO v14.0 - PLATAFORMA PROFESSOR DOMENICO
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -27,64 +27,48 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- MÓDULO 2: AUTENTICAÇÃO ---
-    const loginForm = document.getElementById('login-form');
-    if (loginForm) {
-        loginForm.addEventListener('submit', (e) => {
+    // --- MÓDULO 2: NAVEGAÇÃO POR ABAS (DENTRO DA TURMA) ---
+    const tabItems = document.querySelectorAll('.tab-item');
+    const viewPanels = document.querySelectorAll('.view-panel');
+
+    tabItems.forEach(tab => {
+        tab.addEventListener('click', (e) => {
             e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            if (email.toLowerCase() === 'domenico@prof.com') {
-                alert('Login como gestor bem-sucedido! Redirecionando...');
-                window.location.href = 'admin_turmas.html';
-            } else {
-                alert('Login de aluno bem-sucedido! Redirecionando...');
-                window.location.href = 'plataforma_aluno.html';
+
+            // Remove a classe 'active' de todas as abas e painéis
+            tabItems.forEach(item => item.classList.remove('active'));
+            viewPanels.forEach(panel => {
+                panel.classList.remove('active');
+                panel.style.display = 'none';
+            });
+
+            // Adiciona a classe 'active' à aba clicada
+            tab.classList.add('active');
+
+            // Mostra o painel de conteúdo correspondente
+            const targetViewId = tab.dataset.view;
+            const targetView = document.getElementById(`view-${targetViewId}`);
+            if(targetView) {
+                targetView.style.display = 'block';
+                targetView.classList.add('active');
             }
         });
-    }
-    const cadastroForm = document.getElementById('cadastro-form');
-    if (cadastroForm) {
-        cadastroForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('Cadastro realizado com sucesso! Redirecionando para a plataforma...');
-            window.location.href = 'plataforma_aluno.html';
-        });
-    }
+    });
 
-    // --- MÓDULO 3: PAINEL DO ALUNO ---
-    const greetingElement = document.getElementById('welcome-greeting');
-    if (greetingElement) {
-        const nomeDoUsuario = "Gustavo";
-        const horaAtual = new Date().getHours();
-        let saudacao = horaAtual < 12 ? "Bom dia" : horaAtual < 18 ? "Boa tarde" : "Boa noite";
-        greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha um(a) ótimo(a) ${saudacao.split(' ')[1]}.`;
-    }
 
-    // --- MÓDULO 4: PAINEL DO GESTOR (Simulações) ---
-    const createClassBtn = document.getElementById('create-class-btn');
-    if(createClassBtn){
-        createClassBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            alert('SIMULAÇÃO: Tela para criar uma nova turma apareceria aqui.');
-        });
-    }
+    // --- MÓDULO 3: SIMULAÇÃO DE PUBLICAÇÃO DE AVISO ---
     const formPublicarAviso = document.getElementById('form-publicar-aviso');
     if (formPublicarAviso) {
         formPublicarAviso.addEventListener('submit', (e) => {
             e.preventDefault();
-            alert('SIMULAÇÃO: Aviso publicado com sucesso!');
+            const conteudo = document.getElementById('aviso-conteudo').value;
+            if (conteudo.trim() === '') return;
+            alert(`SIMULAÇÃO: Aviso publicado com sucesso!\nConteúdo: "${conteudo}"`);
             formPublicarAviso.reset();
         });
     }
-    
-    // --- MÓDULO 5: GERAL ---
-    const toggleButtons = document.querySelectorAll('.password-toggle');
-    toggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const passwordInput = button.closest('.password-wrapper').querySelector('input');
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-        });
-    });
+
+    // --- (Outros módulos de login, cadastro, etc. continuam válidos e não precisam estar neste arquivo,
+    // pois cada página carrega o que precisa) ---
 
 });
