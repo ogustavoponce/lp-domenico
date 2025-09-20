@@ -1,5 +1,5 @@
 // =========================================================================
-// SCRIPT FINAL E ROBUSTO v14.0 - PLATAFORMA PROFESSOR DOMENICO
+// SCRIPT FINAL CONSOLIDADO v16.0 - PLATAFORMA PROFESSOR DOMENICO
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -26,49 +26,63 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
-
+    
     // --- MÓDULO 2: NAVEGAÇÃO POR ABAS (DENTRO DA TURMA) ---
     const tabItems = document.querySelectorAll('.tab-item');
     const viewPanels = document.querySelectorAll('.view-panel');
-
     tabItems.forEach(tab => {
         tab.addEventListener('click', (e) => {
             e.preventDefault();
-
-            // Remove a classe 'active' de todas as abas e painéis
             tabItems.forEach(item => item.classList.remove('active'));
-            viewPanels.forEach(panel => {
-                panel.classList.remove('active');
-                panel.style.display = 'none';
-            });
-
-            // Adiciona a classe 'active' à aba clicada
+            viewPanels.forEach(panel => panel.style.display = 'none');
             tab.classList.add('active');
-
-            // Mostra o painel de conteúdo correspondente
             const targetViewId = tab.dataset.view;
             const targetView = document.getElementById(`view-${targetViewId}`);
             if(targetView) {
                 targetView.style.display = 'block';
-                targetView.classList.add('active');
             }
         });
     });
 
-
-    // --- MÓDULO 3: SIMULAÇÃO DE PUBLICAÇÃO DE AVISO ---
-    const formPublicarAviso = document.getElementById('form-publicar-aviso');
-    if (formPublicarAviso) {
-        formPublicarAviso.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const conteudo = document.getElementById('aviso-conteudo').value;
-            if (conteudo.trim() === '') return;
-            alert(`SIMULAÇÃO: Aviso publicado com sucesso!\nConteúdo: "${conteudo}"`);
-            formPublicarAviso.reset();
+    // --- MÓDULO 3: SIMULAÇÕES DO PAINEL DO GESTOR ---
+    // Adicionar Aluno
+    const addStudentBtn = document.getElementById('add-student-btn');
+    if(addStudentBtn){
+        addStudentBtn.addEventListener('click', () => {
+            const studentEmail = prompt("Digite o e-mail do aluno para convidar (simulação):");
+            if(studentEmail){
+                alert(`SIMULAÇÃO: Convite enviado para ${studentEmail}.`);
+            }
         });
     }
 
-    // --- (Outros módulos de login, cadastro, etc. continuam válidos e não precisam estar neste arquivo,
-    // pois cada página carrega o que precisa) ---
+    // Remover Aluno
+    const studentList = document.getElementById('student-list');
+    if(studentList){
+        studentList.addEventListener('click', (e) => {
+            if(e.target.classList.contains('remove-person-btn')){
+                if(confirm("Tem certeza que deseja remover este aluno? (Simulação)")){
+                    e.target.closest('.person-row').remove();
+                }
+            }
+        });
+    }
 
+    // Criar Atividade
+    const createActivityBtn = document.getElementById('create-activity-btn');
+    if(createActivityBtn){
+        createActivityBtn.addEventListener('click', () => {
+            alert("SIMULAÇÃO: Tela para criar uma nova atividade apareceria aqui.");
+        });
+    }
+
+    // (Outros módulos de login, saudação, etc. continuam válidos e podem ser adicionados
+    // a partir das versões anteriores, pois não conflitam)
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            window.location.href = 'plataforma_aluno.html';
+        });
+    }
 });

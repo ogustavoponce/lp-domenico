@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Informática I - Mural</title>
+    <title>Informática I - Professor Domenico</title>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@
     <header class="main-header">
         <div class="header-content">
             <div class="header-left">
-                <a href="admin_turmas.html" class="back-to-classes-btn">←</a>
+                <a href="admin_turmas.html" class="back-to-classes-btn" title="Voltar para Turmas">←</a>
                 <span class="logo">Informática I</span>
             </div>
             <div class="header-right">
@@ -25,7 +25,6 @@
     <main class="container">
         <div class="class-banner informatica">
             <h1>Informática I</h1>
-            <p>Integrado 2025</p>
         </div>
 
         <nav class="class-tabs-nav">
@@ -47,38 +46,70 @@
                         <div class="card publisher-card">
                             <form id="form-publicar-aviso">
                                 <textarea id="aviso-conteudo" rows="3" placeholder="Anuncie algo para a turma..."></textarea>
-                                <div class="publisher-actions">
-                                    <button type="submit" class="btn-submit">Publicar</button>
-                                </div>
+                                <div class="publisher-actions"><button type="submit" class="btn-submit">Publicar</button></div>
                             </form>
                         </div>
                         <div id="admin-feed" class="feed-container">
-                            <div class="card feed-item">
-                                <h4>Boas-vindas à Turma de Informática!</h4>
-                                <p>Utilizaremos este espaço para nossos comunicados.</p>
-                                <small>Publicado em 19 de Setembro</small>
-                            </div>
+                            <div class="card feed-item"><h4>Boas-vindas à Turma!</h4><p>Utilizaremos este espaço para comunicados.</p><small>Publicado em 19 de Setembro</small></div>
                         </div>
                     </div>
                 </div>
             </div>
 
             <div id="view-atividades" class="view-panel" style="display: none;">
-                <div class="card">
-                    <div class="card-title"><h2>Atividades da Turma</h2></div>
-                    <p>Simulação da área de atividades. O professor poderia criar e gerenciar as tarefas aqui.</p>
+                <div class="main-content-header">
+                    <h2>Atividades</h2>
+                    <button id="create-activity-btn" class="btn-submit" style="width: auto;">+ Criar</button>
+                </div>
+                <div class="topic-section">
+                    <h3>TEC. WEB</h3>
+                    <ul class="activity-list">
+                        <li class="activity-item"><span>[Avaliação 2] - HTML CODES</span><small>Item postado: 9 de mai.</small></li>
+                        <li class="activity-item"><span>AV1 - HTML</span><small>Item postado: 25 de abr.</small></li>
+                    </ul>
+                </div>
+                <div class="topic-section">
+                    <h3>DESIGN GRÁFICO</h3>
+                     <ul class="activity-list">
+                        <li class="activity-item"><span>Os estudantes verão este tema assim que um trabalho for adicionado a ele</span></li>
+                    </ul>
                 </div>
             </div>
 
             <div id="view-alunos" class="view-panel" style="display: none;">
-                <div class="card">
-                    <div class="card-title"><h2>Alunos de Informática I</h2></div>
-                    <p>Simulação da área de gerenciamento de alunos.</p>
+                <div class="people-section">
+                    <div class="people-section-header">
+                        <h2>Professores</h2>
+                        <button class="add-person-btn" id="add-teacher-btn" title="Convidar professores">+</button>
+                    </div>
+                    <div class="people-list">
+                        <div class="person-row">
+                            <img src="https://via.placeholder.com/40/007bff/ffffff?text=D" class="profile-pic">
+                            <span>Professor Domenico</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="people-section">
+                    <div class="people-section-header">
+                        <h2>Estudantes</h2>
+                        <button class="add-person-btn" id="add-student-btn" title="Convidar alunos">+</button>
+                    </div>
+                    <div class="people-list" id="student-list">
+                        <div class="person-row">
+                            <img src="https://via.placeholder.com/40/34a853/ffffff?text=G" class="profile-pic">
+                            <span>Gustavo Oliveira</span>
+                            <button class="remove-person-btn" title="Remover aluno">X</button>
+                        </div>
+                        <div class="person-row">
+                            <img src="https://via.placeholder.com/40/e8710a/ffffff?text=A" class="profile-pic">
+                            <span>Alissa Gabriele</span>
+                            <button class="remove-person-btn" title="Remover aluno">X</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-
     <script src="script.js"></script>
 </body>
 </html>
