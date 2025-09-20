@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mural da Turma</title>
-    <link rel="icon" href="data:image/svg+xml,...">
+    <title>Mural da Turma - Informática I</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -31,7 +31,33 @@
         </div>
     </header>
     <main class="container">
-        </main>
+        <div class="admin-dashboard-layout">
+            <div class="admin-main-content">
+                <div class="card publisher-card">
+                    <form id="form-publicar-aviso">
+                        <textarea id="aviso-conteudo" rows="3" placeholder="Anuncie algo para a turma..."></textarea>
+                        <div class="publisher-actions">
+                            <div></div>
+                            <button type="submit" class="btn-submit">Publicar</button>
+                        </div>
+                    </form>
+                </div>
+                <div id="admin-feed" class="feed-container">
+                    <div class="card feed-item">
+                        <h4>Boas-vindas à Turma de Informática!</h4>
+                        <p>Utilizaremos este espaço para nossos comunicados.</p>
+                        <small>Publicado em 19 de Setembro</small>
+                    </div>
+                </div>
+            </div>
+            <div class="admin-sidebar-right">
+                <div class="card">
+                    <div class="card-title"><h3>Próximas Atividades</h3></div>
+                    <p>Nenhuma atividade próxima.</p>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

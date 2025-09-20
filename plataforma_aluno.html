@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma do Aluno</title>
-    <link rel="icon" href="data:image/svg+xml,...">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -22,7 +22,33 @@
         </div>
     </aside>
     <main class="platform-content">
-        </main>
+        <section class="welcome-banner card">
+            <h1 id="welcome-greeting">Carregando...</h1>
+            <p>Seja bem-vindo de volta! Aqui estão as últimas atualizações para você.</p>
+        </section>
+        <div class="student-dashboard-layout">
+            <div class="student-main-feed">
+                <div class="card">
+                    <div class="card-title">Mural de Avisos</div>
+                    <div id="mural-avisos-list">
+                        <div class="aviso-item"><h4>Boas-vindas à Turma</h4><p>Utilizaremos este espaço para comunicados.<span>Atualizado em: 19/09</span></p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="student-sidebar-right">
+                <div class="card">
+                    <div class="card-title">Próximas Atividades</div>
+                    <div><h4>Exercício de Fixação 05</h4><p class="due-date">Prazo: 23 de Setembro</p><a href="#" class="btn-card">Enviar Resposta</a></div>
+                </div>
+                <div class="card">
+                    <div class="card-title">Seu Progresso</div>
+                    <p>Total de atividades concluídas</p>
+                    <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
+                    <strong>75%</strong>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>

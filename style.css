@@ -1,5 +1,5 @@
 /* ==========================================================================
-   CSS FINAL E ROBUSTO v12.0 - PLATAFORMA PROFESSOR DOMENICO
+   CSS FINAL E DEFINITIVO v15.0 - PLATAFORMA PROFESSOR DOMENICO
    ========================================================================== */
 
 /* --- 1. GLOBAIS E VARIÁVEIS --- */
@@ -7,7 +7,7 @@
     /* TEMA CLARO (Padrão) */
     --cor-fundo: #f8f9fa;
     --cor-superficie: #ffffff;
-    --cor-borda: #dee2e6;
+    --cor-borda: #e9ecef;
     --cor-primaria: #1a73e8;
     --cor-primaria-hover: #1765cf;
     --cor-texto-principal: #202124;
@@ -125,6 +125,13 @@ html.dark-mode .class-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
 .class-card-header.automacao { background-color: #8f23a5; }
 .class-card-body { flex-grow: 1; }
 .class-card-footer { border-top: 1px solid var(--cor-borda); padding: 1rem 1.5rem; font-size: 0.9rem; color: var(--cor-texto-secundario); }
+.class-header-nav { display: flex; align-items: center; gap: 1.5rem; }
+.back-to-classes { color: var(--cor-texto-secundario); font-weight: 500; }
+.publisher-card textarea { width: 100%; border: none; background: none; font-size: 1rem; padding: 1rem; resize: vertical; min-height: 60px; color: var(--cor-texto-principal); font-family: 'Poppins', sans-serif; }
+.publisher-actions { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cor-borda); padding-top: 1rem; margin-top: 0.5rem; }
+.feed-container { display: flex; flex-direction: column; gap: 1.5rem; }
+.feed-item small { color: var(--cor-texto-secundario); font-size: 0.8rem; margin-top: 1rem; display: block; }
+
 
 /* --- 5. COMPONENTES (Cards, Botões, Formulários) --- */
 .card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; animation: fadeInUp 0.5s ease-out forwards; }

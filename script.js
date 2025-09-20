@@ -1,5 +1,5 @@
 // =========================================================================
-// SCRIPT FINAL E ROBUSTO v12.0 - PLATAFORMA PROFESSOR DOMENICO
+// SCRIPT FINAL E ROBUSTO v13.0 - PLATAFORMA PROFESSOR DOMENICO
 // =========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -15,10 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
             themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '🌙'; });
         }
     };
-
     const savedTheme = localStorage.getItem('theme') || 'light-mode';
     applyTheme(savedTheme);
-
     themeToggles.forEach(toggle => {
         if (toggle) {
             toggle.addEventListener('click', () => {
@@ -29,8 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-
-    // --- MÓDULO 2: FUNCIONALIDADE DE AUTENTICAÇÃO (Login, Cadastro) ---
+    // --- MÓDULO 2: AUTENTICAÇÃO ---
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
@@ -45,7 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
     const cadastroForm = document.getElementById('cadastro-form');
     if (cadastroForm) {
         cadastroForm.addEventListener('submit', (e) => {
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'plataforma_aluno.html';
         });
     }
-
 
     // --- MÓDULO 3: PAINEL DO ALUNO ---
     const greetingElement = document.getElementById('welcome-greeting');
@@ -65,28 +60,28 @@ document.addEventListener('DOMContentLoaded', () => {
         greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha um(a) ótimo(a) ${saudacao.split(' ')[1]}.`;
     }
 
-
     // --- MÓDULO 4: PAINEL DO GESTOR (Simulações) ---
+    const createClassBtn = document.getElementById('create-class-btn');
+    if(createClassBtn){
+        createClassBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            alert('SIMULAÇÃO: Tela para criar uma nova turma apareceria aqui.');
+        });
+    }
     const formPublicarAviso = document.getElementById('form-publicar-aviso');
     if (formPublicarAviso) {
         formPublicarAviso.addEventListener('submit', (e) => {
             e.preventDefault();
-            const conteudo = document.getElementById('aviso-conteudo').value;
-            if (conteudo.trim() === '') {
-                alert('Por favor, escreva um aviso antes de publicar.');
-                return;
-            }
-            alert(`SIMULAÇÃO: Aviso publicado com sucesso!\n\nConteúdo: "${conteudo}"`);
+            alert('SIMULAÇÃO: Aviso publicado com sucesso!');
             formPublicarAviso.reset();
         });
     }
     
-
-    // --- MÓDULO 5: FUNCIONALIDADES GERAIS (Ex: Ver Senha) ---
+    // --- MÓDULO 5: GERAL ---
     const toggleButtons = document.querySelectorAll('.password-toggle');
     toggleButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const passwordInput = button.previousElementSibling;
+            const passwordInput = button.closest('.password-wrapper').querySelector('input');
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
         });
