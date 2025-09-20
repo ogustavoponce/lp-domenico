@@ -3,48 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel de Turmas - Professor Domenico</title>
+    <title>Painel de Turmas</title>
     <link rel="icon" href="data:image/svg+xml,...">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS EMBUTIDO COMPLETO */
-        :root {
-            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-            --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
-            --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
-        }
-        html.dark-mode {
-            --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-            --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
-            --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        .platform-body { display: flex; }
-        .platform-content { flex: 1; padding: 2rem; }
-        .platform-sidebar { width: 260px; background-color: var(--cor-superficie); border-right: 1px solid var(--cor-borda); min-height: 100vh; display: flex; flex-direction: column; padding: 1rem; }
-        .sidebar-header { padding: 1rem; border-bottom: 1px solid var(--cor-borda); margin-bottom: 1rem; }
-        .logo { font-size: 1.3rem; font-weight: 700; text-decoration: none; color: var(--cor-texto-principal); }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
-        .nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; color: var(--cor-texto-secundario); text-decoration: none; }
-        .nav-item.active, .nav-item:hover { background-color: var(--cor-fundo); color: var(--cor-primaria); }
-        .sidebar-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
-        .main-content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        .btn-submit { padding: 0.7rem 1.5rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; }
-        .btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; }
-        .theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); }
-        .class-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-        .class-card { border: 1px solid var(--cor-borda); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; text-decoration: none; color: var(--cor-texto-principal); background-color: var(--cor-superficie); }
-        .class-card-header { padding: 1rem 1.5rem; color: #fff; min-height: 100px; }
-        .class-card-header.informatica { background-color: #1a73e8; }
-        .class-card-header.mecanica { background-color: #e8710a; }
-        .class-card-header.jogos { background-color: #34a853; }
-        .class-card-header.automacao { background-color: #8f23a5; }
-        .class-card-header h3 { font-size: 1.4rem; }
-        .class-card-body { flex-grow: 1; }
-        .class-card-footer { border-top: 1px solid var(--cor-borda); padding: 1rem 1.5rem; font-size: 0.9rem; color: var(--cor-texto-secundario); }
-        @media (max-width: 900px) { .platform-body { flex-direction: column; } .platform-sidebar { width: 100%; min-height: auto; } }
-    </style>
 </head>
 <body class="platform-body">
     <aside class="platform-sidebar">
@@ -63,32 +25,18 @@
             <button class="btn-submit" style="width: auto;">+ Criar Turma</button>
         </div>
         <div class="class-grid">
-            <a href="admin_mural.html" class="class-card"><div class="class-card-header informatica"><h3>Informática I</h3><p>Integrado 2025</p></div><div class="class-card-body"></div><div class="class-card-footer"><p>Professor Domenico</p></div></a>
-            <a href="admin_mural.html" class="class-card"><div class="class-card-header mecanica"><h3>Mecânica II</h3><p>Integrado 2025</p></div><div class="class-card-body"></div><div class="class-card-footer"><p>Professor Domenico</p></div></a>
-            <a href="admin_mural.html" class="class-card"><div class="class-card-header jogos"><h3>Jogos Digitais</h3><p>Subsequente 2025</p></div><div class="class-card-body"></div><div class="class-card-footer"><p>Professor Domenico</p></div></a>
-            <a href="admin_mural.html" class="class-card"><div class="class-card-header automacao"><h3>Automação Industrial</h3><p>Superior 2025</p></div><div class="class-card-body"></div><div class="class-card-footer"><p>Professor Domenico</p></div></a>
-        </div>
+            <a href="admin_mural.html" class="class-card informatica">
+                <div class="class-card-header"><h3>Informática I</h3><p>Integrado 2025</p></div>
+                <div class="class-card-body"></div>
+                <div class="class-card-footer"><p>Professor Domenico</p></div>
+            </a>
+            <a href="admin_mural.html" class="class-card mecanica">
+                 <div class="class-card-header"><h3>Mecânica II</h3><p>Integrado 2025</p></div>
+                 <div class="class-card-body"></div>
+                 <div class="class-card-footer"><p>Professor Domenico</p></div>
+            </a>
+            </div>
     </main>
-    <script>
-        // JAVASCRIPT EMBUTIDO
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggles = document.querySelectorAll('#theme-toggle');
-            const applyTheme = (theme) => {
-                if (theme === 'dark-mode') { document.documentElement.classList.add('dark-mode'); themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '☀️'; });
-                } else { document.documentElement.classList.remove('dark-mode'); themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '🌙'; }); }
-            };
-            const savedTheme = localStorage.getItem('theme') || 'light-mode';
-            applyTheme(savedTheme);
-            themeToggles.forEach(toggle => {
-                if (toggle) {
-                    toggle.addEventListener('click', () => {
-                        const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
-                        localStorage.setItem('theme', currentTheme);
-                        applyTheme(currentTheme);
-                    });
-                }
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>

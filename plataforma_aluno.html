@@ -5,53 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plataforma do Aluno</title>
     <link rel="icon" href="data:image/svg+xml,...">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* CSS EMBUTIDO COMPLETO */
-        :root {
-            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-            --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
-            --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
-            --sombra-suave: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
-        }
-        html.dark-mode {
-            --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-            --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
-            --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
-            --sombra-suave: 0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        a { color: var(--cor-primaria); text-decoration: none; }
-        .platform-body { display: flex; }
-        .platform-content { flex: 1; padding: 2rem; overflow-y: auto; height: 100vh; }
-        .platform-sidebar { width: 260px; background-color: var(--cor-superficie); border-right: 1px solid var(--cor-borda); min-height: 100vh; display: flex; flex-direction: column; padding: 1rem; }
-        .sidebar-header { padding: 1rem; border-bottom: 1px solid var(--cor-borda); margin-bottom: 1rem; }
-        .logo { font-size: 1.3rem; font-weight: 700; text-decoration: none; color: var(--cor-texto-principal); }
-        .sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
-        .nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; color: var(--cor-texto-secundario); text-decoration: none; }
-        .nav-item.active, .nav-item:hover { background-color: var(--cor-fundo); color: var(--cor-primaria); }
-        .nav-item svg { width: 20px; height: 20px; }
-        .sidebar-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
-        .btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; }
-        .theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); }
-        .student-dashboard-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; }
-        .student-main-feed, .student-sidebar-right { display: flex; flex-direction: column; gap: 2rem; }
-        .card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; }
-        .card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
-        .welcome-banner { margin-bottom: 2rem; }
-        .aviso-item { border-top: 1px solid var(--cor-borda); padding-top: 1rem; margin-top: 1rem; }
-        .aviso-item:first-child { border-top: none; margin-top: 0; padding-top: 0; }
-        .due-date, .aviso-item span { color: var(--cor-texto-secundario); font-size: 0.9rem; }
-        .btn-card { display: block; text-align: center; background-color: var(--cor-primaria); color: #fff; padding: 0.7rem; border-radius: 6px; }
-        .progress-bar-container { height: 8px; background-color: var(--cor-fundo); border-radius: 4px; overflow: hidden; margin: 1rem 0 0.5rem; }
-        .progress-bar { height: 100%; background-color: var(--cor-primaria); border-radius: 4px; }
-        @media (max-width: 900px) {
-            .platform-body { flex-direction: column; }
-            .platform-sidebar { width: 100%; min-height: auto; border-right: none; border-bottom: 1px solid var(--cor-borda); }
-            .student-dashboard-layout { grid-template-columns: 1fr; }
-        }
-    </style>
 </head>
 <body class="platform-body">
     <aside class="platform-sidebar">
@@ -59,7 +14,7 @@
         <nav class="sidebar-nav">
             <a href="plataforma_aluno.html" class="nav-item active"><span>Início</span></a>
             <a href="#" class="nav-item"><span>Apostila</span></a>
-            <a href="#" class="nav-item"><span>Contato</span></a>
+            <a href="contato.html" class="nav-item"><span>Contato</span></a>
         </nav>
         <div class="sidebar-footer">
             <button id="theme-toggle" class="theme-button">☀️</button>
@@ -67,60 +22,7 @@
         </div>
     </aside>
     <main class="platform-content">
-        <section class="welcome-banner card">
-            <h1 id="welcome-greeting">Carregando...</h1>
-            <p>Seja bem-vindo de volta! Aqui estão as últimas atualizações para você.</p>
-        </section>
-        <div class="student-dashboard-layout">
-            <div class="student-main-feed">
-                <div class="card">
-                    <div class="card-title">Mural de Avisos</div>
-                    <div id="mural-avisos-list">
-                        <div class="aviso-item"><h4>Boas-vindas à Turma</h4><p>Utilizaremos este espaço para comunicados.<span>Atualizado em: 19/09</span></p></div>
-                    </div>
-                </div>
-            </div>
-            <div class="student-sidebar-right">
-                <div class="card">
-                    <div class="card-title">Próximas Atividades</div>
-                    <div><h4>Exercício de Fixação 05</h4><p class="due-date">Prazo: 23 de Setembro</p><a href="#" class="btn-card">Enviar Resposta</a></div>
-                </div>
-                <div class="card">
-                    <div class="card-title">Seu Progresso</div>
-                    <p>Total de atividades concluídas</p>
-                    <div class="progress-bar-container"><div class="progress-bar" style="width: 75%;"></div></div>
-                    <strong>75%</strong>
-                </div>
-            </div>
-        </div>
-    </main>
-    <script>
-        // JAVASCRIPT EMBUTIDO
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggles = document.querySelectorAll('#theme-toggle');
-            const applyTheme = (theme) => {
-                if (theme === 'dark-mode') { document.documentElement.classList.add('dark-mode'); themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '☀️'; });
-                } else { document.documentElement.classList.remove('dark-mode'); themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '🌙'; }); }
-            };
-            const savedTheme = localStorage.getItem('theme') || 'light-mode';
-            applyTheme(savedTheme);
-            themeToggles.forEach(toggle => {
-                if (toggle) {
-                    toggle.addEventListener('click', () => {
-                        const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
-                        localStorage.setItem('theme', currentTheme);
-                        applyTheme(currentTheme);
-                    });
-                }
-            });
-            const greetingElement = document.getElementById('welcome-greeting');
-            if (greetingElement) {
-                const nomeDoUsuario = "Gustavo";
-                const horaAtual = new Date().getHours();
-                let saudacao = horaAtual < 12 ? "Bom dia" : horaAtual < 18 ? "Boa tarde" : "Boa noite";
-                greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha um(a) ótimo(a) ${saudacao.split(' ')[1]}.`;
-            }
-        });
-    </script>
+        </main>
+    <script src="script.js"></script>
 </body>
 </html>

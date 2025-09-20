@@ -1,23 +1,26 @@
+// =========================================================================
+// SCRIPT FINAL E ROBUSTO v12.0 - PLATAFORMA PROFESSOR DOMENICO
+// =========================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO DE CONTROLE DE TEMA (LIGHT/DARK) ---
+    // --- MÓDULO 1: CONTROLE DE TEMA (LIGHT/DARK) ---
     const themeToggles = document.querySelectorAll('#theme-toggle');
     const applyTheme = (theme) => {
         if (theme === 'dark-mode') {
             document.documentElement.classList.add('dark-mode');
-            themeToggles.forEach(toggle => { if(toggle) toggle.textContent = '☀️'; });
+            themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '☀️'; });
         } else {
             document.documentElement.classList.remove('dark-mode');
-            themeToggles.forEach(toggle => { if(toggle) toggle.textContent = '🌙'; });
+            themeToggles.forEach(toggle => { if (toggle) toggle.textContent = '🌙'; });
         }
     };
-    // Aplica o tema salvo ao carregar a página
+
     const savedTheme = localStorage.getItem('theme') || 'light-mode';
     applyTheme(savedTheme);
 
-    // Adiciona o evento de clique a todos os botões de tema
     themeToggles.forEach(toggle => {
-        if(toggle) {
+        if (toggle) {
             toggle.addEventListener('click', () => {
                 const currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
                 localStorage.setItem('theme', currentTheme);
@@ -26,55 +29,67 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- MÓDULO DE SAUDAÇÃO DINÂMICA (Painel do Aluno) ---
+
+    // --- MÓDULO 2: FUNCIONALIDADE DE AUTENTICAÇÃO (Login, Cadastro) ---
+    const loginForm = document.getElementById('login-form');
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            if (email.toLowerCase() === 'domenico@prof.com') {
+                alert('Login como gestor bem-sucedido! Redirecionando...');
+                window.location.href = 'admin_turmas.html';
+            } else {
+                alert('Login de aluno bem-sucedido! Redirecionando...');
+                window.location.href = 'plataforma_aluno.html';
+            }
+        });
+    }
+
+    const cadastroForm = document.getElementById('cadastro-form');
+    if (cadastroForm) {
+        cadastroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Cadastro realizado com sucesso! Redirecionando para a plataforma...');
+            window.location.href = 'plataforma_aluno.html';
+        });
+    }
+
+
+    // --- MÓDULO 3: PAINEL DO ALUNO ---
     const greetingElement = document.getElementById('welcome-greeting');
     if (greetingElement) {
-        const nomeDoUsuario = "Gustavo"; // Em um sistema real, este nome viria do login.
+        const nomeDoUsuario = "Gustavo";
         const horaAtual = new Date().getHours();
         let saudacao = horaAtual < 12 ? "Bom dia" : horaAtual < 18 ? "Boa tarde" : "Boa noite";
         greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha um(a) ótimo(a) ${saudacao.split(' ')[1]}.`;
     }
 
-    // --- MÓDULO DE SIMULAÇÃO DE ANEXOS (Painel do Gestor) ---
-    const handleAttachment = (inputId, spanId) => {
-        const fileInput = document.getElementById(inputId);
-        const fileNameSpan = document.getElementById(spanId);
-        if (fileInput) {
-            fileInput.addEventListener('change', () => {
-                fileNameSpan.textContent = fileInput.files.length > 0 ? `Anexo: ${fileInput.files[0].name}` : '';
-            });
-        }
-    };
-    handleAttachment('aviso-anexo', 'attachment-name');
 
-    // --- SIMULAÇÃO DE PUBLICAÇÃO DE AVISO (Painel do Gestor) ---
+    // --- MÓDULO 4: PAINEL DO GESTOR (Simulações) ---
     const formPublicarAviso = document.getElementById('form-publicar-aviso');
     if (formPublicarAviso) {
         formPublicarAviso.addEventListener('submit', (e) => {
             e.preventDefault();
             const conteudo = document.getElementById('aviso-conteudo').value;
-            const anexo = document.getElementById('attachment-name').textContent;
-            const adminFeed = document.getElementById('admin-feed');
-
-            if (conteudo.trim() === '') return; // Não publica se estiver vazio
-
-            // Cria o novo card de aviso
-            const novoAviso = document.createElement('div');
-            novoAviso.classList.add('card', 'feed-item');
-            novoAviso.innerHTML = `
-                <h4>Novo Aviso (Simulação)</h4>
-                <p>${conteudo}</p>
-                <small>Publicado agora</small>
-                ${anexo ? `<p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--cor-primaria);">${anexo}</p>` : ''}
-            `;
-            
-            // Adiciona o novo aviso no topo do feed
-            adminFeed.prepend(novoAviso);
-            
-            alert(`SIMULAÇÃO: Aviso publicado com sucesso!`);
+            if (conteudo.trim() === '') {
+                alert('Por favor, escreva um aviso antes de publicar.');
+                return;
+            }
+            alert(`SIMULAÇÃO: Aviso publicado com sucesso!\n\nConteúdo: "${conteudo}"`);
             formPublicarAviso.reset();
-            document.getElementById('attachment-name').textContent = '';
         });
     }
+    
+
+    // --- MÓDULO 5: FUNCIONALIDADES GERAIS (Ex: Ver Senha) ---
+    const toggleButtons = document.querySelectorAll('.password-toggle');
+    toggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const passwordInput = button.previousElementSibling;
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+        });
+    });
 
 });
