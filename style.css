@@ -1,84 +1,137 @@
 /* ==========================================================================
-   CSS FINAL v16.0 - RÉPLICA FIEL DO CLASSROOM
+   CSS FINAL v17.0 - VERSÃO CORRIGIDA COM ESTILOS DO PAINEL DE TURMAS
    ========================================================================== */
 
 /* --- 1. GLOBAIS E VARIÁVEIS --- */
 :root {
-    --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-    --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
-    --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
+    /* TEMA CLARO (Padrão) */
+    --cor-fundo: #f8f9fa;
+    --cor-superficie: #ffffff;
+    --cor-borda: #e9ecef;
+    --cor-primaria: #1a73e8;
+    --cor-primaria-hover: #1765cf;
+    --cor-texto-principal: #202124;
+    --cor-texto-secundario: #5f6368;
     --sombra-card: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
 }
+
 html.dark-mode {
-    --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-    --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
-    --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
+    /* TEMA ESCURO */
+    --cor-fundo: #202124;
+    --cor-superficie: #292a2d;
+    --cor-borda: #3c4043;
+    --cor-primaria: #8ab4f8;
+    --cor-primaria-hover: #9ec5f9;
+    --cor-texto-principal: #e8eaed;
+    --cor-texto-secundario: #9aa0a6;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-a { color: var(--cor-primaria); text-decoration: none; }
-.container { max-width: 1024px; margin: 0 auto; padding: 1.5rem; }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+}
+
+a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
 
 /* --- 2. LAYOUT GERAL E CABEÇALHO --- */
-.main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 1.5rem; height: 64px; }
-.header-content { display: flex; justify-content: space-between; align-items: center; height: 100%; max-width: 1200px; margin: 0 auto; }
-.header-left, .header-right { display: flex; align-items: center; gap: 1.5rem; }
+.main-header {
+    background-color: var(--cor-superficie);
+    border-bottom: 1px solid var(--cor-borda);
+    padding: 0 1.5rem;
+    height: 64px;
+}
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header-left, .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
 .logo { font-size: 1.3rem; font-weight: 700; }
 .back-to-classes-btn { font-size: 1.5rem; text-decoration: none; color: var(--cor-texto-secundario); }
 
-/* --- 3. DENTRO DA TURMA (ESTILO CLASSROOM) --- */
-.class-banner {
-    background-color: var(--cor-primaria);
-    color: #fff;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 0;
-}
-.class-banner.informatica { background-color: #1a73e8; } /* Cor pode ser customizada por turma */
-.class-banner h1 { font-size: 2.2rem; }
+/* --- 3. PAINEL DO GESTOR: TELA DE TURMAS --- */
+.platform-body { display: flex; }
+.platform-content { flex: 1; padding: 2rem; overflow-y: auto; height: 100vh; }
+.platform-sidebar { width: 260px; background-color: var(--cor-superficie); border-right: 1px solid var(--cor-borda); min-height: 100vh; display: flex; flex-direction: column; padding: 1rem; }
+.sidebar-header { padding: 1rem; border-bottom: 1px solid var(--cor-borda); margin-bottom: 1rem; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
+.nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; color: var(--cor-texto-secundario); text-decoration: none !important; }
+.nav-item.active, .nav-item:hover { background-color: var(--cor-fundo); color: var(--cor-primaria); }
+.sidebar-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
+.main-content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
 
-.class-tabs-nav {
-    display: flex;
-    gap: 1rem;
-    border-bottom: 2px solid var(--cor-borda);
-    margin-bottom: 2rem;
-}
-.tab-item {
-    padding: 1rem 0.5rem;
-    font-weight: 600;
-    color: var(--cor-texto-secundario);
-    border-bottom: 3px solid transparent;
-    transition: all 0.2s ease-in-out;
-}
-.tab-item.active, .tab-item:hover {
-    color: var(--cor-primaria);
-    border-bottom-color: var(--cor-primaria);
-}
-
-.class-content-layout {
+.class-grid {
     display: grid;
-    grid-template-columns: 200px 1fr; /* Coluna lateral fixa e principal flexível */
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
-.class-upcoming { /* Coluna esquerda */ }
-.class-stream { display: flex; flex-direction: column; gap: 1.5rem; } /* Coluna direita */
+.class-card {
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none !important;
+    color: var(--cor-texto-principal);
+    background-color: var(--cor-superficie);
+    transition: box-shadow 0.3s ease;
+}
+.class-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+html.dark-mode .class-card:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+.class-card-header { padding: 1.5rem; color: #fff; min-height: 120px; }
+.class-card-header.informatica { background-color: #1a73e8; }
+.class-card-header.mecanica { background-color: #e8710a; }
+.class-card-header.jogos { background-color: #34a853; }
+.class-card-header.automacao { background-color: #8f23a5; }
+.class-card-header h3 { font-size: 1.4rem; }
+.class-card-body { flex-grow: 1; }
+.class-card-footer { border-top: 1px solid var(--cor-borda); padding: 1rem 1.5rem; font-size: 0.9rem; color: var(--cor-texto-secundario); }
 
-/* --- 4. COMPONENTES --- */
-.card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; box-shadow: var(--sombra-card); }
-.card-title-small { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+/* --- 4. PAINEL DO GESTOR: DENTRO DA TURMA --- */
+.class-banner { background-color: var(--cor-primaria); color: #fff; padding: 2rem; border-radius: 8px; margin-bottom: 0; }
+.class-banner.informatica { background-color: #1a73e8; }
+.class-tabs-nav { display: flex; gap: 1rem; border-bottom: 2px solid var(--cor-borda); margin-bottom: 2rem; }
+.tab-item { padding: 1rem 0.5rem; font-weight: 600; color: var(--cor-texto-secundario); border-bottom: 3px solid transparent; }
+.tab-item.active, .tab-item:hover { color: var(--cor-primaria); border-bottom-color: var(--cor-primaria); }
+.class-content-layout { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; }
+.class-stream { display: flex; flex-direction: column; gap: 1.5rem; }
 .publisher-card textarea { width: 100%; border: none; background: none; font-size: 1rem; padding: 1rem; resize: vertical; min-height: 60px; color: var(--cor-texto-principal); }
 .publisher-actions { display: flex; justify-content: flex-end; align-items: center; border-top: 1px solid var(--cor-borda); padding-top: 1rem; margin-top: 0.5rem; }
 .feed-container { display: flex; flex-direction: column; gap: 1.5rem; }
 .feed-item small { color: var(--cor-texto-secundario); font-size: 0.8rem; margin-top: 1rem; display: block; }
-.btn-submit { padding: 0.6rem 1.5rem; font-size: 0.9rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; }
-.btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; }
+
+/* --- 5. COMPONENTES GENÉRICOS --- */
+.card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; box-shadow: var(--sombra-card); }
+.card-title-small { font-size: 1rem; font-weight: 600; margin-bottom: 1rem; }
+.btn-submit { padding: 0.6rem 1.5rem; font-size: 0.9rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; text-decoration: none !important; }
+.btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none !important; }
 .theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); }
 
-/* --- 5. RESPONSIVIDADE --- */
+/* --- 6. RESPONSIVIDADE --- */
 @media (max-width: 768px) {
     .class-content-layout { grid-template-columns: 1fr; }
-    .class-upcoming { display: none; } /* Oculta atividades próximas em telas pequenas para simplificar */
+    .class-upcoming { display: none; }
 }
-
-/* (Os estilos para as páginas de login, cadastro, e painel de turmas não precisam mudar e continuam válidos) */
-/* ... */
