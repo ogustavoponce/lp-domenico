@@ -1,64 +1,276 @@
 /* ==========================================================================
-   CSS FINAL v9.0 - PAINÉIS REESTRUTURADOS ESTILO CLASSROOM
+   CSS FINAL COMPLETO v10.0 - PAINÉIS REESTRUTURADOS ESTILO CLASSROOM
    ========================================================================== */
+
+/* 1. CONFIGURAÇÕES GLOBAIS E VARIÁVEIS */
 :root {
-    --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-    --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
-    --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
+    /* TEMA CLARO (Padrão) */
+    --cor-fundo: #f8f9fa;
+    --cor-superficie: #ffffff;
+    --cor-borda: #e9ecef;
+    --cor-primaria: #1a73e8;
+    --cor-primaria-hover: #1765cf;
+    --cor-texto-principal: #202124;
+    --cor-texto-secundario: #5f6368;
     --cor-perigo: #d93025;
     --sombra-suave: 0 1px 2px 0 rgba(60,64,67,0.3), 0 2px 6px 2px rgba(60,64,67,0.15);
 }
+
 html.dark-mode {
-    --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-    --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
-    --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
+    /* TEMA ESCURO */
+    --cor-fundo: #202124;
+    --cor-superficie: #292a2d;
+    --cor-borda: #3c4043;
+    --cor-primaria: #8ab4f8;
+    --cor-primaria-hover: #9ec5f9;
+    --cor-texto-principal: #e8eaed;
+    --cor-texto-secundario: #9aa0a6;
     --cor-perigo: #f28b82;
     --sombra-suave: 0 1px 2px 0 rgba(0,0,0,0.3), 0 2px 6px 2px rgba(0,0,0,0.15);
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-.container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-a { color: var(--cor-primaria); text-decoration: none; }
-@keyframes fadeInUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-/* LAYOUT GERAL DA PLATAFORMA */
-.platform-body { display: flex; }
-.platform-sidebar { width: 260px; background-color: var(--cor-superficie); border-right: 1px solid var(--cor-borda); min-height: 100vh; display: flex; flex-direction: column; padding: 1rem; }
-.platform-content { flex: 1; padding: 2rem; overflow-y: auto; height: 100vh; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-/* BARRA LATERAL (SIDEBAR) */
-.sidebar-header { padding: 1rem; border-bottom: 1px solid var(--cor-borda); margin-bottom: 1rem; }
-.logo { font-size: 1.3rem; font-weight: 700; }
-.sidebar-nav { display: flex; flex-direction: column; gap: 0.5rem; flex-grow: 1; }
-.nav-item { display: flex; align-items: center; gap: 1rem; padding: 0.8rem 1rem; border-radius: 8px; font-weight: 500; color: var(--cor-texto-secundario); }
-.nav-item.active, .nav-item:hover { background-color: var(--cor-fundo); color: var(--cor-primaria); }
-.sidebar-footer { margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding: 1rem; }
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
 
-/* PAINEL DO ALUNO */
-.student-dashboard-layout { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 1fr); gap: 2rem; }
-.student-main-feed, .student-sidebar-right { display: flex; flex-direction: column; gap: 2rem; }
+a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
 
-/* PAINEL DO GESTOR */
-.admin-dashboard-layout { display: grid; grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr); gap: 2rem; }
-.admin-main-content, .admin-sidebar-right { display: flex; flex-direction: column; gap: 2rem; }
-.publisher-card textarea { width: 100%; border: none; background: none; font-size: 1rem; padding: 1rem; resize: vertical; min-height: 60px; }
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 2. LAYOUTS GERAIS (Plataforma, Autenticação) */
+.platform-body {
+    display: flex;
+}
+
+.platform-content {
+    flex: 1;
+    padding: 2rem;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.auth-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 100vh;
+}
+
+.auth-branding {
+    background: linear-gradient(135deg, #1a73e8, #1765cf);
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+}
+
+html.dark-mode .auth-branding {
+    background: linear-gradient(135deg, #292a2d, #202124);
+}
+
+.auth-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-superficie);
+}
+
+/* 3. BARRA LATERAL (Sidebar) */
+.platform-sidebar {
+    width: 260px;
+    background-color: var(--cor-superficie);
+    border-right: 1px solid var(--cor-borda);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    transition: background-color 0.3s ease, border-right 0.3s ease;
+}
+
+.sidebar-header {
+    padding: 1rem;
+    border-bottom: 1px solid var(--cor-borda);
+    margin-bottom: 1rem;
+}
+
+.logo {
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-decoration: none !important;
+    color: var(--cor-texto-principal);
+}
+
+.profile-card {
+    text-align: center;
+    padding: 1rem;
+}
+
+.profile-card .profile-pic {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 0.5rem;
+    border: 2px solid var(--cor-primaria);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex-grow: 1;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.nav-item.active, .nav-item:hover {
+    background-color: var(--cor-fundo);
+    color: var(--cor-primaria);
+}
+
+.nav-item svg {
+    width: 20px;
+    height: 20px;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cor-borda);
+}
+
+/* 4. PAINÉIS (Aluno e Gestor) */
+.student-dashboard-layout, .admin-dashboard-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.5fr) minmax(0, 1fr);
+    gap: 2rem;
+}
+
+.student-main-feed, .student-sidebar-right,
+.admin-main-content, .admin-sidebar-right {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* 5. COMPONENTES */
+.card {
+    background-color: var(--cor-superficie);
+    border-radius: 8px;
+    border: 1px solid var(--cor-borda);
+    padding: 1.5rem;
+    animation: fadeInUp 0.5s ease-out forwards;
+    transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--cor-borda);
+}
+
+.welcome-banner { margin-bottom: 2rem; }
+
+.publisher-card textarea {
+    width: 100%;
+    border: none;
+    background: none;
+    font-size: 1rem;
+    padding: 1rem;
+    resize: vertical;
+    min-height: 60px;
+    color: var(--cor-texto-principal);
+    font-family: 'Poppins', sans-serif;
+}
 .publisher-card textarea:focus { outline: none; }
 .publisher-actions { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--cor-borda); padding-top: 1rem; margin-top: 0.5rem; }
-.publisher-actions input { border: 1px solid var(--cor-borda); padding: 0.5rem; border-radius: 6px; }
+.attachment-wrapper { display: flex; align-items: center; gap: 1rem; }
+#attachment-name { font-size: 0.9rem; color: var(--cor-texto-secundario); }
+
+.feed-container { display: flex; flex-direction: column; gap: 1.5rem; }
 .feed-item small { color: var(--cor-texto-secundario); font-size: 0.8rem; margin-top: 1rem; display: block; }
 
-/* COMPONENTES */
-.card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; animation: fadeInUp 0.5s ease-out forwards; }
-.card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
-.welcome-banner { margin-bottom: 2rem; }
-.btn-submit { padding: 0.6rem 1.5rem; font-size: 0.9rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 6px; cursor: pointer; }
-.btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; }
-.theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); }
 .data-table { width: 100%; }
-.data-table th, .data-table td { padding: 0.5rem; text-align: left; border-bottom: 1px solid var(--cor-borda); }
-.btn-danger { background-color: transparent; border: none; color: var(--cor-perigo); font-weight: bold; cursor: pointer; }
+.data-table th, .data-table td { padding: 0.75rem; text-align: left; border-bottom: 1px solid var(--cor-borda); }
 
-/* (Estilos de login/cadastro da versão anterior podem ser mantidos aqui) */
-.auth-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
-.auth-branding { background: linear-gradient(135deg, #1a73e8, #1765cf); color: #fff; display: flex; justify-content: center; align-items: center; text-align: center; }
-.auth-form { display: flex; justify-content: center; align-items: center; background-color: var(--cor-superficie); }
+/* 6. FORMULÁRIOS */
+.input-group { margin-bottom: 1.5rem; text-align: left; }
+.input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+.input-group input, .input-group textarea, .input-group select {
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-principal);
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--cor-primaria) 20%, transparent);
+}
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+/* 7. BOTÕES */
+.btn-submit, .btn-secondary, .btn-card, .btn-danger {
+    padding: 0.7rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    text-decoration: none !important;
+    border: 1px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+.btn-submit { color: #fff; background-color: var(--cor-primaria); }
+.btn-submit:hover { background-color: var(--cor-primaria-hover); }
+.btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border-color: var(--cor-borda); }
+.btn-secondary:hover { background-color: var(--cor-borda); }
+.btn-danger { background-color: transparent; border-color: var(--cor-perigo); color: var(--cor-perigo); padding: 0.3rem 0.8rem; }
+.btn-danger:hover { background-color: var(--cor-perigo); color: #fff; }
+.theme-button { background-color: transparent; border: 1px solid var(--cor-borda); border-radius: 50%; width: 40px; height: 40px; font-size: 1.2rem; cursor: pointer; color: var(--cor-texto-secundario); }
+
+/* 8. RESPONSIVIDADE */
+@media (max-width: 900px) {
+    .auth-container { grid-template-columns: 1fr; }
+    .auth-branding { display: none; }
+    .platform-body { flex-direction: column; }
+    .platform-sidebar { width: 100%; min-height: auto; border-right: none; border-bottom: 1px solid var(--cor-borda); }
+    .student-dashboard-layout, .admin-dashboard-layout { grid-template-columns: 1fr; }
+}
