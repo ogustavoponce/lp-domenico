@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Plataforma LP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* (Estilos idênticos ao do painel do aluno para consistência) */
+        :root {
+            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
+            --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
+            --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
+            --sombra-card: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+        }
+        html.dark-mode {
+            --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
+            --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
+            --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
+        .container { max-width: 800px; margin: 0 auto; padding: 1.5rem; }
+        .main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 1.5rem; height: 64px; }
+        .header-content { display: flex; align-items: center; height: 100%; }
+        .logo { font-size: 1.3rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
+        .card { background-color: var(--cor-superficie); border-radius: 8px; padding: 1.5rem; box-shadow: var(--sombra-card); }
+        .card-title { font-size: 1.2rem; font-weight: 600; margin-bottom: 1rem; }
+        .input-group { margin-bottom: 1.5rem; }
+        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+        .input-group input { background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); color: var(--cor-texto-principal); width: 100%; padding: 0.8rem 1rem; font-size: 1rem; border-radius: 8px; }
+        .btn-submit { padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; text-decoration: none; border: none; color: #fff; background-color: var(--cor-primaria); }
+        .theme-selector { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--cor-borda); border-radius: 8px; }
+        .theme-selector p { margin: 0; font-weight: 500; }
+        #theme-toggle-btn { font-size: 1rem; padding: 0.5rem 1rem; border: 1px solid var(--cor-borda); background-color: var(--cor-fundo); color: var(--cor-texto-principal); border-radius: 6px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="plataforma_aluno.html" class="logo">← Voltar</a>
+        </div>
+    </header>
+    <main class="container">
+        <h1>Configurações</h1>
+        <br>
+        <div class="card">
+            <h2 class="card-title">Perfil</h2>
+            <form id="settings-form">
+                <div class="input-group"><label>Foto de Perfil</label><input type="file"></div>
+                <div class="input-group"><label>Nome Completo</label><input type="text" value="Gustavo Oliveira de Pontes"></div>
+                <div class="input-group"><label>Email</label><input type="email" value="gustavo.ponce@email.com"></div>
+                <hr style="border: 1px solid var(--cor-borda); margin: 2rem 0;">
+                <h2 class="card-title">Tema da Plataforma</h2>
+                <div class="theme-selector">
+                    <p>Alternar entre modo claro e escuro</p>
+                    <button id="theme-toggle-btn" type="button">Mudar para Modo Escuro</button>
+                </div>
+                <hr style="border: 1px solid var(--cor-borda); margin: 2rem 0;">
+                <button type="submit" class="btn-submit" style="width: auto;">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const themeToggleBtn = document.getElementById('theme-toggle-btn');
+            const applyTheme = (theme) => {
+                if (theme === 'dark-mode') {
+                    document.documentElement.classList.add('dark-mode');
+                    themeToggleBtn.textContent = 'Mudar para Modo Claro';
+                } else {
+                    document.documentElement.classList.remove('dark-mode');
+                    themeToggleBtn.textContent = 'Mudar para Modo Escuro';
+                }
+            };
+            let currentTheme = localStorage.getItem('theme') || 'light-mode';
+            applyTheme(currentTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
+            const settingsForm = document.getElementById('settings-form');
+            if(settingsForm) {
+                settingsForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    alert('Configurações salvas com sucesso! (Simulação)');
+                });
+            }
+        });
+    </script>
+</body>
+</html>
