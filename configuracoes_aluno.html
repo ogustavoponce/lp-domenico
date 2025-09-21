@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Plataforma LP</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="plataforma_aluno.html" class="logo">← Voltar para a Plataforma</a>
+            </div>
+            <div class="header-right">
+                <button id="theme-toggle" class="theme-button">🌙</button>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        <div class="card">
+            <div class="card-title"><h2>⚙️ Minhas Configurações</h2></div>
+            <form id="settings-form">
+                <div class="input-group">
+                    <label>Alterar Foto de Perfil</label>
+                    <input type="file">
+                </div>
+                <div class="input-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" value="gustavo.exemplo@email.com">
+                </div>
+                <div class="input-group">
+                    <label for="senha-nova">Nova Senha</label>
+                    <input type="password" id="senha-nova">
+                </div>
+                <button type="submit" class="btn-submit" style="width: auto;">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+    <script src="script.js"></script>
+</body>
+</html>
