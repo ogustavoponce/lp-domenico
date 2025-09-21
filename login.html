@@ -36,19 +36,24 @@
                     <div class="input-group"><label for="senha">Senha</label><input type="password" id="senha" required></div>
                     <button type="submit" class="btn-submit">Entrar</button>
                 </form>
-                <div style="margin-top: 1.5rem;"><a href="#">Esqueceu sua senha?</a><p style="margin-top: 1rem;">Não tem uma conta? <a href="#">Cadastre-se</a></p></div>
+                <div style="margin-top: 1.5rem;"><p>Não tem uma conta? <a href="#">Cadastre-se</a></p></div>
             </div>
         </div>
     </div>
     <script>
+        // SCRIPT DE LOGIN EMBUTIDO
         document.addEventListener('DOMContentLoaded', () => {
+            // Aplica o tema salvo, mesmo sem o botão, para manter a consistência se o usuário já tiver escolhido
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme) { document.documentElement.className = savedTheme; }
+
             const loginForm = document.getElementById('login-form');
             if (loginForm) {
                 loginForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     const email = document.getElementById('login-email').value;
                     if (email.toLowerCase() === 'domenico@prof.com') {
-                        window.location.href = 'admin_turmas.html';
+                        window.location.href = 'admin_mural.html'; // Corrigido para a página correta
                     } else {
                         window.location.href = 'plataforma_aluno.html';
                     }
