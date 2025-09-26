@@ -3,93 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações - Plataforma LP</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-            --cor-primaria: #1a73e8; --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
-        }
-        html.dark-mode {
-            --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-            --cor-primaria: #8ab4f8; --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        .container { max-width: 900px; margin: 2rem auto; }
-        .main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 1.5rem; height: 64px; }
-        .header-content { display: flex; align-items: center; height: 100%; }
-        .logo { font-size: 1.3rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
-        .settings-layout { display: grid; grid-template-columns: 200px 1fr; gap: 2rem; }
-        .settings-nav a { display: block; padding: 0.75rem 1rem; font-weight: 500; color: var(--cor-texto-secundario); border-radius: 6px; text-decoration: none; }
-        .settings-nav a.active, .settings-nav a:hover { background-color: var(--cor-fundo); color: var(--cor-primaria); }
-        .card { background-color: var(--cor-superficie); border-radius: 8px; padding: 1.5rem; }
-        .card-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1.5rem; }
-        .input-group { margin-bottom: 1.5rem; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-        .input-group input { background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); color: var(--cor-texto-principal); width: 100%; padding: 0.8rem 1rem; border-radius: 8px; }
-        .btn-submit { padding: 0.7rem 1.5rem; font-size: 0.9rem; font-weight: 600; border-radius: 6px; cursor: pointer; border: none; color: #fff; background-color: var(--cor-primaria); }
-        .theme-selector { display: flex; align-items: center; justify-content: space-between; padding: 1rem; border: 1px solid var(--cor-borda); border-radius: 8px; }
-        #theme-toggle-btn { font-weight: 500; padding: 0.5rem 1rem; border: 1px solid var(--cor-borda); background-color: var(--cor-fundo); color: var(--cor-texto-principal); border-radius: 6px; cursor: pointer; }
-    </style>
+    <title>Configurações</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content"><a href="plataforma_aluno.html" class="logo">← Voltar</a></div>
-    </header>
-    <main class="container">
-        <div class="settings-layout">
-            <aside class="settings-nav">
-                <a href="#" class="nav-item active">Perfil</a>
-                <a href="#" class="nav-item">Aparência</a>
-            </aside>
-            <section class="settings-content">
-                <div class="card">
-                    <h2 class="card-title">Perfil</h2>
-                    <form id="settings-form">
-                        <div class="input-group"><label>Foto de Perfil</label><input type="file"></div>
-                        <div class="input-group"><label>Nome Completo</label><input type="text" value="Gustavo Oliveira de Pontes"></div>
-                        <hr style="border: 1px solid var(--cor-borda); margin: 2rem 0;">
-                        <button type="submit" class="btn-submit" style="width: auto;">Salvar Alterações</button>
-                    </form>
-                </div>
-                 <div class="card" style="margin-top: 2rem;">
-                    <h2 class="card-title">Aparência</h2>
-                    <div class="theme-selector">
-                        <span>Mudar tema da plataforma</span>
-                        <button id="theme-toggle-btn" type="button">Mudar para Modo Escuro</button>
-                    </div>
-                </div>
-            </section>
+    <div class="header surface">
+        <a href="plataforma_aluno.html" class="logo" style="text-decoration: none;">← Voltar</a>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h1 class="card-title">Configurações</h1>
+            <div class="input-group">
+                <label>Nome</label>
+                <input type="text" value="Gustavo">
+            </div>
+            <div class="input-group">
+                <label>Tema</label>
+                <button id="theme-toggle-btn" class="btn" style="width: 100%;">Mudar Tema</button>
+            </div>
         </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const themeToggleBtn = document.getElementById('theme-toggle-btn');
-            const applyTheme = (theme) => {
-                if (theme === 'dark-mode') {
-                    document.documentElement.classList.add('dark-mode');
-                    themeToggleBtn.textContent = 'Mudar para Modo Claro';
-                } else {
-                    document.documentElement.classList.remove('dark-mode');
-                    themeToggleBtn.textContent = 'Mudar para Modo Escuro';
-                }
-            };
-            let currentTheme = localStorage.getItem('theme') || 'light-mode';
-            applyTheme(currentTheme);
-            themeToggleBtn.addEventListener('click', () => {
-                currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
-                localStorage.setItem('theme', currentTheme);
-                applyTheme(currentTheme);
-            });
-            const settingsForm = document.getElementById('settings-form');
-            if(settingsForm) {
-                settingsForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    alert('Configurações salvas com sucesso! (Simulação)');
-                });
-            }
-        });
-    </script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

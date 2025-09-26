@@ -3,132 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma do Aluno</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --cor-fundo: #f8f9fa; --cor-superficie: #ffffff; --cor-borda: #e9ecef;
-            --cor-primaria: #1a73e8; --cor-primaria-hover: #1765cf;
-            --cor-texto-principal: #202124; --cor-texto-secundario: #5f6368;
-            --sombra-card: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
-        }
-        html.dark-mode {
-            --cor-fundo: #202124; --cor-superficie: #292a2d; --cor-borda: #3c4043;
-            --cor-primaria: #8ab4f8; --cor-primaria-hover: #9ec5f9;
-            --cor-texto-principal: #e8eaed; --cor-texto-secundario: #9aa0a6;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        .container { max-width: 1024px; margin: 0 auto; padding: 1.5rem; }
-        a { color: var(--cor-primaria); text-decoration: none; }
-        .main-header { background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 1.5rem; height: 64px; }
-        .header-content { display: flex; justify-content: space-between; align-items: center; height: 100%; }
-        .header-left, .header-right { display: flex; align-items: center; gap: 1rem; }
-        .logo { display: flex; align-items: center; gap: 0.75rem; font-size: 1.3rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
-        .logo svg { height: 32px; width: 32px; }
-        .profile-button { display: flex; align-items: center; gap: 0.5rem; background: none; border: none; cursor: pointer; color: var(--cor-texto-principal); font-family: 'Poppins', sans-serif; font-size: 1rem; padding: 0.5rem; border-radius: 20px; }
-        .profile-button:hover { background-color: var(--cor-fundo); }
-        .profile-pic { width: 32px; height: 32px; border-radius: 50%; }
-        .icon-button { background: none; border: none; cursor: pointer; color: var(--cor-texto-secundario); padding: 0.5rem; text-decoration: none; font-size: 1.5rem; }
-        .icon-button:hover { color: var(--cor-texto-principal); }
-        .btn-secondary { color: var(--cor-texto-principal); background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; }
-        .card { background-color: var(--cor-superficie); border-radius: 8px; border: 1px solid var(--cor-borda); padding: 1.5rem; box-shadow: var(--sombra-card); }
-        .student-banner {
-            padding: 2.5rem 2rem;
-            border-radius: 12px;
-            margin-bottom: 2rem;
-            background: linear-gradient(135deg, #1a73e8, #8e44ad);
-            color: #fff;
-        }
-        html.dark-mode .student-banner {
-             background: linear-gradient(135deg, #292a2d, #121212);
-        }
-        .student-banner h1 { font-size: 2rem; }
-        .student-banner p { opacity: 0.9; }
-        .student-tabs-nav { display: flex; gap: 1rem; border-bottom: 2px solid var(--cor-borda); margin-bottom: 2rem; }
-        .student-tab-item { padding: 1rem 0.5rem; font-weight: 600; color: var(--cor-texto-secundario); border-bottom: 3px solid transparent; cursor: pointer; }
-        .student-tab-item.active, .student-tab-item:hover { color: var(--cor-primaria); border-bottom-color: var(--cor-primaria); }
-        .aviso-item { border-bottom: 1px solid var(--cor-borda); padding: 1.5rem 0; }
-        .aviso-item:last-child { border-bottom: none; }
-    </style>
+    <title>Painel do Aluno</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="main-header">
-        <div class="header-content">
-            <div class="header-left">
-                <a href="#" class="logo">
-                    <svg viewBox="0 0 496 496" fill="currentColor"><path d="M496 248c0 137-111 248-248 248S0 385 0 248 111 0 248 0s248 111 248 248zM248 60c-24.3 0-44 19.7-44 44s19.7 44 44 44 44-19.7 44-44-19.7-44-44-44zm0 244c-35.3 0-64 28.7-64 64s28.7 64 64 64 64-28.7 64-64-28.7-64-64-64zm-82-120c-23.1 0-42 18.9-42 42s18.9 42 42 42 42-18.9 42-42-18.9-42-42-42zm164 0c-23.1 0-42 18.9-42 42s18.9 42 42 42 42-18.9 42-42-18.9-42-42-42z"/></svg>
-                    <span>Instituto Federal</span>
-                </a>
-            </div>
-            <div class="header-right">
-                <a href="configuracoes.html" class="icon-button" title="Configurações">⚙️</a>
-                <button class="profile-button">
-                    <img src="https://via.placeholder.com/40/34a853/ffffff?text=G" alt="Foto do Aluno" class="profile-pic">
-                    <span>Gustavo</span>
-                </button>
-                <a href="login.html" class="btn-secondary">Sair</a>
+    <div class="header surface">
+        <div class="logo">Plataforma LP</div>
+        <div class="header-actions">
+            <a href="configuracoes.html" class="btn">Configurações</a>
+            <a href="login.html" class="btn">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <h1 id="welcome-greeting" class="card-title">Olá!</h1>
+            <p>Seja bem-vindo à sua plataforma de estudos.</p>
+        </div>
+        <div class="card">
+            <h2 class="card-title">Mural de Avisos</h2>
+            <div>
+                <h4>Lembrete de Prova</h4>
+                <p class="text-secondary">Publicado em 21/09</p>
             </div>
         </div>
-    </header>
-
-    <main class="container">
-        <section class="student-banner">
-            <h1 id="welcome-greeting">Carregando...</h1>
-            <p>Turma: Informática</p>
-        </section>
-
-        <nav class="student-tabs-nav">
-            <a href="#" class="student-tab-item active" data-view="mural">Mural</a>
-            <a href="#" class="student-tab-item" data-view="atividades">Minhas Atividades</a>
-        </nav>
-
-        <div class="student-content">
-            <div id="view-mural" class="view-panel active">
-                <div class="card">
-                    <div id="mural-avisos-list">
-                        <div class="aviso-item">
-                            <h4>Boas-vindas à Turma</h4>
-                            <p>Utilizaremos este espaço para comunicados.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="view-atividades" class="view-panel" style="display: none;">
-                <div class="card"><h2>Minhas Atividades</h2><p>Aqui você encontra a lista de todas as suas atividades.</p></div>
-            </div>
-        </div>
-    </main>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Lógica para carregar o tema salvo
-            const applyTheme = (theme) => document.documentElement.className = theme;
-            applyTheme(localStorage.getItem('theme') || 'light-mode');
-
-            // Lógica da saudação
-            const greetingElement = document.getElementById('welcome-greeting');
-            if (greetingElement) {
-                const nomeDoUsuario = "Gustavo";
-                const horaAtual = new Date().getHours();
-                let saudacao = horaAtual < 12 ? "Bom dia" : horaAtual < 18 ? "Boa tarde" : "Boa noite";
-                greetingElement.textContent = `Olá, ${nomeDoUsuario}! Tenha uma ótima ${saudacao.split(' ')[1]}.`;
-            }
-
-            // Lógica das abas
-            const tabItems = document.querySelectorAll('.student-tab-item');
-            const viewPanels = document.querySelectorAll('.view-panel');
-            tabItems.forEach(tab => {
-                tab.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    tabItems.forEach(item => item.classList.remove('active'));
-                    viewPanels.forEach(panel => panel.style.display = 'none');
-                    tab.classList.add('active');
-                    const targetView = document.getElementById(tab.dataset.view);
-                    if (targetView) targetView.style.display = 'block';
-                });
-            });
-        });
-    </script>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>
