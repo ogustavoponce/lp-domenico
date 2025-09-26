@@ -6,21 +6,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- MÓDULO 1: CONTROLE DE TEMA ---
     const themeToggleBtn = document.getElementById('theme-toggle-btn');
-
     const applyTheme = (theme) => {
-        if (theme === 'dark-mode') {
-            document.documentElement.classList.add('dark-mode');
-        } else {
-            document.documentElement.classList.remove('dark-mode');
-        }
-        if (themeToggleBtn) {
-            themeToggleBtn.textContent = theme === 'dark-mode' ? 'Modo Claro' : 'Modo Escuro';
-        }
+        document.documentElement.className = '';
+        if (theme === 'dark-mode') document.documentElement.classList.add('dark-mode');
+        if (themeToggleBtn) themeToggleBtn.textContent = theme === 'dark-mode' ? 'Ativar Modo Claro' : 'Ativar Modo Escuro';
     };
-
     let currentTheme = localStorage.getItem('theme') || 'light-mode';
     applyTheme(currentTheme);
-
     if (themeToggleBtn) {
         themeToggleBtn.addEventListener('click', () => {
             currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
@@ -29,44 +21,77 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- MÓDULO 2: AUTENTICAÇÃO E NAVEGAÇÃO ---
+    // --- MÓDULO 2: AUTENTICAÇÃO ---
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = e.target.querySelector('#email').value;
+            const email = e.target.querySelector('input[type="email"]').value;
             if (email.toLowerCase() === 'domenico@prof.com') {
+                alert('Login como gestor bem-sucedido!');
                 window.location.href = 'admin_turmas.html';
             } else {
+                alert('Login de aluno bem-sucedido!');
                 window.location.href = 'plataforma_aluno.html';
             }
         });
     }
 
-    // --- MÓDULO 3: SAUDAÇÃO DINÂMICA ---
+    // --- MÓDULO 3: PAINEL DO ALUNO ---
     const greetingElement = document.getElementById('welcome-greeting');
     if (greetingElement) {
-        const userName = "Gustavo"; // Este nome seria dinâmico em um sistema real
-        const currentHour = new Date().getHours();
-        let greeting = "Olá";
-        if (currentHour < 12) {
-            greeting = "Bom dia";
-        } else if (currentHour < 18) {
-            greeting = "Boa tarde";
-        } else {
-            greeting = "Boa noite";
-        }
-        greetingElement.textContent = `${greeting}, ${userName}!`;
+        greetingElement.textContent = `Olá, Gustavo! Tenha uma ótima tarde.`;
     }
 
-    // --- MÓDULO 4: SIMULAÇÕES GERAIS ---
-    // Adiciona alerta para links e botões sem funcionalidade real ainda
-    document.querySelectorAll('a[href="#"], button:not([type="submit"])').forEach(element => {
-        // Evita adicionar o evento ao botão de tema que já tem uma função
-        if (element.id !== 'theme-toggle-btn') {
-            element.addEventListener('click', (e) => {
+    // --- MÓDULO 4: PAINEL DO GESTOR ---
+    // Simulação de Modais
+    const overlay = document.getElementById('modal-overlay');
+    document.querySelectorAll('[data-modal-target]').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = document.querySelector(button.dataset.modalTarget);
+            if(modal && overlay) {
+                overlay.classList.add('active');
+                modal.classList.add('active');
+            }
+        });
+    });
+    document.querySelectorAll('[data-modal-close]').forEach(button => {
+        button.addEventListener('click', () => {
+            const modal = button.closest('.modal');
+            if(modal && overlay) {
+                overlay.classList.remove('active');
+                modal.classList.remove('active');
+            }
+        });
+    });
+
+    // Simulação de Abas
+    document.querySelectorAll('.tab-item').forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            const parentNav = e.target.closest('nav');
+            parentNav.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+            e.target.classList.add('active');
+            
+            const viewContainer = document.querySelector('.class-content');
+            viewContainer.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
+            
+            const targetView = document.getElementById(e.target.dataset.view);
+            if(targetView) targetView.style.display = 'block';
+        });
+    });
+
+    // Simulação de Formulários
+    document.querySelectorAll('form').forEach(form => {
+        if(form.id !== 'login-form'){
+             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                alert('SIMULAÇÃO: Esta funcionalidade será implementada no futuro.');
+                alert('SIMULAÇÃO: Ação executada com sucesso!');
+                const modal = e.target.closest('.modal');
+                if(modal && overlay) {
+                     overlay.classList.remove('active');
+                     modal.classList.remove('active');
+                }
             });
         }
     });
