@@ -1,28 +1,35 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mural da Turma</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
-     <div class="header surface">
-        <a href="admin_turmas.html" class="logo" style="text-decoration: none;">← Voltar para Turmas</a>
-        <div class="header-actions">
-             <a href="login.html" class="btn">Sair</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card surface">
-            <h1 class="card-title">Mural de Avisos - Informática I</h1>
-            <div class="input-group">
-                <textarea rows="4" style="width: 100%; font-family: sans-serif; padding: 8px;" placeholder="Anuncie algo para a turma..."></textarea>
-            </div>
-            <button class="btn btn-primary">Publicar</button>
-        </div>
-    </div>
-     <script src="script.js"></script>
-</body>
-</html>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;pt-br&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Mural - Informática I&lt;/title&gt;
+     &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+    &lt;style&gt;
+        :root {
+            --cor-fundo: #f0f2f5; --cor-superficie: #ffffff; --cor-borda: #dcdfe3;
+            --cor-primaria: #0d6efd; --cor-texto-principal: #1c1e21;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: &#39;Poppins&#39;, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
+        .header { display: flex; align-items: center; justify-content: space-between; height: 70px; background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 2rem; }
+        .logo { font-size: 1.4rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
+        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; border: 1px solid var(--cor-borda); background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+        .card { background-color: var(--cor-superficie); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem;}
+        .card-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class=&quot;header&quot;&gt;
+        &lt;a href=&quot;admin_turmas.html&quot; class=&quot;logo&quot;&gt;← Informática I&lt;/a&gt;
+        &lt;a href=&quot;login.html&quot; class=&quot;btn&quot;&gt;Sair&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;main class=&quot;container&quot;&gt;
+        &lt;div class=&quot;card&quot;&gt;
+            &lt;h1 class=&quot;card-title&quot;&gt;Mural de Avisos&lt;/h1&gt;
+            &lt;p&gt;Nenhum aviso publicado para esta turma.&lt;/p&gt;
+        &lt;/div&gt;
+    &lt;/main&gt;
+&lt;/body&gt;
+&lt;/html&gt;
