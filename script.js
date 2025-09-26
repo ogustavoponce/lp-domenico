@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.documentElement.classList.remove('dark-mode');
         }
         if (themeToggleBtn) {
-            themeToggleBtn.textContent = theme === 'dark-mode' ? 'Modo Claro' : 'Modo Escuro';
+            themeToggleBtn.textContent = theme === 'dark-mode' ? 'Ativar Modo Claro' : 'Ativar Modo Escuro';
         }
     };
 
@@ -39,15 +39,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (greetingElement) {
         const userName = "Gustavo";
-        const currentHour = new Date().getHours();
-        let greeting = "Olá";
-        if (currentHour < 12) {
-            greeting = "Bom dia";
-        } else if (currentHour < 18) {
-            greeting = "Boa tarde";
-        } else {
-            greeting = "Boa noite";
-        }
-        greetingElement.textContent = `${greeting}, ${userName}!`;
+        greetingElement.textContent = `Olá, ${userName}!`;
     }
 });
