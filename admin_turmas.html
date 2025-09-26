@@ -1,42 +1,74 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Gestor</title>
+    <title>Painel do Gestor - Plataforma Edu</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header surface">
-        <div class="logo">Painel do Gestor</div>
-        <div class="header-actions">
-             <a href="login.html" class="btn">Sair</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="main-content-header">
-            <h1>Suas Turmas</h1>
-            <a href="#" class="btn btn-primary">+ Criar Turma</a>
-        </div>
-        <div class="dashboard-grid">
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header informatica"><h2>Informática I</h2></div>
-                <div class="class-card-content"><p class="text-secondary">Professor Domenico</p></div>
-            </a>
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header mecanica"><h2>Mecânica II</h2></div>
-                <div class="class-card-content"><p class="text-secondary">Professor Domenico</p></div>
-            </a>
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header jogos"><h2>Jogos Digitais</h2></div>
-                <div class="class-card-content"><p class="text-secondary">Professor Domenico</p></div>
-            </a>
-            <a href="admin_mural.html" class="class-card">
-                <div class="class-card-header automacao"><h2>Automação</h2></div>
-                <div class="class-card-content"><p class="text-secondary">Professor Domenico</p></div>
-            </a>
-        </div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Edu</div>
+            <nav>
+                <ul>
+                    <li><a href="admin_turmas.html" class="active">Minhas Turmas</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                 <a href="login.html" class="btn btn-primary">Sair</a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header>
+                <h1>Painel do Gestor</h1>
+                <p>Gerencie suas turmas com facilidade.</p>
+            </header>
+            
+            <section class="turmas-grid" style="margin-top: 2rem;">
+                <a href="admin_mural.html" class="turma-card">
+                    <div class="turma-card-header informatica-header">
+                        <h3>Téc. em Informática</h3>
+                        <p>1º Ano - Matutino</p>
+                    </div>
+                    <div class="turma-card-body">
+                        <p>32 Alunos</p>
+                    </div>
+                </a>
+                
+                <a href="#" onclick="alert('Página da turma em construção!')" class="turma-card">
+                    <div class="turma-card-header mecanica-header">
+                        <h3>Téc. em Mecânica</h3>
+                        <p>2º Ano - Vespertino</p>
+                    </div>
+                    <div class="turma-card-body">
+                        <p>28 Alunos</p>
+                    </div>
+                </a>
+
+                <a href="#" onclick="alert('Página da turma em construção!')" class="turma-card">
+                    <div class="turma-card-header eletrotecnica-header">
+                        <h3>Téc. em Eletrotécnica</h3>
+                        <p>3º Ano - Matutino</p>
+                    </div>
+                    <div class="turma-card-body">
+                        <p>35 Alunos</p>
+                    </div>
+                </a>
+
+                <div class="turma-card">
+                     <div class="turma-card-header geral-header">
+                        <h3>Visão Geral</h3>
+                     </div>
+                     <div class="turma-card-body">
+                        <p><strong>Total de Alunos:</strong> 95</p>
+                        <p><strong>Turmas Ativas:</strong> 3</p>
+                     </div>
+                </div>
+            </section>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>

@@ -1,98 +1,116 @@
-// =========================================================================
-// SCRIPT FINAL E COMPLETO - PLATAFORMA PROFESSOR DOMENICO
-// =========================================================================
-
 document.addEventListener('DOMContentLoaded', () => {
 
-    // --- MÓDULO 1: CONTROLE DE TEMA ---
-    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+    // LÓGICA DE TEMA (CLARO/ESCURO)
+    const themeToggleButton = document.getElementById('theme-toggle');
+    const currentTheme = localStorage.getItem('theme');
+
     const applyTheme = (theme) => {
-        document.documentElement.className = '';
-        if (theme === 'dark-mode') document.documentElement.classList.add('dark-mode');
-        if (themeToggleBtn) themeToggleBtn.textContent = theme === 'dark-mode' ? 'Ativar Modo Claro' : 'Ativar Modo Escuro';
+        if (theme === 'dark') {
+            document.body.classList.add('dark-mode');
+        } else {
+            document.body.classList.remove('dark-mode');
+        }
     };
-    let currentTheme = localStorage.getItem('theme') || 'light-mode';
-    applyTheme(currentTheme);
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', () => {
-            currentTheme = document.documentElement.classList.contains('dark-mode') ? 'light-mode' : 'dark-mode';
-            localStorage.setItem('theme', currentTheme);
-            applyTheme(currentTheme);
+
+    if (currentTheme) {
+        applyTheme(currentTheme);
+    }
+
+    if (themeToggleButton) {
+        themeToggleButton.addEventListener('click', () => {
+            let theme = document.body.classList.contains('dark-mode') ? 'light' : 'dark';
+            applyTheme(theme);
+            localStorage.setItem('theme', theme);
         });
     }
 
-    // --- MÓDULO 2: AUTENTICAÇÃO ---
+    // LÓGICA DE LOGIN
     const loginForm = document.getElementById('login-form');
     if (loginForm) {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = e.target.querySelector('input[type="email"]').value;
+            const email = document.getElementById('email').value;
             if (email.toLowerCase() === 'domenico@prof.com') {
-                alert('Login como gestor bem-sucedido!');
                 window.location.href = 'admin_turmas.html';
             } else {
-                alert('Login de aluno bem-sucedido!');
                 window.location.href = 'plataforma_aluno.html';
             }
         });
     }
-
-    // --- MÓDULO 3: PAINEL DO ALUNO ---
-    const greetingElement = document.getElementById('welcome-greeting');
-    if (greetingElement) {
-        greetingElement.textContent = `Olá, Gustavo! Tenha uma ótima tarde.`;
+    
+    // LÓGICA DE CADASTRO
+    const cadastroForm = document.getElementById('cadastro-form');
+    if(cadastroForm){
+        cadastroForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Cadastro simulado com sucesso! Redirecionando para o login.');
+            window.location.href = 'login.html';
+        });
     }
 
-    // --- MÓDULO 4: PAINEL DO GESTOR ---
-    // Simulação de Modais
-    const overlay = document.getElementById('modal-overlay');
-    document.querySelectorAll('[data-modal-target]').forEach(button => {
-        button.addEventListener('click', () => {
-            const modal = document.querySelector(button.dataset.modalTarget);
-            if(modal && overlay) {
-                overlay.classList.add('active');
-                modal.classList.add('active');
-            }
-        });
-    });
-    document.querySelectorAll('[data-modal-close]').forEach(button => {
-        button.addEventListener('click', () => {
-            const modal = button.closest('.modal');
-            if(modal && overlay) {
-                overlay.classList.remove('active');
-                modal.classList.remove('active');
-            }
+
+    // LÓGICA DAS ABAS (PAINEL DO GESTOR)
+    const tabs = document.querySelectorAll('.tab-link');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = document.querySelector(tab.dataset.tab);
+
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            tabContents.forEach(content => content.classList.remove('active'));
+            target.classList.add('active');
         });
     });
 
-    // Simulação de Abas
-    document.querySelectorAll('.tab-item').forEach(tab => {
-        tab.addEventListener('click', (e) => {
-            e.preventDefault();
-            const parentNav = e.target.closest('nav');
-            parentNav.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            const viewContainer = document.querySelector('.class-content');
-            viewContainer.querySelectorAll('.view-panel').forEach(panel => panel.style.display = 'none');
-            
-            const targetView = document.getElementById(e.target.dataset.view);
-            if(targetView) targetView.style.display = 'block';
-        });
-    });
+    // LÓGICA DOS MODAIS (PAINEL DO GESTOR)
+    const openModalButtons = document.querySelectorAll('[data-modal-target]');
+    const closeModalButtons = document.querySelectorAll('.close-modal');
+    const overlay = document.querySelector('.modal-overlay');
 
-    // Simulação de Formulários
-    document.querySelectorAll('form').forEach(form => {
-        if(form.id !== 'login-form'){
-             form.addEventListener('submit', (e) => {
-                e.preventDefault();
-                alert('SIMULAÇÃO: Ação executada com sucesso!');
-                const modal = e.target.closest('.modal');
-                if(modal && overlay) {
-                     overlay.classList.remove('active');
-                     modal.classList.remove('active');
-                }
+    const openModal = (modal) => {
+        if (modal == null) return;
+        modal.classList.add('visible');
+    };
+
+    const closeModal = (modal) => {
+        if (modal == null) return;
+        modal.classList.remove('visible');
+    };
+
+    if (overlay) {
+        openModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = document.querySelector(button.dataset.modalTarget);
+                openModal(modal);
             });
-        }
-    });
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modal = button.closest('.modal-overlay');
+                closeModal(modal);
+            });
+        });
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                closeModal(overlay);
+            }
+        });
+    }
+    
+    // LÓGICA DE SIMULAÇÃO DE AÇÕES (MODAL)
+    const criarAvisoForm = document.getElementById('criar-aviso-form');
+    if(criarAvisoForm) {
+        criarAvisoForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Aviso publicado no mural com sucesso!');
+            const modal = criarAvisoForm.closest('.modal-overlay');
+            closeModal(modal);
+            criarAvisoForm.reset();
+        });
+    }
 });

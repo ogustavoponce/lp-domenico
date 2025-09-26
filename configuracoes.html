@@ -1,28 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configurações</title>
+    <title>Configurações - Plataforma Edu</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header surface">
-        <a href="plataforma_aluno.html" class="logo" style="text-decoration: none;">← Voltar</a>
-    </div>
-    <div class="container">
-        <div class="card surface">
-            <h1 class="card-title">Configurações</h1>
-            <div class="input-group">
-                <label>Nome</label>
-                <input type="text" value="Gustavo">
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Edu</div>
+            <nav>
+                <ul>
+                    <li><a href="plataforma_aluno.html">Mural</a></li>
+                    <li><a href="configuracoes.html" class="active">Configurações</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+             <div class="logout">
+                 <a href="login.html" class="btn btn-primary">Sair</a>
             </div>
-            <div class="input-group">
-                <label>Tema da Interface</label>
-                <button id="theme-toggle-btn" class="btn" style="width: 100%;">Mudar Tema</button>
+        </aside>
+        <main class="main-content">
+            <h1>Configurações</h1>
+            
+            <div class="settings-layout card">
+                <nav class="settings-nav">
+                    <a href="#" class="active">Aparência</a>
+                    <a href="#" onclick="alert('Página de Perfil em construção!')">Perfil</a>
+                    <a href="#" onclick="alert('Página de Notificações em construção!')">Notificações</a>
+                </nav>
+                <div class="settings-content">
+                    <h2>Aparência</h2>
+                    <p>Personalize a aparência da plataforma.</p>
+                    <div class="theme-switcher">
+                        <span>Tema Escuro (Dark Mode)</span>
+                        <button id="theme-toggle" class="btn btn-primary" style="width: auto;">Alternar Tema</button>
+                    </div>
+                </div>
             </div>
-        </div>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>

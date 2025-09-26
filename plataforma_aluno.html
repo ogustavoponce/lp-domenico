@@ -1,29 +1,75 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Aluno</title>
+    <title>Painel do Aluno - Plataforma Edu</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header surface">
-        <div class="logo">Plataforma LP</div>
-        <div class="header-actions">
-            <a href="configuracoes.html" class="btn">Configurações</a>
-            <a href="login.html" class="btn">Sair</a>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card surface">
-            <h1 id="welcome-greeting" class="card-title">Olá!</h1>
-            <p class="text-secondary">Seja bem-vindo à sua plataforma de estudos. Aqui estão os avisos mais recentes.</p>
-        </div>
-        <div class="card surface">
-            <h2 class="card-title">Mural de Avisos</h2>
-            <p>Nenhum aviso no momento.</p>
-        </div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Edu</div>
+            <nav>
+                <ul>
+                    <li><a href="plataforma_aluno.html" class="active">Mural</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                 <a href="login.html" class="btn btn-primary">Sair</a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <header class="header-banner">
+                <h1>Olá, Gustavo! Tenha uma ótima tarde.</h1>
+                <p>Turma: Técnico em Informática para Internet</p>
+            </header>
+            
+            <div class="aluno-dashboard-grid">
+                <section id="mural">
+                    <h2>Mural de Avisos</h2>
+                    <div class="card post-card">
+                        <div class="post-header">
+                            <img src="https://via.placeholder.com/40" alt="Professor">
+                            <div>
+                                <h3>Domenico</h3>
+                                <p>Postado em 26 de Setembro</p>
+                            </div>
+                        </div>
+                        <p>Pessoal, lembrem-se que o prazo para a entrega do Projeto Lógico de Banco de Dados é na próxima sexta-feira. Não deixem para a última hora!</p>
+                    </div>
+                     <div class="card post-card">
+                        <div class="post-header">
+                            <img src="https://via.placeholder.com/40" alt="Professor">
+                            <div>
+                                <h3>Domenico</h3>
+                                <p>Postado em 24 de Setembro</p>
+                            </div>
+                        </div>
+                        <p>A aula de amanhã sobre JavaScript Avançado será no laboratório 05. Por favor, cheguem no horário. Bons estudos!</p>
+                    </div>
+                </section>
+                
+                <aside>
+                    <section id="atividades">
+                        <h2>Próximas Atividades</h2>
+                        <div class="card">
+                           <p><strong>03/10</strong> - Entrega do Projeto Lógico</p>
+                           <p><strong>10/10</strong> - Prova de Programação Web</p>
+                        </div>
+                    </section>
+                    <section id="notas" style="margin-top: 2rem;">
+                         <h2>Minhas Notas</h2>
+                         <div class="card">
+                           <p>Programação Web: <strong>9.5</strong></p>
+                           <p>Banco de Dados: <strong>8.0</strong></p>
+                         </div>
+                    </section>
+                </aside>
+            </div>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>

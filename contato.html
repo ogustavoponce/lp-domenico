@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contato</title>
+    <title>Contato - Plataforma Edu</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header surface">
-        <a href="plataforma_aluno.html" class="logo" style="text-decoration: none;">← Voltar</a>
-    </div>
-    <div class="container">
-        <div class="card surface">
-            <h1 class="card-title">Contato</h1>
-            <p>Para dúvidas, entre em contato com o Professor Domenico pelo e-mail: <strong>domenico@prof.com</strong></p>
-        </div>
+    <div class="app-container">
+        <aside class="sidebar">
+            <div class="logo">Edu</div>
+            <nav>
+                <ul>
+                    <li><a href="plataforma_aluno.html">Mural</a></li>
+                    <li><a href="configuracoes.html">Configurações</a></li>
+                    <li><a href="contato.html" class="active">Contato</a></li>
+                </ul>
+            </nav>
+            <div class="logout">
+                 <a href="login.html" class="btn btn-primary">Sair</a>
+            </div>
+        </aside>
+        <main class="main-content">
+            <h1>Contato</h1>
+            <div class="card">
+                <h2>Fale Conosco</h2>
+                <p>Se precisar de ajuda ou tiver alguma sugestão, entre em contato através do formulário abaixo.</p>
+                <form onsubmit="event.preventDefault(); alert('Mensagem enviada com sucesso!');">
+                    <div class="form-group">
+                        <label for="assunto">Assunto</label>
+                        <input type="text" id="assunto" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem</label>
+                        <textarea id="mensagem" class="form-control" rows="6" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Enviar Mensagem</button>
+                </form>
+            </div>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
