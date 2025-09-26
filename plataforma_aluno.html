@@ -1,66 +1,30 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;pt-br&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Painel do Aluno - Plataforma LP&lt;/title&gt;
-    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-    &lt;style&gt;
-        :root {
-            --cor-fundo: #f0f2f5; --cor-superficie: #ffffff; --cor-borda: #dcdfe3;
-            --cor-primaria: #0d6efd; --cor-texto-principal: #1c1e21; --cor-texto-secundario: #606770;
-            --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: &#39;Poppins&#39;, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        .header { display: flex; align-items: center; justify-content: space-between; height: 70px; background-color: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); padding: 0 2rem; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--cor-texto-principal); text-decoration: none; }
-        .header-actions { display: flex; align-items: center; gap: 1rem; }
-        .btn { padding: 0.6rem 1.2rem; border-radius: 8px; font-weight: 500; text-decoration: none; border: 1px solid var(--cor-borda); background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
-        .card { background-color: var(--cor-superficie); border-radius: 12px; padding: 1.5rem; box-shadow: var(--sombra-card); margin-bottom: 1.5rem;}
-        .card-title { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; }
-        .aviso-item { padding: 1rem 0; border-bottom: 1px solid var(--cor-borda); }
-        .aviso-item:last-child { border-bottom: none; }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;div class=&quot;header&quot;&gt;
-        &lt;a href=&quot;plataforma_aluno.html&quot; class=&quot;logo&quot;&gt;Plataforma LP&lt;/a&gt;
-        &lt;div class=&quot;header-actions&quot;&gt;
-            &lt;a href=&quot;login.html&quot; class=&quot;btn&quot;&gt;Sair&lt;/a&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;main class=&quot;container&quot;&gt;
-        &lt;div class=&quot;card&quot;&gt;
-            &lt;h1 id=&quot;welcome-greeting&quot; class=&quot;card-title&quot;&gt;Carregando...&lt;/h1&gt;
-            &lt;p&gt;Seja bem-vindo de volta! Confira os avisos da sua turma.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;card&quot;&gt;
-            &lt;h2 class=&quot;card-title&quot;&gt;Mural de Avisos&lt;/h2&gt;
-            &lt;div class=&quot;aviso-item&quot;&gt;
-                &lt;h4&gt;Boas-vindas à Turma&lt;/h4&gt;
-                &lt;p&gt;Utilizaremos este espaço para nossos comunicados.&lt;/p&gt;
-            &lt;/div&gt;
-             &lt;div class=&quot;aviso-item&quot;&gt;
-                &lt;h4&gt;Lembrete de Prova&lt;/h4&gt;
-                &lt;p&gt;Nossa avaliação será na próxima semana.&lt;/p&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/main&gt;
-    &lt;script&gt;
-        document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
-            const greetingElement = document.getElementById(&#39;welcome-greeting&#39;);
-            if (greetingElement) {
-                const userName = &quot;Gustavo&quot;;
-                const currentHour = new Date().getHours();
-                let greeting = &quot;Olá&quot;;
-                if (currentHour &lt; 12) { greeting = &quot;Bom dia&quot;; } 
-                else if (currentHour &lt; 18) { greeting = &quot;Boa tarde&quot;; } 
-                else { greeting = &quot;Boa noite&quot;; }
-                greetingElement.textContent = `${greeting}, ${userName}!`;
-            }
-        });
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Aluno</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header surface">
+        <div class="logo">Plataforma LP</div>
+        <div class="header-actions">
+            <a href="configuracoes.html" class="btn">Configurações</a>
+            <a href="login.html" class="btn">Sair</a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card surface">
+            <h1 id="welcome-greeting" class="card-title">Olá!</h1>
+            <p class="text-secondary">Seja bem-vindo à sua plataforma de estudos. Aqui estão os avisos mais recentes.</p>
+        </div>
+        <div class="card surface">
+            <h2 class="card-title">Mural de Avisos</h2>
+            <p>Nenhum aviso no momento.</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

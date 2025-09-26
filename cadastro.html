@@ -1,76 +1,38 @@
-&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;pt-br&quot;&gt;
-&lt;head&gt;
-    &lt;meta charset=&quot;UTF-8&quot;&gt;
-    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
-    &lt;title&gt;Cadastro - Plataforma Professor Domenico&lt;/title&gt;
-    &lt;link href=&quot;https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
-    &lt;style&gt;
-        :root {
-            --cor-fundo: #f0f2f5; --cor-superficie: #ffffff; --cor-borda: #dcdfe3;
-            --cor-primaria: #0d6efd; --cor-primaria-hover: #0b5ed7;
-            --cor-texto-principal: #1c1e21; --cor-texto-secundario: #606770;
-            --sombra-card: 0 4px 12px rgba(0, 0, 0, 0.08);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: &#39;Poppins&#39;, sans-serif; background-color: var(--cor-fundo); color: var(--cor-texto-principal); }
-        a { color: var(--cor-primaria); text-decoration: none; font-weight: 500; }
-        a:hover { text-decoration: underline; }
-        .auth-container { display: grid; grid-template-columns: 1fr 1fr; min-height: 100vh; }
-        .auth-branding { background: linear-gradient(135deg, #0d6efd, #054cb3); color: #fff; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 2rem; }
-        .auth-form { display: flex; justify-content: center; align-items: center; background-color: var(--cor-superficie); }
-        .form-wrapper { width: 100%; max-width: 400px; padding: 2rem; }
-        .form-wrapper h2 { font-size: 2rem; margin-bottom: 0.5rem; }
-        .form-wrapper p { margin-bottom: 2rem; color: var(--cor-texto-secundario); }
-        .input-group { margin-bottom: 1.5rem; text-align: left; }
-        .input-group label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
-        .input-group input { background-color: var(--cor-fundo); border: 1px solid var(--cor-borda); color: var(--cor-texto-principal); width: 100%; padding: 0.8rem 1rem; font-size: 1rem; border-radius: 8px; }
-        .btn-submit { width: 100%; padding: 0.9rem; font-size: 1.1rem; font-weight: 600; color: #fff; background-color: var(--cor-primaria); border: none; border-radius: 8px; cursor: pointer; }
-        @media (max-width: 900px) { .auth-container { grid-template-columns: 1fr; } .auth-branding { display: none; } }
-    &lt;/style&gt;
-&lt;/head&gt;
-&lt;body&gt;
-     &lt;div class=&quot;auth-container&quot;&gt;
-        &lt;div class=&quot;auth-branding&quot;&gt;
-            &lt;h1&gt;Plataforma Professor Domenico&lt;/h1&gt;
-            &lt;p&gt;Seu ambiente de aprendizado moderno e interativo.&lt;/p&gt;
-        &lt;/div&gt;
-        &lt;div class=&quot;auth-form&quot;&gt;
-            &lt;div class=&quot;form-wrapper&quot;&gt;
-                &lt;h2&gt;Crie sua Conta&lt;/h2&gt;
-                &lt;p&gt;O cadastro é rápido e fácil.&lt;/p&gt;
-                &lt;form id=&quot;cadastro-form&quot;&gt;
-                    &lt;div class=&quot;input-group&quot;&gt;
-                        &lt;label for=&quot;nome&quot;&gt;Nome Completo&lt;/label&gt;
-                        &lt;input type=&quot;text&quot; id=&quot;nome&quot; required&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;input-group&quot;&gt;
-                        &lt;label for=&quot;email&quot;&gt;Email&lt;/label&gt;
-                        &lt;input type=&quot;email&quot; id=&quot;email&quot; required&gt;
-                    &lt;/div&gt;
-                    &lt;div class=&quot;input-group&quot;&gt;
-                        &lt;label for=&quot;password&quot;&gt;Senha&lt;/label&gt;
-                        &lt;input type=&quot;password&quot; id=&quot;password&quot; required&gt;
-                    &lt;/div&gt;
-                    &lt;button type=&quot;submit&quot; class=&quot;btn-submit&quot;&gt;Cadastrar&lt;/button&gt;
-                &lt;/form&gt;
-                 &lt;div style=&quot;margin-top: 1.5rem; text-align: center;&quot;&gt;
-                    &lt;p&gt;Já tem uma conta? &lt;a href=&quot;login.html&quot;&gt;Faça login&lt;/a&gt;&lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;script&gt;
-        document.addEventListener(&#39;DOMContentLoaded&#39;, () =&gt; {
-            const cadastroForm = document.getElementById(&#39;cadastro-form&#39;);
-            if (cadastroForm) {
-                cadastroForm.addEventListener(&#39;submit&#39;, (e) =&gt; {
-                    e.preventDefault();
-                    alert(&#39;Cadastro realizado com sucesso! Redirecionando...&#39;);
-                    window.location.href = &#39;plataforma_aluno.html&#39;;
-                });
-            }
-        });
-    &lt;/script&gt;
-&lt;/body&gt;
-&lt;/html&gt;
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-branding">
+            <h1>Plataforma Professor Domenico</h1>
+        </div>
+        <div class="auth-form">
+            <div class="form-wrapper">
+                <h2>Crie sua Conta</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="name">Nome Completo</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" required>
+                    </div>
+                    <a href="plataforma_aluno.html" class="btn btn-primary" style="width: 100%; text-align: center;">Cadastrar</a>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
