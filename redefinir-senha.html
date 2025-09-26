@@ -3,31 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redefinir Senha - Plataforma</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
+    <title>Redefinir Senha</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="auth-container">
+     <div class="auth-container">
         <div class="auth-branding">
-             <div>
-                <h2>Plataforma de Língua Portuguesa</h2>
-                <p>Um ambiente de aprendizado moderno e interativo.</p>
+            <div>
+                <h1>Plataforma Professor Domenico</h1>
+                <p class="text-secondary" style="color: #e5e7eb;">Seu ambiente de aprendizado moderno e interativo.</p>
             </div>
         </div>
         <div class="auth-form">
-            <button id="theme-toggle" class="theme-button">🌙</button>
-            <div class="form-container">
-                <h2>Esqueceu sua senha?</h2>
-                <p>Digite seu e-mail para receber o link de recuperação.</p>
-                <form>
-                    <div class="input-group"><label>Email</label><input type="email" required></div>
-                    <button type="submit" class="btn-submit">Enviar Link</button>
+            <div class="form-wrapper">
+                <h2>Redefinir Senha</h2>
+                <p class="text-secondary" style="margin-bottom: 32px;">Insira seu e-mail para continuar.</p>
+                <form id="redefinir-form">
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar</button>
                 </form>
-                 <div style="margin-top: 1.5rem;">
-                    <a href="login.html">Voltar para o Login</a>
-                </div>
             </div>
         </div>
     </div>
