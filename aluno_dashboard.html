@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard do Professor</title>
+    <title>Painel do Aluno</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body id="admin-dashboard">
-    <div class="page-wrapper">
+<body id="aluno-dashboard">
+     <div class="page-wrapper">
         <aside class="sidebar">
             <div class="logo">IFPR</div>
             <nav class="sidebar-nav">
-                <a href="admin_dashboard.html" class="active">Minhas Turmas</a>
-                <a href="#">Gerenciar Alunos</a>
-                <a href="#">Gerenciar Materiais</a>
+                <a href="aluno_dashboard.html" class="active">Minha Turma</a>
+                <a href="#">Mural de Avisos</a>
+                <a href="#">Atividades</a>
+                <a href="#">Materiais</a>
             </nav>
             <div class="sidebar-footer">
                 <a href="login.html">Sair</a>
@@ -21,14 +22,11 @@
         </aside>
         <main class="main-content">
             <header class="main-header">
-                <h1>Painel do Professor</h1>
+                <h1>Painel do Aluno</h1>
                 <div class="user-info">Olá, <span id="username"></span>!</div>
             </header>
-            <section>
-                <h2>Suas Turmas</h2>
-                <div class="grid-container" id="turmas-container" style="margin-top:20px;">
-                    </div>
-            </section>
+            <section id="aluno-turma-container">
+                </section>
         </main>
     </div>
     <script src="database.js"></script>
