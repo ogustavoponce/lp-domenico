@@ -7,28 +7,21 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="aluno-dashboard">
-     <div class="page-wrapper">
-        <aside class="sidebar">
-            <div class="logo">IFPR</div>
-            <nav class="sidebar-nav">
-                <a href="aluno_dashboard.html" class="active">Minha Turma</a>
-                <a href="#">Mural de Avisos</a>
-                <a href="#">Atividades</a>
-                <a href="#">Materiais</a>
-            </nav>
-            <div class="sidebar-footer">
-                <a href="login.html">Sair</a>
+    <header class="main-header">
+        <div class="container">
+            <a href="aluno_dashboard.html" class="logo">IFPR Aluno</a>
+            <nav id="main-nav" class="main-nav"></nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Olá, <span id="username"></span>!</h1>
             </div>
-        </aside>
-        <main class="main-content">
-            <header class="main-header">
-                <h1>Painel do Aluno</h1>
-                <div class="user-info">Olá, <span id="username"></span>!</div>
-            </header>
-            <section id="aluno-turma-container">
-                </section>
-        </main>
-    </div>
+            <div id="aluno-turma-container">
+                </div>
+        </div>
+    </main>
     <script src="database.js"></script>
     <script src="script.js"></script>
 </body>
