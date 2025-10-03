@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +7,25 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-branding">
-            <h1>Plataforma Edu</h1>
-            <p>Sua jornada para o conhecimento começa aqui.</p>
-        </div>
-        <div class="auth-form-container">
-            <form class="auth-form" id="login-form">
-                <h2>Bem-vindo de volta!</h2>
-                <p>Faça login para acessar suas turmas.</p>
+
+    <main class="login-container">
+        <div class="login-card">
+            <h1>Acesse a Plataforma</h1>
+            <p>Utilize suas credenciais para continuar.</p>
+            <form id="login-form">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" class="form-control" placeholder="seuemail@exemplo.com" required>
+                    <label for="email">E-mail Corporativo</label>
+                    <input type="email" id="email" placeholder="seu.email@ifpr.edu.br" required>
                 </div>
                 <div class="form-group">
-                    <label for="senha">Senha</label>
-                    <input type="password" id="senha" class="form-control" placeholder="Sua senha" required>
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" placeholder="********" required>
                 </div>
                 <button type="submit" class="btn btn-primary">Entrar</button>
-                <a href="cadastro.html" class="link-secundario">Não tem uma conta? Cadastre-se</a>
             </form>
         </div>
-    </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

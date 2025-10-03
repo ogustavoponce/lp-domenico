@@ -1,419 +1,220 @@
-/* === CONFIGURAÇÕES GLOBAIS E VARIÁVEIS === */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+/* --- ARQUIVO: style.css --- */
+
+/* 1. IMPORTAÇÃO DE FONTE E VARIÁVEIS DE COR */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
 
 :root {
-    /* Tema Claro (Padrão) */
-    --cor-fundo: #f4f7fa;
-    --cor-fundo-secundario: #ffffff;
-    --cor-texto-primario: #2c3e50;
-    --cor-texto-secundario: #7f8c8d;
-    --cor-borda: #e1e8ed;
-    --cor-primaria: #3498db;
-    --cor-primaria-hover: #2980b9;
-    --cor-sombra: rgba(0, 0, 0, 0.08);
+    /* Tema Claro (Padrão Profissional) */
+    --bg-color: #f8f9fa;
+    --card-bg-color: #ffffff;
+    --text-color: #343a40;
+    --text-secondary-color: #6c757d;
+    --accent-color: #005a9e; /* Azul corporativo */
+    --border-color: #dee2e6;
+    --shadow-color: rgba(0, 0, 0, 0.05);
 
-    /* Degradês */
-    --gradiente-informatica: linear-gradient(135deg, #007bff, #00bfff);
-    --gradiente-mecanica: linear-gradient(135deg, #f39c12, #e67e22);
-    --gradiente-eletrotecnica: linear-gradient(135deg, #9b59b6, #8e44ad);
-    --gradiente-geral: linear-gradient(135deg, #2ecc71, #27ae60);
+    --theme-transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.dark-mode {
-    /* Tema Escuro */
-    --cor-fundo: #1e272e;
-    --cor-fundo-secundario: #2c3a47;
-    --cor-texto-primario: #ffffff;
-    --cor-texto-secundario: #bdc3c7;
-    --cor-borda: #4a6375;
-    --cor-primaria: #3498db;
-    --cor-primaria-hover: #5dade2;
-    --cor-sombra: rgba(0, 0, 0, 0.2);
+body.dark-mode {
+    /* Tema Escuro (Sóbrio) */
+    --bg-color: #212529;
+    --card-bg-color: #343a40;
+    --text-color: #f8f9fa;
+    --text-secondary-color: #adb5bd;
+    --accent-color: #4dabf7; /* Azul mais claro para contraste */
+    --border-color: #495057;
+    --shadow-color: rgba(0, 0, 0, 0.2);
 }
 
+/* 2. ESTILOS GERAIS */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
 }
 
 body {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-primario);
-    transition: background-color 0.3s, color 0.3s;
+    font-family: 'Open Sans', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: var(--theme-transition);
 }
 
-/* === LAYOUTS PRINCIPAIS === */
-.auth-container {
-    display: flex;
-    min-height: 100vh;
+a {
+    color: var(--accent-color);
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.auth-branding {
-    width: 45%;
-    background: var(--gradiente-informatica);
-    color: white;
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* 3. TELA DE LOGIN (login.html) */
+.login-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    background-color: #fff; /* Fundo branco para a página de login, como em sites corporativos */
+}
+
+.login-card {
+    background-color: #fff;
     padding: 40px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    width: 100%;
+    max-width: 420px;
     text-align: center;
 }
 
-.auth-branding h1 {
-    font-size: 3rem;
+.login-card h1 {
+    margin-bottom: 10px;
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 1rem;
+    color: #000;
 }
 
-.auth-form-container {
-    width: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-}
-
-.auth-form {
-    width: 100%;
-    max-width: 400px;
-}
-
-.app-container {
-    display: flex;
-    min-height: 100vh;
-}
-
-.sidebar {
-    width: 260px;
-    background-color: var(--cor-fundo-secundario);
-    border-right: 1px solid var(--cor-borda);
-    padding: 2rem 1rem;
-    display: flex;
-    flex-direction: column;
-    transition: background-color 0.3s, border-right 0.3s;
-}
-
-.main-content {
-    flex-grow: 1;
-    padding: 2rem;
-    overflow-y: auto;
-}
-
-/* === COMPONENTES REUTILIZÁVEIS === */
-h1, h2, h3 {
-    color: var(--cor-texto-primario);
-    margin-bottom: 0.5rem;
-}
-
-p {
-    color: var(--cor-texto-secundario);
-    line-height: 1.6;
+.login-card p {
+    color: var(--text-secondary-color);
+    margin-bottom: 30px;
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 20px;
+    text-align: left;
 }
 
 .form-group label {
     display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 500;
-    color: var(--cor-texto-secundario);
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
 }
 
-.form-control {
+.form-group input {
     width: 100%;
-    padding: 12px 15px;
-    border: 1px solid var(--cor-borda);
-    background-color: var(--cor-fundo);
-    border-radius: 8px;
-    color: var(--cor-texto-primario);
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
     font-size: 1rem;
-    transition: border-color 0.3s, background-color 0.3s;
+    transition: border-color 0.3s ease;
 }
 
-.form-control:focus {
+.form-group input:focus {
     outline: none;
-    border-color: var(--cor-primaria);
+    border-color: var(--accent-color);
 }
 
 .btn {
     display: inline-block;
     width: 100%;
-    padding: 12px 15px;
+    padding: 12px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     font-size: 1rem;
     font-weight: 700;
-    text-align: center;
     cursor: pointer;
-    text-decoration: none;
-    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    transition: background-color 0.3s ease;
 }
 
 .btn-primary {
-    background-color: var(--cor-primaria);
-    color: white;
+    background-color: var(--accent-color);
+    color: #fff;
 }
 
 .btn-primary:hover {
-    background-color: var(--cor-primaria-hover);
-    transform: translateY(-2px);
+    background-color: #004171;
 }
 
-.link-secundario {
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    color: var(--cor-primaria);
-    text-decoration: none;
+/* 4. PÁGINAS INTERNAS (Plataforma e Admin) */
+.main-header {
+    background-color: var(--card-bg-color);
+    padding: 15px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: var(--theme-transition);
+}
+
+.main-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    transition: var(--theme-transition);
+}
+
+.theme-toggler {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--theme-transition);
+}
+
+.theme-toggler:hover {
+    border-color: var(--text-color);
+}
+
+main {
+    padding: 40px 0;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+.dashboard-grid, .class-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .card {
-    background-color: var(--cor-fundo-secundario);
-    border-radius: 12px;
-    padding: 1.5rem;
-    border: 1px solid var(--cor-borda);
-    box-shadow: 0 4px 15px var(--cor-sombra);
-    transition: all 0.3s ease;
-}
-
-/* === SIDEBAR === */
-.sidebar .logo {
-    font-size: 1.8rem;
-    font-weight: 700;
-    text-align: center;
-    margin-bottom: 3rem;
-    color: var(--cor-primaria);
-}
-
-.sidebar nav ul {
-    list-style: none;
-}
-
-.sidebar nav a {
-    display: block;
-    padding: 1rem;
-    margin-bottom: 0.5rem;
+    background-color: var(--card-bg-color);
+    border: 1px solid var(--border-color);
+    padding: 25px;
     border-radius: 8px;
-    text-decoration: none;
-    color: var(--cor-texto-secundario);
-    font-weight: 500;
-    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 2px 5px var(--shadow-color);
+    transition: var(--theme-transition), transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.sidebar nav a:hover,
-.sidebar nav a.active {
-    background-color: var(--cor-primaria);
-    color: white;
-}
-
-.sidebar .logout {
-    margin-top: auto;
-}
-
-/* === PAINEL ALUNO === */
-.header-banner {
-    padding: 3rem 2rem;
-    border-radius: 12px;
-    color: white;
-    margin-bottom: 2rem;
-    background: var(--gradiente-informatica);
-}
-
-.header-banner h1 {
-    color: white;
-    font-size: 2.5rem;
-}
-.header-banner p {
-    color: rgba(255, 255, 255, 0.9);
-    font-size: 1.2rem;
-}
-
-.aluno-dashboard-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 2rem;
-}
-
-.post-card {
-    margin-bottom: 1.5rem;
-}
-.post-card .post-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-.post-card .post-header img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 1rem;
-}
-
-/* === PAINEL GESTOR (TURMAS) === */
-.turmas-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-}
-.turma-card {
-    border: 1px solid var(--cor-borda);
-    border-radius: 12px;
-    overflow: hidden;
-    text-decoration: none;
-    color: var(--cor-texto-primario);
-    box-shadow: 0 4px 15px var(--cor-sombra);
-    transition: transform 0.3s, box-shadow 0.3s;
-}
-.turma-card:hover {
+.card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px var(--cor-sombra);
-}
-.turma-card-header {
-    padding: 1.5rem;
-    color: white;
-}
-.turma-card-header h3 {
-    color: white;
-    font-size: 1.5rem;
-}
-.turma-card-body {
-    padding: 1.5rem;
-    background-color: var(--cor-fundo-secundario);
-}
-.informatica-header { background: var(--gradiente-informatica); }
-.mecanica-header { background: var(--gradiente-mecanica); }
-.eletrotecnica-header { background: var(--gradiente-eletrotecnica); }
-.geral-header { background: var(--gradiente-geral); }
-
-/* === PAINEL GESTOR (MURAL) === */
-.mural-header-banner {
-    padding: 3rem 2rem;
-    border-radius: 12px;
-    color: white;
-    margin-bottom: 1rem;
-    position: relative;
-}
-.mural-header-banner h1 {
-    color: white;
-    font-size: 2.5rem;
-}
-.mural-tabs {
-    display: flex;
-    border-bottom: 1px solid var(--cor-borda);
-    margin-bottom: 2rem;
-}
-.tab-link {
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    border: none;
-    background: none;
-    color: var(--cor-texto-secundario);
-    font-size: 1rem;
-    font-weight: 500;
-    border-bottom: 3px solid transparent;
-}
-.tab-link.active {
-    color: var(--cor-primaria);
-    border-bottom: 3px solid var(--cor-primaria);
-}
-.tab-content {
-    display: none;
-}
-.tab-content.active {
-    display: block;
+    box-shadow: 0 8px 15px var(--shadow-color);
 }
 
-.create-post-card {
-    display: flex;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    cursor: pointer;
-    margin-bottom: 2rem;
-}
-.create-post-card:hover {
-    background-color: var(--cor-fundo);
-}
-.create-post-card span {
-    margin-left: 1rem;
-    color: var(--cor-texto-secundario);
+.card h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-color);
 }
 
-/* === MODAL === */
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s, visibility 0.3s;
-}
-.modal-overlay.visible {
-    opacity: 1;
-    visibility: visible;
-}
-.modal-content {
-    background-color: var(--cor-fundo-secundario);
-    padding: 2rem;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    transform: scale(0.9);
-    transition: transform 0.3s;
-}
-.modal-overlay.visible .modal-content {
-    transform: scale(1);
-}
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-}
-.close-modal {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    cursor: pointer;
-    color: var(--cor-texto-secundario);
+.card p {
+    color: var(--text-secondary-color);
+    font-size: 0.95rem;
 }
 
-/* === PÁGINA DE CONFIGURAÇÕES === */
-.settings-layout {
-    display: flex;
-    gap: 2rem;
-}
-.settings-nav {
-    flex: 0 0 200px;
-}
-.settings-content {
-    flex-grow: 1;
-}
-.settings-nav a {
-    display: block;
-    padding: 0.75rem 1rem;
-    text-decoration: none;
-    border-radius: 8px;
-    color: var(--cor-texto-secundario);
-    margin-bottom: 0.5rem;
-}
-.settings-nav a.active, .settings-nav a:hover {
-    background-color: var(--cor-fundo);
-    color: var(--cor-texto-primario);
-}
-.theme-switcher {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.class-card {
+    border-top: 4px solid var(--accent-color);
 }

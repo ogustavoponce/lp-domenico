@@ -1,76 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Aluno - Plataforma Edu</title>
+    <title>Painel do Aluno</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">Edu</div>
-            <nav>
-                <ul>
-                    <li><a href="plataforma_aluno.html" class="active">Mural</a></li>
-                    <li><a href="configuracoes.html">Configurações</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="logout">
-                 <a href="login.html" class="btn btn-primary">Sair</a>
-            </div>
-        </aside>
-        <main class="main-content">
-            <header class="header-banner">
-                <h1>Olá, Gustavo! Tenha uma ótima tarde.</h1>
-                <p>Turma: Técnico em Informática para Internet</p>
-            </header>
+
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Plataforma IFPR</a>
+            <button id="theme-toggler" class="theme-toggler">Alternar Tema</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title"><span id="greeting">Olá</span>, Aluno!</h1>
             
-            <div class="aluno-dashboard-grid">
-                <section id="mural">
-                    <h2>Mural de Avisos</h2>
-                    <div class="card post-card">
-                        <div class="post-header">
-                            <img src="https://via.placeholder.com/40" alt="Professor">
-                            <div>
-                                <h3>Domenico</h3>
-                                <p>Postado em 26 de Setembro</p>
-                            </div>
-                        </div>
-                        <p>Pessoal, lembrem-se que o prazo para a entrega do Projeto Lógico de Banco de Dados é na próxima sexta-feira. Não deixem para a última hora!</p>
-                    </div>
-                     <div class="card post-card">
-                        <div class="post-header">
-                            <img src="https://via.placeholder.com/40" alt="Professor">
-                            <div>
-                                <h3>Domenico</h3>
-                                <p>Postado em 24 de Setembro</p>
-                            </div>
-                        </div>
-                        <p>A aula de amanhã sobre JavaScript Avançado será no laboratório 05. Por favor, cheguem no horário. Bons estudos!</p>
-                    </div>
-                </section>
-                
-                <aside>
-                    <section id="atividades">
-                        <h2>Próximas Atividades</h2>
-                        <div class="card">
-                           <p><strong>03/10</strong> - Entrega do Projeto Lógico</p>
-                           <p><strong>10/10</strong> - Prova de Programação Web</p>
-                        </div>
-                    </section>
-                    <section id="notas" style="margin-top: 2rem;">
-                         <h2>Minhas Notas</h2>
-                         <div class="card">
-                           <p>Programação Web: <strong>9.5</strong></p>
-                           <p>Banco de Dados: <strong>8.0</strong></p>
-                         </div>
-                    </section>
-                </aside>
+            <div class="dashboard-grid">
+                <a href="#" class="card">
+                    <h3>Minhas Notas</h3>
+                    <p>Acompanhe seu desempenho acadêmico.</p>
+                </a>
+                <a href="#" class="card">
+                    <h3>Mural de Avisos</h3>
+                    <p>Veja os últimos recados e comunicados.</p>
+                </a>
+                <a href="#" class="card">
+                    <h3>Atividades e Prazos</h3>
+                    <p>Acesse e envie suas tarefas pendentes.</p>
+                </a>
+                <a href="#" class="card">
+                    <h3>Biblioteca Virtual</h3>
+                    <p>Recursos e materiais de apoio.</p>
+                </a>
             </div>
-        </main>
-    </div>
+        </div>
+    </main>
+
     <script src="script.js"></script>
 </body>
 </html>

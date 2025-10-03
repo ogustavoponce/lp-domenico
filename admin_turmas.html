@@ -1,75 +1,45 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Gestor - Plataforma Edu</title>
+    <title>Painel do Gestor - Turmas</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">Edu</div>
-            <nav>
-                <ul>
-                    <li><a href="admin_turmas.html" class="active">Minhas Turmas</a></li>
-                    <li><a href="configuracoes.html">Configurações</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="logout">
-                 <a href="login.html" class="btn btn-primary">Sair</a>
-            </div>
-        </aside>
-        <main class="main-content">
-            <header>
-                <h1>Painel do Gestor</h1>
-                <p>Gerencie suas turmas com facilidade.</p>
-            </header>
+    
+    <header class="main-header">
+        <div class="container">
+            <a href="#" class="logo">Painel do Gestor</a>
+            <button id="theme-toggler" class="theme-toggler">Alternar Tema</button>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Gerenciamento de Turmas</h1>
             
-            <section class="turmas-grid" style="margin-top: 2rem;">
-                <a href="admin_mural.html" class="turma-card">
-                    <div class="turma-card-header informatica-header">
-                        <h3>Téc. em Informática</h3>
-                        <p>1º Ano - Matutino</p>
-                    </div>
-                    <div class="turma-card-body">
-                        <p>32 Alunos</p>
-                    </div>
+            <div class="class-grid">
+                <a href="admin_mural.html" class="card class-card">
+                    <h3>3º Ano - Informática para Internet</h3>
+                    <p>Período: Matutino</p>
                 </a>
-                
-                <a href="#" onclick="alert('Página da turma em construção!')" class="turma-card">
-                    <div class="turma-card-header mecanica-header">
-                        <h3>Téc. em Mecânica</h3>
-                        <p>2º Ano - Vespertino</p>
-                    </div>
-                    <div class="turma-card-body">
-                        <p>28 Alunos</p>
-                    </div>
+                <a href="admin_mural.html" class="card class-card">
+                    <h3>2º Ano - Desenvolvimento de Sistemas</h3>
+                    <p>Período: Vespertino</p>
                 </a>
+                <a href="admin_mural.html" class="card class-card">
+                    <h3>Projeto Integrador - 2025</h3>
+                    <p>Status: Ativo</p>
+                </a>
+                <a href="admin_mural.html" class="card class-card">
+                    <h3>1º Ano - Eletrotécnica</h3>
+                    <p>Período: Matutino</p>
+                </a>
+            </div>
+        </div>
+    </main>
 
-                <a href="#" onclick="alert('Página da turma em construção!')" class="turma-card">
-                    <div class="turma-card-header eletrotecnica-header">
-                        <h3>Téc. em Eletrotécnica</h3>
-                        <p>3º Ano - Matutino</p>
-                    </div>
-                    <div class="turma-card-body">
-                        <p>35 Alunos</p>
-                    </div>
-                </a>
-
-                <div class="turma-card">
-                     <div class="turma-card-header geral-header">
-                        <h3>Visão Geral</h3>
-                     </div>
-                     <div class="turma-card-body">
-                        <p><strong>Total de Alunos:</strong> 95</p>
-                        <p><strong>Turmas Ativas:</strong> 3</p>
-                     </div>
-                </div>
-            </section>
-        </main>
-    </div>
     <script src="script.js"></script>
 </body>
 </html>

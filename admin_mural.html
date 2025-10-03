@@ -1,89 +1,30 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mural da Turma - Plataforma Edu</title>
+    <title>Mural - 3º Ano</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="app-container">
-        <aside class="sidebar">
-            <div class="logo">Edu</div>
-            <nav>
-                <ul>
-                    <li><a href="admin_turmas.html">Minhas Turmas</a></li>
-                    <li><a href="configuracoes.html">Configurações</a></li>
-                    <li><a href="contato.html">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="logout">
-                 <a href="login.html" class="btn btn-primary">Sair</a>
-            </div>
-        </aside>
-        <main class="main-content">
-            <header class="mural-header-banner informatica-header">
-                <h1>Técnico em Informática</h1>
-                <p>Código da turma: ti2025</p>
-            </header>
-            
-            <nav class="mural-tabs">
-                <button class="tab-link active" data-tab="#mural">Mural</button>
-                <button class="tab-link" data-tab="#atividades">Atividades</button>
-                <button class="tab-link" data-tab="#alunos">Alunos</button>
-            </nav>
-
-            <div id="mural" class="tab-content active">
-                <div class="card create-post-card" data-modal-target="#modal-criar-aviso">
-                    <span>Publique um aviso para a turma...</span>
-                </div>
-                <div class="card post-card">
-                    <div class="post-header">
-                        <img src="https://via.placeholder.com/40" alt="Professor">
-                        <div>
-                            <h3>Domenico</h3>
-                            <p>Postado em 26 de Setembro</p>
-                        </div>
-                    </div>
-                    <p>Pessoal, lembrem-se que o prazo para a entrega do Projeto Lógico de Banco de Dados é na próxima sexta-feira. Não deixem para a última hora!</p>
-                </div>
-            </div>
-
-            <div id="atividades" class="tab-content">
-                <button class="btn btn-primary" style="width: auto; margin-bottom: 1rem;" onclick="alert('+ Criar Atividade (simulado)')">+ Criar</button>
-                <div class="card">
-                    <h3>Atividades planejadas</h3>
-                    <p>Nenhuma atividade por enquanto.</p>
-                </div>
-            </div>
-
-            <div id="alunos" class="tab-content">
-                <button class="btn btn-primary" style="width: auto; margin-bottom: 1rem;" onclick="alert('+ Adicionar Aluno (simulado)')">Adicionar Aluno</button>
-                <div class="card">
-                     <h3>Lista de Alunos (32)</h3>
-                     <p>Gustavo Oliveira de Pontes</p>
-                     <p>Maria Clara Souza</p>
-                     <p>João Pedro Martins</p>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <div class="modal-overlay" id="modal-criar-aviso">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Criar Aviso</h2>
-                <button class="close-modal">&times;</button>
-            </div>
-            <form id="criar-aviso-form">
-                <div class="form-group">
-                    <label for="aviso-texto">Mensagem</label>
-                    <textarea id="aviso-texto" class="form-control" rows="5" placeholder="Escreva seu aviso aqui..."></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Publicar</button>
-            </form>
+    
+    <header class="main-header">
+        <div class="container">
+            <a href="admin_turmas.html" class="logo">&larr; Voltar</a>
+            <button id="theme-toggler" class="theme-toggler">Alternar Tema</button>
         </div>
-    </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <h1 class="page-title">Mural: 3º Ano - Informática para Internet</h1>
+            <div class="card">
+                <h3>Aviso: Prova Final</h3>
+                <p><strong>Postado em:</strong> 03 de Outubro, 2025</p>
+                <p class="text-secondary-color">Lembrete de que a prova final da disciplina de Banco de Dados será na próxima sexta-feira. O conteúdo abrange os capítulos 5 a 8 do livro. Bons estudos!</p>
+            </div>
+        </div>
+    </main>
 
     <script src="script.js"></script>
 </body>
