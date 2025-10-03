@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard do Professor</title>
+    <title>Gerenciar Materiais</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body id="admin-dashboard">
+<body id="admin-materiais">
     <header class="app-header">
         <div class="container">
             <div class="logo">IFPR Admin</div>
             <nav class="main-nav">
-                <a href="admin_dashboard.html" class="active">Turmas</a>
+                <a href="admin_dashboard.html">Turmas</a>
                 <a href="admin_alunos.html">Alunos</a>
                 <a href="admin_atividades.html">Atividades</a>
-                <a href="admin_materiais.html">Materiais</a>
+                <a href="admin_materiais.html" class="active">Materiais</a>
                 <a href="login.html" class="logout-btn">Sair</a>
             </nav>
         </div>
@@ -22,10 +22,12 @@
     <main>
         <div class="container">
             <div class="page-header">
-                <h1>Olá, <span id="username"></span>!</h1>
+                <h1>Gerenciar Materiais</h1>
+                <button class="btn btn-primary">Adicionar Material</button>
             </div>
-            <div id="turmas-grid" class="grid-container">
-                </div>
+            <div class="card">
+                <p>A funcionalidade de upload e gerenciamento de materiais está em desenvolvimento.</p>
+            </div>
         </div>
     </main>
     <script src="database.js"></script>

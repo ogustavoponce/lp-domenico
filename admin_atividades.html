@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Atividades</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="admin-atividades">
+    <header class="app-header">
+        <div class="container">
+            <div class="logo">IFPR Admin</div>
+            <nav class="main-nav">
+                <a href="admin_dashboard.html">Turmas</a>
+                <a href="admin_alunos.html">Alunos</a>
+                <a href="admin_atividades.html" class="active">Atividades</a>
+                <a href="admin_materiais.html">Materiais</a>
+                <a href="login.html" class="logout-btn">Sair</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Gerenciar Atividades</h1>
+                <button id="add-atividade-btn" class="btn btn-primary">Nova Atividade</button>
+            </div>
+            <div id="atividades-container">
+                </div>
+        </div>
+    </main>
+
+    <div id="add-atividade-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Nova Atividade</h2>
+                <span class="close-btn">&times;</span>
+            </div>
+            <form id="add-atividade-form">
+                <div class="form-group">
+                    <label for="atividade-titulo">Título</label>
+                    <input type="text" id="atividade-titulo" required>
+                </div>
+                <div class="form-group">
+                    <label for="atividade-descricao">Descrição</label>
+                    <textarea id="atividade-descricao" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="atividade-data">Data de Entrega</label>
+                    <input type="date" id="atividade-data" required>
+                </div>
+                <div class="form-group">
+                    <label for="atividade-turma">Turma</label>
+                    <select id="atividade-turma" required></select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width:100%;">Publicar</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -7,10 +7,15 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body id="aluno-dashboard">
-    <header class="main-header">
+    <header class="app-header">
         <div class="container">
-            <a href="aluno_dashboard.html" class="logo">IFPR Aluno</a>
-            <nav id="main-nav" class="main-nav"></nav>
+            <div class="logo">IFPR Aluno</div>
+            <nav class="main-nav">
+                <a href="aluno_dashboard.html" class="active">Início</a>
+                <a href="aluno_atividades.html">Atividades</a>
+                <a href="aluno_materiais.html">Materiais</a>
+                <a href="login.html" class="logout-btn">Sair</a>
+            </nav>
         </div>
     </header>
     <main>
@@ -18,8 +23,10 @@
             <div class="page-header">
                 <h1>Olá, <span id="username"></span>!</h1>
             </div>
-            <div id="aluno-turma-container">
-                </div>
+            <div class="card">
+                <h2>Sua Turma: <span id="turma-nome"></span></h2>
+                <p>Navegue pelo menu para ver suas atividades e materiais de estudo.</p>
+            </div>
         </div>
     </main>
     <script src="database.js"></script>

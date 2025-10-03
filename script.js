@@ -1,24 +1,21 @@
-/* --- ARQUIVO: script.js (VERSÃO FINAL E CORRIGIDA) --- */
+/* --- ARQUIVO: script.js (REFEITO DO ZERO) --- */
 document.addEventListener('DOMContentLoaded', () => {
     let db;
 
-    // --- 1. INICIALIZAÇÃO E AUTENTICAÇÃO ---
+    // --- 1. FUNÇÕES GERAIS E AUTENTICAÇÃO ---
     function initDatabase() {
-        const storedDb = localStorage.getItem('platformDb');
-        db = storedDb ? JSON.parse(storedDb) : initialDatabase;
+        db = JSON.parse(localStorage.getItem('platformDb')) || initialDatabase;
         localStorage.setItem('platformDb', JSON.stringify(db));
     }
 
     function protectPage() {
         const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-        const isLoginPage = document.body.classList.contains('login-page');
-        if (!user && !isLoginPage) {
+        if (!user && !document.body.classList.contains('login-page')) {
             window.location.href = 'login.html';
         }
         return user;
     }
 
-    // --- 2. LÓGICA DE LOGIN ---
     function setupLoginForm() {
         const form = document.getElementById('login-form');
         if (!form) return;
@@ -40,116 +37,137 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 3. RENDERIZAÇÃO E LÓGICA DAS PÁGINAS ---
-    function initPage() {
-        initDatabase();
-        const user = protectPage();
-        if (!user) return; // Se não houver usuário, para a execução
+    function setupModal(modalId, openBtnId) {
+        const modal = document.getElementById(modalId);
+        const openBtn = document.getElementById(openBtnId);
+        const closeBtn = modal.querySelector('.close-btn');
+        openBtn.onclick = () => modal.style.display = "flex";
+        closeBtn.onclick = () => modal.style.display = "none";
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+    }
 
-        renderHeader(user); // Renderiza o cabeçalho dinâmico
-
+    // --- 2. LÓGICA DAS PÁGINAS DO PROFESSOR (ADMIN) ---
+    function initAdminPages(user) {
+        document.getElementById('username').textContent = user.nome;
         const pageId = document.body.id;
-        switch (pageId) {
-            case 'admin-dashboard': renderAdminDashboard(); break;
-            case 'aluno-dashboard': renderAlunoDashboard(user); break;
-            case 'aluno_materiais': renderAlunoMateriais(user); break; // ADICIONADO LÓGICA DA PÁGINA
-        }
-    }
-    
-    // --- 4. RENDERIZAÇÃO DE COMPONENTES DINÂMICOS ---
-    function renderHeader(user) {
-        const navContainer = document.getElementById('main-nav');
-        if (!navContainer) return;
-        
-        // Links do menu agora são funcionais
-        let navLinks = '';
-        if (user.type === 'professor') {
-            navLinks = `
-                <a href="admin_dashboard.html" class="active">Turmas</a>
-                <a href="#">Alunos</a>
-                <a href="#">Atividades</a>
-                <a href="login.html" class="logout-btn">Sair</a>
-            `;
-        } else { // Aluno
-            navLinks = `
-                <a href="aluno_dashboard.html">Minha Turma</a>
-                <a href="aluno_materiais.html">Materiais e Apostilas</a>
-                <a href="login.html" class="logout-btn">Sair</a>
-            `;
-        }
-        navContainer.innerHTML = navLinks;
-        
-        // Adiciona a classe 'active' ao link da página atual
-        const currentPage = window.location.pathname.split('/').pop();
-        navContainer.querySelectorAll('a').forEach(link => {
-            if(link.getAttribute('href') === currentPage) {
-                link.classList.add('active');
-            } else {
-                link.classList.remove('active');
-            }
-        });
+        if (pageId === 'admin-dashboard') renderAdminDashboard();
+        if (pageId === 'admin-alunos') { renderAdminAlunos(); setupAlunoModal(); }
+        if (pageId === 'admin-atividades') { renderAdminAtividades(); setupAtividadeModal(); }
     }
 
-    // --- 5. RENDERIZAÇÃO - PROFESSOR ---
     function renderAdminDashboard() {
-        const container = document.getElementById('turmas-container');
+        const container = document.getElementById('turmas-grid');
         container.innerHTML = '';
         db.turmas.forEach(turma => {
-            const card = document.createElement('a');
-            card.href = "#"; // Futuramente levaria para a página da turma
-            card.className = 'card card-hover';
-            card.style.textDecoration = 'none';
-            card.innerHTML = `<h3>${turma.nome}</h3><p>Gerenciar esta turma.</p>`;
-            container.appendChild(card);
+            container.innerHTML += `<div class="card card-hover"><h3>${turma.nome}</h3></div>`;
         });
     }
     
-    // --- 6. RENDERIZAÇÃO - ALUNO ---
-    function renderAlunoDashboard(user) {
-        const usernameEl = document.getElementById('username');
-        if (usernameEl) usernameEl.textContent = user.nome.split(' ')[0];
+    function renderAdminAlunos() {
+        const tbody = document.getElementById('alunos-table-body');
+        tbody.innerHTML = '';
+        db.alunos.forEach(aluno => {
+            const turma = db.turmas.find(t => t.id === aluno.turmaId) || {nome: 'N/A'};
+            tbody.innerHTML += `<tr><td>${aluno.id}</td><td>${aluno.nome}</td><td>${aluno.email}</td><td>${turma.nome}</td></tr>`;
+        });
+    }
 
-        const turma = db.turmas.find(t => t.id === user.turmaId);
-        if(!turma) return;
-        
-        const container = document.getElementById('aluno-turma-container');
-        container.innerHTML = `
-            <div class="turma-header-card">
-                <h2>Você está na turma: ${turma.nome}</h2>
-                <p>Navegue pelo menu acima para acessar os materiais de estudo ou outras seções da sua turma.</p>
-            </div>
-        `;
+    function renderAdminAtividades() {
+        const container = document.getElementById('atividades-container');
+        container.innerHTML = '';
+        db.atividades.forEach(ativ => {
+            const turma = db.turmas.find(t => t.id === ativ.turmaId);
+            container.innerHTML += `<div class="card"><h4>${ativ.titulo} (Turma: ${turma.nome})</h4><p>${ativ.descricao}</p><small>Entrega: ${ativ.dataEntrega}</small></div>`;
+        });
+    }
+
+    function setupAlunoModal() {
+        setupModal('add-aluno-modal', 'add-aluno-btn');
+        const form = document.getElementById('add-aluno-form');
+        const selectTurma = document.getElementById('aluno-turma');
+        db.turmas.forEach(turma => {
+            selectTurma.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
+        });
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            db.alunos.push({
+                id: Date.now(),
+                nome: document.getElementById('aluno-nome').value,
+                email: document.getElementById('aluno-email').value,
+                turmaId: parseInt(document.getElementById('aluno-turma').value)
+            });
+            localStorage.setItem('platformDb', JSON.stringify(db));
+            renderAdminAlunos();
+            document.getElementById('add-aluno-modal').style.display = "none";
+            form.reset();
+        };
+    }
+
+    function setupAtividadeModal() {
+        setupModal('add-atividade-modal', 'add-atividade-btn');
+        const form = document.getElementById('add-atividade-form');
+        const selectTurma = document.getElementById('atividade-turma');
+        db.turmas.forEach(turma => {
+            selectTurma.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
+        });
+        form.onsubmit = (e) => {
+            e.preventDefault();
+            db.atividades.push({
+                id: Date.now(),
+                turmaId: parseInt(document.getElementById('atividade-turma').value),
+                titulo: document.getElementById('atividade-titulo').value,
+                descricao: document.getElementById('atividade-descricao').value,
+                dataEntrega: document.getElementById('atividade-data').value
+            });
+            localStorage.setItem('platformDb', JSON.stringify(db));
+            renderAdminAtividades();
+            document.getElementById('add-atividade-modal').style.display = "none";
+            form.reset();
+        };
+    }
+
+    // --- 3. LÓGICA DAS PÁGINAS DO ALUNO ---
+    function initAlunoPages(user) {
+        document.getElementById('username').textContent = user.nome.split(' ')[0];
+        const pageId = document.body.id;
+        if (pageId === 'aluno-dashboard') renderAlunoDashboard(user);
+        if (pageId === 'aluno-atividades') renderAlunoAtividades(user);
+        if (pageId === 'aluno-materiais') renderAlunoMateriais(user);
     }
     
+    function renderAlunoDashboard(user) {
+        const turma = db.turmas.find(t => t.id === user.turmaId);
+        document.getElementById('turma-nome').textContent = turma.nome;
+    }
+
+    function renderAlunoAtividades(user) {
+        const container = document.getElementById('atividades-container');
+        container.innerHTML = '';
+        const atividades = db.atividades.filter(a => a.turmaId === user.turmaId);
+        atividades.forEach(ativ => {
+            container.innerHTML += `<div class="card"><h4>${ativ.titulo}</h4><p>${ativ.descricao}</p><small>Data de Entrega: ${ativ.dataEntrega}</small></div>`;
+        });
+    }
+
     function renderAlunoMateriais(user) {
         const container = document.getElementById('materiais-container');
-        if (!container) return;
-        
         container.innerHTML = '';
-        const materiaisDaTurma = db.materiais.filter(m => m.turmaId === user.turmaId);
-
-        if (materiaisDaTurma.length === 0) {
-            container.innerHTML = "<p>Nenhum material de estudo foi disponibilizado para sua turma ainda.</p>";
-            return;
-        }
-
-        materiaisDaTurma.forEach(material => {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
-                <h3>${material.nome}</h3>
-                <p>Clique no botão abaixo para acessar o material.</p>
-                <a href="${material.arquivo}" class="btn btn-primary" target="_blank" style="margin-top: 10px;">Acessar Material</a>
-            `;
-            container.appendChild(card);
+        const materiais = db.materiais.filter(m => m.turmaId === user.turmaId);
+        materiais.forEach(material => {
+            container.innerHTML += `<div class="card card-hover"><a href="${material.arquivo}" target="_blank" style="text-decoration:none; color:inherit;"><h3>${material.nome}</h3><p>Clique para acessar o material.</p></a></div>`;
         });
     }
 
-    // --- INICIALIZAÇÃO ---
+    // --- INICIALIZAÇÃO GERAL ---
     if (document.body.classList.contains('login-page')) {
         initDatabase();
         setupLoginForm();
     } else {
-        initPage();
+        const currentUser = protectPage();
+        if (currentUser) {
+            initDatabase();
+            if (currentUser.type === 'professor') initAdminPages(currentUser);
+            if (currentUser.type === 'aluno') initAlunoPages(currentUser);
+        }
     }
 });

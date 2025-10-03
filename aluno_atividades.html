@@ -5,18 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minhas Atividades</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-     <div class="header surface">
-        <a href="plataforma_aluno.html" class="logo" style="text-decoration: none;">← Voltar</a>
-    </div>
-    <div class="container">
-        <div class="card surface">
-            <h1 class="card-title">Minhas Atividades</h1>
-            <p>Nenhuma atividade pendente no momento.</p>
+<body id="aluno-atividades">
+    <header class="app-header">
+        <div class="container">
+            <div class="logo">IFPR Aluno</div>
+            <nav class="main-nav">
+                <a href="aluno_dashboard.html">Início</a>
+                <a href="aluno_atividades.html" class="active">Atividades</a>
+                <a href="aluno_materiais.html">Materiais</a>
+                <a href="login.html" class="logout-btn">Sair</a>
+            </nav>
         </div>
-    </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="page-header">
+                <h1>Minhas Atividades</h1>
+            </div>
+            <div id="atividades-container">
+                </div>
+        </div>
+    </main>
+    <script src="database.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
