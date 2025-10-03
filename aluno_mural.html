@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural da Turma</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="page-aluno-mural"> 
+    <header class="main-header">
+        <div class="container">
+            <a href="aluno_dashboard.html" class="logo">&larr; Voltar</a>
+            <nav class="user-info"><a href="login.html">Sair</a></nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+             <div class="turma-header" id="turma-header-container"></div>
+             <div class="mural-grid">
+                <div class="post-stream">
+                    <h2>Mural de Avisos</h2>
+                    <div id="mural-container" style="margin-top:20px;"></div>
+                </div>
+                <div class="side-panel">
+                    <a href="aluno_materiais.html" class="card" style="text-decoration: none;">
+                        <h3>Materiais de Aula</h3>
+                        <p>Acesse aqui as apostilas e arquivos da sua turma.</p>
+                    </a>
+                </div>
+             </div>
+        </div>
+    </main>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

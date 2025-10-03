@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mural da Turma</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="page-turma">
+    <header class="main-header">
+        <div class="container">
+            <a href="admin_dashboard.html" class="logo">&larr; Voltar para Turmas</a>
+            <nav class="user-info">
+                <a href="#">Professor Domenico</a>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div id="turma-header-container">
+                </div>
+            <div class="mural-grid">
+                <div class="post-stream">
+                    <div class="card post-form">
+                        <h3>Postar no mural</h3>
+                        <form id="novo-post-form">
+                            <input type="text" id="post-titulo" placeholder="Título do aviso ou atividade" required style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); margin-bottom:10px;">
+                            <textarea id="post-conteudo" placeholder="Escreva seu aviso aqui..."></textarea>
+                            <select id="post-tipo" style="width:100%; padding:10px; border-radius:6px; border:1px solid var(--border-color); margin-bottom:10px;">
+                                <option value="Aviso">Aviso</option>
+                                <option value="Atividade">Atividade</option>
+                                <option value="Material">Material</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Postar</button>
+                        </form>
+                    </div>
+                    <div id="mural-container">
+                        </div>
+                </div>
+                <div class="side-panel">
+                    <div class="card">
+                        <h3>Alunos</h3>
+                        <ul id="lista-alunos-turma" style="list-style: none;">
+                           </ul>
+                    </div>
+                    <div class="card" style="margin-top: 20px;">
+                        <h3>Materiais</h3>
+                         <ul id="lista-materiais-turma" style="list-style: none;">
+                           </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

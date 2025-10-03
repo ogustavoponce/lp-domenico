@@ -1,51 +1,22 @@
 /* --- ARQUIVO: style.css --- */
-
-/* 1. IMPORTAÇÃO DE FONTE E VARIÁVEIS DE COR */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
 :root {
-    /* Tema Claro (Padrão Profissional) */
-    --bg-color: #f8f9fa;
-    --card-bg-color: #ffffff;
-    --text-color: #343a40;
-    --text-secondary-color: #6c757d;
-    --accent-color: #005a9e; /* Azul corporativo */
+    --primary-blue: #0d6efd;
+    --dark-blue: #0a58ca;
+    --light-blue: #eef2f9;
+    --text-dark: #1c3d5a;
+    --text-light: #6c757d;
+    --white: #ffffff;
     --border-color: #dee2e6;
-    --shadow-color: rgba(0, 0, 0, 0.05);
-
-    --theme-transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-body.dark-mode {
-    /* Tema Escuro (Sóbrio) */
-    --bg-color: #212529;
-    --card-bg-color: #343a40;
-    --text-color: #f8f9fa;
-    --text-secondary-color: #adb5bd;
-    --accent-color: #4dabf7; /* Azul mais claro para contraste */
-    --border-color: #495057;
-    --shadow-color: rgba(0, 0, 0, 0.2);
-}
-
-/* 2. ESTILOS GERAIS */
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    --shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
 }
 
 body {
-    font-family: 'Open Sans', sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--light-blue);
+    color: var(--text-dark);
     line-height: 1.6;
-    transition: var(--theme-transition);
-}
-
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
 }
 
 .container {
@@ -54,93 +25,51 @@ a {
     padding: 0 20px;
 }
 
-/* 3. TELA DE LOGIN (login.html) */
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background-color: #fff; /* Fundo branco para a página de login, como em sites corporativos */
-}
-
-.login-card {
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    width: 100%;
-    max-width: 420px;
-    text-align: center;
-}
-
-.login-card h1 {
-    margin-bottom: 10px;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: #000;
-}
-
-.login-card p {
-    color: var(--text-secondary-color);
-    margin-bottom: 30px;
-}
-
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: var(--accent-color);
-}
-
+/* --- Componentes Reutilizáveis --- */
 .btn {
     display: inline-block;
-    width: 100%;
-    padding: 12px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 1rem;
-    font-weight: 700;
+    font-weight: 500;
     cursor: pointer;
+    text-decoration: none;
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .btn-primary {
-    background-color: var(--accent-color);
-    color: #fff;
+    background-color: var(--primary-blue);
+    color: var(--white);
 }
 
 .btn-primary:hover {
-    background-color: #004171;
+    background-color: var(--dark-blue);
+    transform: translateY(-2px);
 }
 
-/* 4. PÁGINAS INTERNAS (Plataforma e Admin) */
+.card {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    padding: 25px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Cabeçalho Principal --- */
 .main-header {
-    background-color: var(--card-bg-color);
+    background-color: var(--white);
+    box-shadow: var(--shadow);
     padding: 15px 0;
-    border-bottom: 1px solid var(--border-color);
-    transition: var(--theme-transition);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
 .main-header .container {
@@ -150,71 +79,83 @@ a {
 }
 
 .logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--text-color);
-    transition: var(--theme-transition);
+    color: var(--primary-blue);
+    text-decoration: none;
 }
 
-.theme-toggler {
-    background-color: var(--bg-color);
-    border: 1px solid var(--border-color);
-    color: var(--text-secondary-color);
-    padding: 8px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: var(--theme-transition);
+.user-info a {
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
 }
 
-.theme-toggler:hover {
-    border-color: var(--text-color);
-}
+/* --- Página de Login --- */
+.login-container { display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+.login-card { width: 100%; max-width: 400px; }
+.login-card h1 { text-align: center; margin-bottom: 20px; }
 
-main {
-    padding: 40px 0;
-}
-
-.page-title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 20px;
-}
-
-.dashboard-grid, .class-grid {
+/* --- Dashboard de Turmas --- */
+.class-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 30px;
-}
-
-.card {
-    background-color: var(--card-bg-color);
-    border: 1px solid var(--border-color);
-    padding: 25px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px var(--shadow-color);
-    transition: var(--theme-transition), transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 15px var(--shadow-color);
-}
-
-.card h3 {
-    font-size: 1.2rem;
-    font-weight: 600;
-    margin-bottom: 10px;
-    color: var(--text-color);
-}
-
-.card p {
-    color: var(--text-secondary-color);
-    font-size: 0.95rem;
+    margin-top: 30px;
 }
 
 .class-card {
-    border-top: 4px solid var(--accent-color);
+    border-top: 5px solid var(--primary-blue);
 }
+
+.class-card a {
+    text-decoration: none;
+    color: var(--text-dark);
+}
+
+.class-card h3 {
+    color: var(--primary-blue);
+}
+
+/* --- Mural da Turma --- */
+.turma-header {
+    padding: 40px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+    color: var(--white);
+    margin-bottom: 30px;
+}
+
+.mural-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 30px;
+}
+
+.post-stream .card { margin-bottom: 20px; }
+.post-form textarea { width: 100%; padding: 10px; border-radius: 8px; border: 1px solid var(--border-color); min-height: 80px; margin-bottom: 10px;}
+
+/* --- Modals (Pop-ups) --- */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    justify-content: center;
+    align-items: center;
+}
+.modal-content {
+    background-color: var(--white);
+    margin: auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+}
+.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.close-btn { font-size: 2rem; cursor: pointer; }
