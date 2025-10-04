@@ -3,32 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Aluno</title>
+    <title>Dashboard do Aluno</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body id="aluno-dashboard">
-    <header class="app-header">
-        <div class="container">
-            <div class="logo">IFPR Aluno</div>
-            <nav class="main-nav">
-                <a href="aluno_dashboard.html" class="active">Início</a>
-                <a href="aluno_atividades.html">Atividades</a>
-                <a href="aluno_materiais.html">Materiais</a>
-                <a href="login.html" class="logout-btn">Sair</a>
-            </nav>
+<body>
+    <header class="main-header">
+        <a href="aluno_dashboard.html" class="logo">Plataforma</a>
+        <div class="header-user">
+            <span id="user-name"></span>
+            <button id="logout-btn" class="btn btn-secondary">Sair</button>
         </div>
     </header>
-    <main>
-        <div class="container">
-            <div class="page-header">
-                <h1>Olá, <span id="username"></span>!</h1>
+
+    <main class="container">
+        <h1>Minha Turma</h1>
+        <div class="dashboard-grid" id="turmas-grid">
             </div>
-            <div class="card">
-                <h2>Sua Turma: <span id="turma-nome"></span></h2>
-                <p>Navegue pelo menu para ver suas atividades e materiais de estudo.</p>
-            </div>
-        </div>
     </main>
+
     <script src="database.js"></script>
     <script src="script.js"></script>
 </body>

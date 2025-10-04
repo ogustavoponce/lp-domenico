@@ -1,21 +1,77 @@
-/* --- ARQUIVO: database.js --- */
-const initialDatabase = {
-  professor: { nome: "Domenico", email: "domenico@prof.com" },
-  turmas: [
-    { id: 1, nome: "Informática 1" }, { id: 2, nome: "Automação 1" },
-    { id: 3, nome: "Mecânica 1" }, { id: 4, nome: "Jogos 1" },
-  ],
-  alunos: [
-    { id: 101, nome: "Alissa Gabriele", email: "alissa@aluno.com", turmaId: 1 },
-    { id: 102, nome: "Gustavo Ponce", email: "gustavo@aluno.com", turmaId: 1 },
-    { id: 103, nome: "André Chepak", email: "andre@aluno.com", turmaId: 2 },
-  ],
-  atividades: [
-    { id: 201, turmaId: 1, titulo: "Atividade 01: Algoritmos", dataEntrega: "2025-10-10", descricao: "Desenvolver um algoritmo para calcular a média de 3 notas." },
-    { id: 202, turmaId: 1, titulo: "Atividade 02: HTML Básico", dataEntrega: "2025-10-17", descricao: "Criar uma página HTML semântica com uma biografia pessoal." },
-  ],
-  materiais: [
-    { id: 301, turmaId: 1, nome: "Apostila de Informática 1", arquivo: "#" },
-    { id: 302, turmaId: 2, nome: "Apostila de Automação 1", arquivo: "#" },
-  ]
-};
+// database.js
+
+function getInitialData() {
+    return {
+        users: [
+            {
+                email: 'domenico@prof.com',
+                password: '123',
+                role: 'professor',
+                name: 'Domenico'
+            },
+            {
+                email: 'aluno1@ifpr.edu.br',
+                password: '123',
+                role: 'aluno',
+                name: 'Gustavo Oliveira',
+                turmaId: 1
+            },
+            {
+                email: 'aluno2@ifpr.edu.br',
+                password: '123',
+                role: 'aluno',
+                name: 'Isadora Kamille',
+                turmaId: 2
+            }
+        ],
+        turmas: [
+            {
+                id: 1,
+                name: 'Informática 1',
+                curso: 'Desenvolvimento de Sistemas'
+            },
+            {
+                id: 2,
+                name: 'Automação 1',
+                curso: 'Automação Industrial'
+            },
+            {
+                id: 3,
+                name: 'Mecânica 1',
+                curso: 'Mecânica Industrial'
+            },
+            {
+                id: 4,
+                name: 'Jogos 1',
+                curso: 'Jogos Digitais'
+            }
+        ],
+        mural: [
+            {
+                id: 1,
+                turmaId: 1,
+                author: 'Domenico',
+                content: 'Sejam bem-vindos à disciplina de Algoritmos! A primeira aula será na próxima segunda-feira.',
+                timestamp: new Date().toISOString()
+            }
+        ],
+        atividades: [
+            {
+                id: 1,
+                turmaId: 1,
+                title: 'Lógica de Programação - Exercício 1',
+                description: 'Resolver os 10 primeiros exercícios da lista em anexo sobre pseudocódigo.',
+                dueDate: '2025-10-15'
+            }
+        ],
+        materiais: [
+            {
+                id: 1,
+                turmaId: 1,
+                title: 'Apostila Completa de Algoritmos',
+                description: 'Material em PDF com todo o conteúdo da disciplina.',
+                url: '#' // Link para o PDF
+            }
+        ]
+    };
+}

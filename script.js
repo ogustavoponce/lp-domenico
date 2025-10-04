@@ -1,173 +1,426 @@
-/* --- ARQUIVO: script.js (REFEITO DO ZERO) --- */
-document.addEventListener('DOMContentLoaded', () => {
-    let db;
+// script.js
 
-    // --- 1. FUNÇÕES GERAIS E AUTENTICAÇÃO ---
-    function initDatabase() {
-        db = JSON.parse(localStorage.getItem('platformDb')) || initialDatabase;
-        localStorage.setItem('platformDb', JSON.stringify(db));
+// Classe principal da aplicação
+class App {
+    constructor() {
+        // Inicializa o banco de dados no localStorage se não existir
+        if (!localStorage.getItem('platformDB')) {
+            localStorage.setItem('platformDB', JSON.stringify(getInitialData()));
+        }
+        this.db = JSON.parse(localStorage.getItem('platformDB'));
+        this.currentUser = JSON.parse(sessionStorage.getItem('loggedInUser'));
+
+        // Adiciona listeners de eventos globais
+        document.addEventListener('DOMContentLoaded', () => {
+            this.route(); // Roteia a página com base na URL
+            this.setupGlobalUI();
+        });
     }
 
-    function protectPage() {
-        const user = JSON.parse(sessionStorage.getItem('loggedInUser'));
-        if (!user && !document.body.classList.contains('login-page')) {
+    // Atualiza o banco de dados no localStorage
+    updateDB() {
+        localStorage.setItem('platformDB', JSON.stringify(this.db));
+    }
+
+    // Lida com a lógica de roteamento
+    route() {
+        const path = window.location.pathname.split('/').pop();
+        
+        // Protege rotas que exigem login
+        const protectedRoutes = ['admin_dashboard.html', 'aluno_dashboard.html', 'turma.html'];
+        if (protectedRoutes.includes(path) && !this.currentUser) {
             window.location.href = 'login.html';
+            return;
         }
-        return user;
+
+        switch (path) {
+            case 'login.html':
+            case '':
+                this.initLoginPage();
+                break;
+            case 'admin_dashboard.html':
+                this.initAdminDashboard();
+                break;
+            case 'aluno_dashboard.html':
+                this.initAlunoDashboard();
+                break;
+            case 'turma.html':
+                this.initTurmaPage();
+                break;
+        }
+    }
+    
+    // Configura elementos de UI globais (header, botão de logout)
+    setupGlobalUI() {
+        if (!this.currentUser) return;
+
+        const userNameEl = document.getElementById('user-name');
+        const logoutBtn = document.getElementById('logout-btn');
+        const dashboardLink = document.getElementById('dashboard-link');
+
+        if (userNameEl) userNameEl.textContent = `Olá, ${this.currentUser.name}`;
+        if (logoutBtn) logoutBtn.addEventListener('click', this.logout);
+        
+        if(dashboardLink) {
+            dashboardLink.href = this.currentUser.role === 'professor' ? 'admin_dashboard.html' : 'aluno_dashboard.html';
+        }
     }
 
-    function setupLoginForm() {
-        const form = document.getElementById('login-form');
-        if (!form) return;
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim().toLowerCase();
-            if (email === db.professor.email.toLowerCase()) {
-                sessionStorage.setItem('loggedInUser', JSON.stringify({ type: 'professor', ...db.professor }));
-                window.location.href = 'admin_dashboard.html';
-                return;
-            }
-            const aluno = db.alunos.find(a => a.email.toLowerCase() === email);
-            if (aluno) {
-                sessionStorage.setItem('loggedInUser', JSON.stringify({ type: 'aluno', ...aluno }));
-                window.location.href = 'aluno_dashboard.html';
-            } else {
-                alert('E-mail não encontrado.');
-            }
+    // Logout
+    logout() {
+        sessionStorage.removeItem('loggedInUser');
+        window.location.href = 'login.html';
+    }
+
+    // --- Páginas Específicas ---
+
+    // Página de Login
+    initLoginPage() {
+        const loginForm = document.getElementById('login-form');
+        if (loginForm) {
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const errorEl = document.getElementById('login-error');
+
+                const user = this.db.users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    sessionStorage.setItem('loggedInUser', JSON.stringify(user));
+                    if (user.role === 'professor') {
+                        window.location.href = 'admin_dashboard.html';
+                    } else {
+                        window.location.href = 'aluno_dashboard.html';
+                    }
+                } else {
+                    errorEl.style.display = 'block';
+                }
+            });
+        }
+    }
+    
+    // Dashboard do Professor
+    initAdminDashboard() {
+        const grid = document.getElementById('turmas-grid');
+        grid.innerHTML = '';
+        this.db.turmas.forEach(turma => {
+            const card = document.createElement('a');
+            card.href = `turma.html?id=${turma.id}`;
+            card.className = 'turma-card card';
+            card.innerHTML = `
+                <h3>${turma.name}</h3>
+                <p>${turma.curso}</p>
+            `;
+            grid.appendChild(card);
         });
     }
 
-    function setupModal(modalId, openBtnId) {
-        const modal = document.getElementById(modalId);
-        const openBtn = document.getElementById(openBtnId);
-        const closeBtn = modal.querySelector('.close-btn');
-        openBtn.onclick = () => modal.style.display = "flex";
-        closeBtn.onclick = () => modal.style.display = "none";
-        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+    // Dashboard do Aluno
+    initAlunoDashboard() {
+        const grid = document.getElementById('turmas-grid');
+        const alunoTurma = this.db.turmas.find(t => t.id === this.currentUser.turmaId);
+        grid.innerHTML = '';
+        if (alunoTurma) {
+            const card = document.createElement('a');
+            card.href = `turma.html?id=${alunoTurma.id}`;
+            card.className = 'turma-card card';
+            card.innerHTML = `
+                <h3>${alunoTurma.name}</h3>
+                <p>${alunoTurma.curso}</p>
+            `;
+            grid.appendChild(card);
+        }
+    }
+    
+    // Página da Turma
+    initTurmaPage() {
+        // Obter ID da turma da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const turmaId = parseInt(urlParams.get('id'));
+        if (!turmaId) {
+            window.location.href = this.currentUser.role === 'professor' ? 'admin_dashboard.html' : 'aluno_dashboard.html';
+            return;
+        }
+        
+        const turma = this.db.turmas.find(t => t.id === turmaId);
+        
+        // Preencher informações da turma
+        document.getElementById('turma-name').textContent = turma.name;
+        document.getElementById('turma-curso').textContent = turma.curso;
+
+        // Configurar abas
+        const tabs = document.querySelectorAll('.tab-link');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Desativa todas
+                tabs.forEach(t => t.classList.remove('active'));
+                tabContents.forEach(c => c.classList.remove('active'));
+                
+                // Ativa a clicada
+                tab.classList.add('active');
+                document.getElementById(tab.dataset.tab).classList.add('active');
+            });
+        });
+
+        // Esconder aba "Alunos" para alunos
+        if(this.currentUser.role === 'aluno'){
+            document.getElementById('tab-alunos').style.display = 'none';
+        }
+
+        // Renderizar conteúdo inicial (Mural)
+        this.renderMural(turmaId);
+        this.renderAtividades(turmaId);
+        this.renderMateriais(turmaId);
+        this.renderAlunos(turmaId);
+
+        // Configurar FAB para professor
+        if (this.currentUser.role === 'professor') {
+            const fab = document.getElementById('fab-add');
+            fab.style.display = 'flex';
+            fab.addEventListener('click', () => this.openModal(turmaId));
+        }
+        
+        // Fechar modal
+        document.getElementById('modal-close').addEventListener('click', this.closeModal);
+        document.getElementById('modal').addEventListener('click', (e) => {
+            if(e.target.id === 'modal') this.closeModal();
+        });
     }
 
-    // --- 2. LÓGICA DAS PÁGINAS DO PROFESSOR (ADMIN) ---
-    function initAdminPages(user) {
-        document.getElementById('username').textContent = user.nome;
-        const pageId = document.body.id;
-        if (pageId === 'admin-dashboard') renderAdminDashboard();
-        if (pageId === 'admin-alunos') { renderAdminAlunos(); setupAlunoModal(); }
-        if (pageId === 'admin-atividades') { renderAdminAtividades(); setupAtividadeModal(); }
-    }
+    // --- Funções de Renderização de Conteúdo da Turma ---
 
-    function renderAdminDashboard() {
-        const container = document.getElementById('turmas-grid');
+    renderMural(turmaId) {
+        const container = document.getElementById('mural');
         container.innerHTML = '';
-        db.turmas.forEach(turma => {
-            container.innerHTML += `<div class="card card-hover"><h3>${turma.nome}</h3></div>`;
+        const items = this.db.mural.filter(item => item.turmaId === turmaId).reverse();
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <p>${item.content}</p>
+                <small class="text-secondary">Postado por ${item.author} em ${new Date(item.timestamp).toLocaleDateString()}</small>
+                ${this.currentUser.role === 'professor' ? `
+                <div class="item-actions">
+                    <button onclick="app.deleteItem('mural', ${item.id}, ${turmaId})">&times;</button>
+                </div>
+                ` : ''}
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    renderAtividades(turmaId) {
+        const container = document.getElementById('atividades');
+        container.innerHTML = '';
+        const items = this.db.atividades.filter(item => item.turmaId === turmaId);
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h4>${item.title}</h4>
+                <p>${item.description}</p>
+                <small class="text-secondary">Data de entrega: ${new Date(item.dueDate).toLocaleDateString()}</small>
+                 ${this.currentUser.role === 'professor' ? `
+                <div class="item-actions">
+                    <button onclick="app.deleteItem('atividades', ${item.id}, ${turmaId})">&times;</button>
+                </div>
+                ` : ''}
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    renderMateriais(turmaId) {
+        const container = document.getElementById('materiais');
+        container.innerHTML = '';
+        const items = this.db.materiais.filter(item => item.turmaId === turmaId);
+        items.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.innerHTML = `
+                <h4><a href="${item.url}" target="_blank">${item.title}</a></h4>
+                <p>${item.description}</p>
+                 ${this.currentUser.role === 'professor' ? `
+                <div class="item-actions">
+                    <button onclick="app.deleteItem('materiais', ${item.id}, ${turmaId})">&times;</button>
+                </div>
+                ` : ''}
+            `;
+            container.appendChild(card);
         });
     }
     
-    function renderAdminAlunos() {
-        const tbody = document.getElementById('alunos-table-body');
-        tbody.innerHTML = '';
-        db.alunos.forEach(aluno => {
-            const turma = db.turmas.find(t => t.id === aluno.turmaId) || {nome: 'N/A'};
-            tbody.innerHTML += `<tr><td>${aluno.id}</td><td>${aluno.nome}</td><td>${aluno.email}</td><td>${turma.nome}</td></tr>`;
-        });
+    renderAlunos(turmaId){
+         const container = document.getElementById('alunos');
+         container.innerHTML = '';
+         const items = this.db.users.filter(user => user.role === 'aluno' && user.turmaId === turmaId);
+         items.forEach(item => {
+             const card = document.createElement('div');
+             card.className = 'card';
+             card.innerHTML = `
+                <h4>${item.name}</h4>
+                <p class="text-secondary">${item.email}</p>
+             `;
+             container.appendChild(card);
+         });
     }
 
-    function renderAdminAtividades() {
-        const container = document.getElementById('atividades-container');
-        container.innerHTML = '';
-        db.atividades.forEach(ativ => {
-            const turma = db.turmas.find(t => t.id === ativ.turmaId);
-            container.innerHTML += `<div class="card"><h4>${ativ.titulo} (Turma: ${turma.nome})</h4><p>${ativ.descricao}</p><small>Entrega: ${ativ.dataEntrega}</small></div>`;
-        });
+    // --- Modal e CRUD ---
+
+    openModal(turmaId) {
+        const activeTab = document.querySelector('.tab-link.active').dataset.tab;
+        const modal = document.getElementById('modal');
+        const modalTitle = document.getElementById('modal-title');
+        const form = document.getElementById('modal-form');
+        form.innerHTML = ''; // Limpa o formulário
+
+        let formContent = '';
+
+        switch (activeTab) {
+            case 'mural':
+                modalTitle.textContent = 'Novo Aviso no Mural';
+                formContent = `
+                    <div class="form-group">
+                        <label for="mural-content">Mensagem</label>
+                        <textarea id="mural-content" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Postar</button>
+                `;
+                form.onsubmit = (e) => this.addItem(e, 'mural', turmaId);
+                break;
+            case 'atividades':
+                 modalTitle.textContent = 'Nova Atividade';
+                formContent = `
+                    <div class="form-group">
+                        <label for="atividade-title">Título</label>
+                        <input type="text" id="atividade-title" class="form-control" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="atividade-desc">Descrição</label>
+                        <textarea id="atividade-desc" class="form-control" required></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="atividade-date">Data de Entrega</label>
+                        <input type="date" id="atividade-date" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Criar Atividade</button>
+                `;
+                form.onsubmit = (e) => this.addItem(e, 'atividades', turmaId);
+                break;
+            case 'materiais':
+                 modalTitle.textContent = 'Novo Material';
+                formContent = `
+                    <div class="form-group">
+                        <label for="material-title">Título</label>
+                        <input type="text" id="material-title" class="form-control" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="material-desc">Descrição</label>
+                        <input type="text" id="material-desc" class="form-control">
+                    </div>
+                     <div class="form-group">
+                        <label for="material-url">URL do Material</label>
+                        <input type="url" id="material-url" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Adicionar Material</button>
+                `;
+                form.onsubmit = (e) => this.addItem(e, 'materiais', turmaId);
+                break;
+            case 'alunos':
+                 modalTitle.textContent = 'Adicionar Novo Aluno';
+                 formContent = `
+                    <div class="form-group">
+                        <label for="aluno-name">Nome Completo</label>
+                        <input type="text" id="aluno-name" class="form-control" required>
+                    </div>
+                     <div class="form-group">
+                        <label for="aluno-email">E-mail</label>
+                        <input type="email" id="aluno-email" class="form-control" required>
+                    </div>
+                    <p class="text-secondary" style="margin-bottom: 1rem;">Uma senha padrão "123" será criada.</p>
+                    <button type="submit" class="btn btn-primary">Cadastrar Aluno</button>
+                 `;
+                 form.onsubmit = (e) => this.addItem(e, 'alunos', turmaId);
+                 break;
+        }
+
+        form.innerHTML = formContent;
+        modal.classList.add('active');
     }
 
-    function setupAlunoModal() {
-        setupModal('add-aluno-modal', 'add-aluno-btn');
-        const form = document.getElementById('add-aluno-form');
-        const selectTurma = document.getElementById('aluno-turma');
-        db.turmas.forEach(turma => {
-            selectTurma.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
-        });
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            db.alunos.push({
-                id: Date.now(),
-                nome: document.getElementById('aluno-nome').value,
-                email: document.getElementById('aluno-email').value,
-                turmaId: parseInt(document.getElementById('aluno-turma').value)
-            });
-            localStorage.setItem('platformDb', JSON.stringify(db));
-            renderAdminAlunos();
-            document.getElementById('add-aluno-modal').style.display = "none";
-            form.reset();
-        };
-    }
-
-    function setupAtividadeModal() {
-        setupModal('add-atividade-modal', 'add-atividade-btn');
-        const form = document.getElementById('add-atividade-form');
-        const selectTurma = document.getElementById('atividade-turma');
-        db.turmas.forEach(turma => {
-            selectTurma.innerHTML += `<option value="${turma.id}">${turma.nome}</option>`;
-        });
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            db.atividades.push({
-                id: Date.now(),
-                turmaId: parseInt(document.getElementById('atividade-turma').value),
-                titulo: document.getElementById('atividade-titulo').value,
-                descricao: document.getElementById('atividade-descricao').value,
-                dataEntrega: document.getElementById('atividade-data').value
-            });
-            localStorage.setItem('platformDb', JSON.stringify(db));
-            renderAdminAtividades();
-            document.getElementById('add-atividade-modal').style.display = "none";
-            form.reset();
-        };
-    }
-
-    // --- 3. LÓGICA DAS PÁGINAS DO ALUNO ---
-    function initAlunoPages(user) {
-        document.getElementById('username').textContent = user.nome.split(' ')[0];
-        const pageId = document.body.id;
-        if (pageId === 'aluno-dashboard') renderAlunoDashboard(user);
-        if (pageId === 'aluno-atividades') renderAlunoAtividades(user);
-        if (pageId === 'aluno-materiais') renderAlunoMateriais(user);
+    closeModal() {
+        document.getElementById('modal').classList.remove('active');
     }
     
-    function renderAlunoDashboard(user) {
-        const turma = db.turmas.find(t => t.id === user.turmaId);
-        document.getElementById('turma-nome').textContent = turma.nome;
+    addItem(event, type, turmaId) {
+        event.preventDefault();
+        const newId = Date.now(); // ID simples baseado no timestamp
+        let newItem;
+
+        switch (type) {
+            case 'mural':
+                newItem = {
+                    id: newId,
+                    turmaId: turmaId,
+                    author: this.currentUser.name,
+                    content: document.getElementById('mural-content').value,
+                    timestamp: new Date().toISOString()
+                };
+                this.db.mural.push(newItem);
+                break;
+            case 'atividades':
+                newItem = {
+                    id: newId,
+                    turmaId: turmaId,
+                    title: document.getElementById('atividade-title').value,
+                    description: document.getElementById('atividade-desc').value,
+                    dueDate: document.getElementById('atividade-date').value
+                };
+                this.db.atividades.push(newItem);
+                break;
+            case 'materiais':
+                 newItem = {
+                    id: newId,
+                    turmaId: turmaId,
+                    title: document.getElementById('material-title').value,
+                    description: document.getElementById('material-desc').value,
+                    url: document.getElementById('material-url').value
+                };
+                this.db.materiais.push(newItem);
+                break;
+             case 'alunos':
+                 newItem = {
+                    email: document.getElementById('aluno-email').value,
+                    password: '123', // Senha padrão
+                    role: 'aluno',
+                    name: document.getElementById('aluno-name').value,
+                    turmaId: turmaId
+                };
+                this.db.users.push(newItem);
+                break;
+        }
+        
+        this.updateDB();
+        this.closeModal();
+        
+        // Re-renderiza o conteúdo da aba atual
+        this[`render${type.charAt(0).toUpperCase() + type.slice(1)}`](turmaId);
     }
 
-    function renderAlunoAtividades(user) {
-        const container = document.getElementById('atividades-container');
-        container.innerHTML = '';
-        const atividades = db.atividades.filter(a => a.turmaId === user.turmaId);
-        atividades.forEach(ativ => {
-            container.innerHTML += `<div class="card"><h4>${ativ.titulo}</h4><p>${ativ.descricao}</p><small>Data de Entrega: ${ativ.dataEntrega}</small></div>`;
-        });
-    }
-
-    function renderAlunoMateriais(user) {
-        const container = document.getElementById('materiais-container');
-        container.innerHTML = '';
-        const materiais = db.materiais.filter(m => m.turmaId === user.turmaId);
-        materiais.forEach(material => {
-            container.innerHTML += `<div class="card card-hover"><a href="${material.arquivo}" target="_blank" style="text-decoration:none; color:inherit;"><h3>${material.nome}</h3><p>Clique para acessar o material.</p></a></div>`;
-        });
-    }
-
-    // --- INICIALIZAÇÃO GERAL ---
-    if (document.body.classList.contains('login-page')) {
-        initDatabase();
-        setupLoginForm();
-    } else {
-        const currentUser = protectPage();
-        if (currentUser) {
-            initDatabase();
-            if (currentUser.type === 'professor') initAdminPages(currentUser);
-            if (currentUser.type === 'aluno') initAlunoPages(currentUser);
+    deleteItem(type, itemId, turmaId) {
+        if (confirm('Tem certeza que deseja excluir este item?')) {
+            this.db[type] = this.db[type].filter(item => item.id !== itemId);
+            this.updateDB();
+            this[`render${type.charAt(0).toUpperCase() + type.slice(1)}`](turmaId);
         }
     }
-});
+}
+
+// Inicializa a aplicação
+const app = new App();
+
+// Permite chamar métodos da instância globalmente (para os botões onclick)
+window.app = app;

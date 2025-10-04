@@ -6,28 +6,21 @@
     <title>Dashboard do Professor</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body id="admin-dashboard">
-    <header class="app-header">
-        <div class="container">
-            <div class="logo">IFPR Admin</div>
-            <nav class="main-nav">
-                <a href="admin_dashboard.html" class="active">Turmas</a>
-                <a href="admin_alunos.html">Alunos</a>
-                <a href="admin_atividades.html">Atividades</a>
-                <a href="admin_materiais.html">Materiais</a>
-                <a href="login.html" class="logout-btn">Sair</a>
-            </nav>
+<body>
+    <header class="main-header">
+        <a href="admin_dashboard.html" class="logo">Plataforma</a>
+        <div class="header-user">
+            <span id="user-name"></span>
+            <button id="logout-btn" class="btn btn-secondary">Sair</button>
         </div>
     </header>
-    <main>
-        <div class="container">
-            <div class="page-header">
-                <h1>Olá, <span id="username"></span>!</h1>
+
+    <main class="container">
+        <h1>Minhas Turmas</h1>
+        <div class="dashboard-grid" id="turmas-grid">
             </div>
-            <div id="turmas-grid" class="grid-container">
-                </div>
-        </div>
     </main>
+
     <script src="database.js"></script>
     <script src="script.js"></script>
 </body>

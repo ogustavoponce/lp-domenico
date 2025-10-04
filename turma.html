@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turma | Plataforma Educacional</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="main-header">
+        <a href="#" id="dashboard-link" class="logo">Plataforma</a>
+        <div class="header-user">
+            <span id="user-name"></span>
+            <button id="logout-btn" class="btn btn-secondary">Sair</button>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="turma-header">
+            <h1 id="turma-name"></h1>
+            <p id="turma-curso" class="text-secondary"></p>
+        </div>
+
+        <nav class="turma-tabs">
+            <a class="tab-link active" data-tab="mural">Mural</a>
+            <a class="tab-link" data-tab="atividades">Atividades</a>
+            <a class="tab-link" data-tab="materiais">Materiais</a>
+            <a class="tab-link" data-tab="alunos" id="tab-alunos">Alunos</a>
+        </nav>
+
+        <div id="mural" class="tab-content active content-list"></div>
+        <div id="atividades" class="tab-content content-list"></div>
+        <div id="materiais" class="tab-content content-list"></div>
+        <div id="alunos" class="tab-content content-list"></div>
+    </main>
+
+    <button id="fab-add" class="fab" style="display: none;">+</button>
+
+    <div id="modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title"></h2>
+                <button id="modal-close">&times;</button>
+            </div>
+            <form id="modal-form">
+                </form>
+        </div>
+    </div>
+
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

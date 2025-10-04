@@ -1,72 +1,369 @@
-/* --- ARQUIVO: style.css (REFEITO DO ZERO) --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+/* style.css */
+
+/* 1. Importação da Fonte e Variáveis Globais */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
-    --blue-primary: #007aff;
-    --blue-dark: #005ecb;
-    --bg-light: #f6f8fc;
-    --white: #ffffff;
-    --text-dark: #1d2d35;
-    --text-light: #6a7c87;
-    --border-color: #e_ae_ae_e;
-    --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 8px 25px rgba(0, 0, 0, 0.08);
-    --spacing-md: 24px;
-    --spacing-lg: 32px;
+    --font-main: 'Inter', sans-serif;
+
+    --color-bg-main: #121212;
+    --color-bg-component: #1d1d1d;
+    --color-bg-component-hover: #2a2a2a;
+    --color-border: #333333;
+
+    --color-text-main: #eaeaea;
+    --color-text-secondary: #888888;
+    --color-text-inverse: #121212;
+
+    --color-accent: #007aff;
+    --color-accent-hover: #0056b3;
+    --color-danger: #e53e3e;
+
+    --border-radius: 8px;
+    --transition-speed: 0.2s;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* --- ESTILO BASE --- */
-* { box-sizing: border-box; margin: 0; padding: 0; }
+/* 2. Reset e Estilos Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: var(--bg-light);
-    color: var(--text-dark);
-    line-height: 1.6;
+    font-family: var(--font-main);
+    background-color: var(--color-bg-main);
+    color: var(--color-text-main);
+    -webkit-font-smoothing: antialiased;
+    display: flex;
+    flex-direction: column;
 }
-.container { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
-a { text-decoration: none; color: var(--blue-primary); }
 
-/* --- COMPONENTES GLOBAIS --- */
-.btn { display: inline-block; padding: 12px 24px; border: none; border-radius: 8px; font-size: 1rem; font-weight: 500; cursor: pointer; text-decoration: none; text-align: center; transition: all 0.3s ease; }
-.btn-primary { background-color: var(--blue-primary); color: var(--white); }
-.btn-primary:hover { background-color: var(--blue-dark); transform: translateY(-2px); }
+/* 3. Layout Principal e Componentes Comuns */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
 
-.card { background: var(--white); border-radius: 12px; box-shadow: var(--shadow-sm); padding: var(--spacing-lg); margin-bottom: var(--spacing-lg); }
-.card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.card-hover:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    background-color: var(--color-bg-component);
+    border-bottom: 1px solid var(--color-border);
+}
 
-.form-group { margin-bottom: var(--spacing-md); }
-.form-group label { display: block; margin-bottom: 8px; font-weight: 500; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); font-size: 1rem; font-family: 'Inter', sans-serif; }
-.form-group input:focus { outline: 2px solid var(--blue-primary); }
+.main-header .logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-text-main);
+    text-decoration: none;
+}
 
-.table { width: 100%; border-collapse: collapse; }
-.table th, .table td { padding: 15px; text-align: left; border-bottom: 1px solid var(--border-color); }
-.table th { font-weight: 500; color: var(--text-light); font-size: 0.9rem; }
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
 
-/* --- MODAL (POP-UP) --- */
-.modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); justify-content: center; align-items: center; }
-.modal-content { background: var(--white); padding: var(--spacing-lg); border-radius: 12px; width: 90%; max-width: 500px; }
-.modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md); }
-.modal-header h2 { font-size: 1.5rem; }
-.close-btn { font-size: 2.5rem; cursor: pointer; color: var(--text-light); }
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease;
+}
 
-/* --- LAYOUT PRINCIPAL --- */
-.app-header { background-color: var(--white); box-shadow: var(--shadow-sm); padding: 15px 0; position: sticky; top: 0; z-index: 1000; }
-.app-header .container { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 1.8rem; font-weight: 700; color: var(--blue-primary); }
-.main-nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; margin-left: var(--spacing-lg); padding-bottom: 5px; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
-.main-nav a:hover { color: var(--blue-primary); }
-.main-nav a.active { color: var(--blue-primary); border-bottom-color: var(--blue-primary); }
-.main-nav .logout-btn { color: #dc3545; }
+.btn-primary {
+    background-color: var(--color-accent);
+    color: white;
+}
 
-main { padding: 40px 0; }
-.page-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
-.page-header h1 { font-size: 2.5rem; }
+.btn-primary:hover {
+    background-color: var(--color-accent-hover);
+    transform: translateY(-2px);
+}
 
-/* --- LOGIN --- */
-.login-page { background-color: #eef2f9; }
-.login-card { text-align: center; }
+.btn-secondary {
+    background-color: transparent;
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border);
+}
 
-/* --- DASHBOARD --- */
-.grid-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--spacing-lg); }
+.btn-secondary:hover {
+    background-color: var(--color-bg-component-hover);
+    color: var(--color-text-main);
+}
+
+.card {
+    background-color: var(--color-bg-component);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    padding: 1.5rem;
+    transition: background-color var(--transition-speed) ease, transform var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    background-color: var(--color-bg-component-hover);
+    border-color: var(--color-accent);
+}
+
+/* 4. Estilos da Página de Login */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    min-height: 100vh;
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    padding: 3rem;
+    background-color: var(--color-bg-component);
+    border-radius: var(--border-radius);
+    border: 1px solid var(--color-border);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: var(--color-bg-main);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius);
+    color: var(--color-text-main);
+    font-size: 1rem;
+    transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.25);
+}
+
+#login-error {
+    color: var(--color-danger);
+    margin-top: 1rem;
+    text-align: center;
+    display: none;
+}
+
+/* 5. Estilos do Dashboard */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.turma-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: var(--color-text-main);
+}
+
+.turma-card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.turma-card p {
+    color: var(--color-text-secondary);
+    flex-grow: 1;
+}
+
+/* 6. Estilos da Página da Turma */
+.turma-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.turma-header h1 {
+    font-size: 2.5rem;
+}
+
+.turma-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.tab-link {
+    padding: 1rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    position: relative;
+    border-bottom: 2px solid transparent;
+    transition: color var(--transition-speed) ease;
+}
+
+.tab-link:hover {
+    color: var(--color-text-main);
+}
+
+.tab-link.active {
+    color: var(--color-accent);
+    border-bottom-color: var(--color-accent);
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.content-list .card {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.content-list .card:hover {
+    transform: none; /* Desativa o hover de elevação na lista */
+}
+
+.item-actions {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    gap: 0.5rem;
+}
+
+.item-actions button {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.item-actions button:hover {
+    color: var(--color-text-main);
+}
+
+/* 7. Modal e Floating Action Button (FAB) */
+.fab {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: white;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+    transition: transform var(--transition-speed) ease;
+}
+
+.fab:hover {
+    transform: scale(1.1) rotate(90deg);
+}
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-speed) ease, visibility var(--transition-speed) ease;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: var(--color-bg-component);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    width: 90%;
+    max-width: 600px;
+    transform: scale(0.95);
+    transition: transform var(--transition-speed) ease;
+}
+
+.modal-overlay.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+#modal-close {
+    background: none;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+textarea.form-control {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
