@@ -2,76 +2,31 @@
 
 function getInitialData() {
     return {
+        // Usuários agora não precisam estar pré-associados a uma turma
         users: [
-            {
-                email: 'domenico@prof.com',
-                password: '123',
-                role: 'professor',
-                name: 'Domenico'
-            },
-            {
-                email: 'aluno1@ifpr.edu.br',
-                password: '123',
-                role: 'aluno',
-                name: 'Gustavo Oliveira',
-                turmaId: 1
-            },
-            {
-                email: 'aluno2@ifpr.edu.br',
-                password: '123',
-                role: 'aluno',
-                name: 'Isadora Kamille',
-                turmaId: 2
-            }
+            { email: 'domenico@prof.com', password: '123', role: 'professor', name: 'Domenico' },
+            { email: 'aluno1@ifpr.edu.br', password: '123', role: 'aluno', name: 'Gustavo Oliveira' },
+            { email: 'aluno2@ifpr.edu.br', password: '123', role: 'aluno', name: 'Isadora Kamille' }
         ],
         turmas: [
-            {
-                id: 1,
-                name: 'Informática 1',
-                curso: 'Desenvolvimento de Sistemas'
-            },
-            {
-                id: 2,
-                name: 'Automação 1',
-                curso: 'Automação Industrial'
-            },
-            {
-                id: 3,
-                name: 'Mecânica 1',
-                curso: 'Mecânica Industrial'
-            },
-            {
-                id: 4,
-                name: 'Jogos 1',
-                curso: 'Jogos Digitais'
-            }
+            { id: 1, name: 'Informática 1', curso: 'Desenvolvimento de Sistemas', alunos: ['aluno1@ifpr.edu.br'] },
+            { id: 2, name: 'Automação 1', curso: 'Automação Industrial', alunos: ['aluno2@ifpr.edu.br'] },
+            { id: 3, name: 'Mecânica 1', curso: 'Mecânica Industrial', alunos: [] }
         ],
-        mural: [
-            {
-                id: 1,
-                turmaId: 1,
-                author: 'Domenico',
-                content: 'Sejam bem-vindos à disciplina de Algoritmos! A primeira aula será na próxima segunda-feira.',
-                timestamp: new Date().toISOString()
-            }
+        // NOVO: Módulos para organizar o conteúdo das turmas
+        modulos: [
+            { id: 101, turmaId: 1, name: 'Módulo 1: Boas-vindas', order: 1 },
+            { id: 102, turmaId: 1, name: 'Módulo 2: Lógica de Programação', order: 2 }
         ],
-        atividades: [
-            {
-                id: 1,
-                turmaId: 1,
-                title: 'Lógica de Programação - Exercício 1',
-                description: 'Resolver os 10 primeiros exercícios da lista em anexo sobre pseudocódigo.',
-                dueDate: '2025-10-15'
-            }
+        // NOVO: Conteúdos unificados, ligados aos módulos
+        conteudos: [
+            { id: 1001, moduloId: 101, type: 'pagina', title: 'Bem-vindo à Disciplina!', content: 'Este é o espaço onde nossa jornada de aprendizado começará. Fique atento aos avisos e materiais.' },
+            { id: 1002, moduloId: 102, type: 'atividade', title: 'Exercício de Pseudocódigo', description: 'Resolver a lista de exercícios sobre estruturas de repetição.', dueDate: '2025-10-20' },
+            { id: 1003, moduloId: 102, type: 'link', title: 'Apostila de Algoritmos', url: '#' }
         ],
-        materiais: [
-            {
-                id: 1,
-                turmaId: 1,
-                title: 'Apostila Completa de Algoritmos',
-                description: 'Material em PDF com todo o conteúdo da disciplina.',
-                url: '#' // Link para o PDF
-            }
+        // NOVO: Sistema de notas e entregas
+        entregas: [
+            { id: 1, alunoEmail: 'aluno1@ifpr.edu.br', conteudoId: 1002, status: 'Entregue', grade: 9.5 }
         ]
     };
 }
