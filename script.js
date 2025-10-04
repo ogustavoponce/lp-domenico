@@ -96,7 +96,8 @@ class App {
 /**
  * Ponto de entrada para a aplicação principal (index.html).
  */
-initMainApp() {
+initMainApp() 
+{
     this.renderSidebar();
     this.renderWelcome();
     this.setupModalListeners(); // Será implementado depois
@@ -105,7 +106,8 @@ initMainApp() {
 /**
  * Constrói e renderiza a barra de navegação lateral com base no perfil do usuário.
  */
-renderSidebar() {
+renderSidebar() 
+{
     const sidebar = document.getElementById('sidebar');
     let navLinks = '';
     let turmasNav = '';
@@ -144,7 +146,8 @@ renderSidebar() {
  * @param {Event} event - O evento de clique.
  * @param {string} id - O ID do link clicado.
  */
-handleNavClick(event, id) {
+handleNavClick(event, id) 
+{
     event.preventDefault();
     // Atualiza o estado visual dos links (ativo/inativo)
     document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -162,7 +165,8 @@ handleNavClick(event, id) {
 /**
  * Renderiza a mensagem de boas-vindas inicial no painel principal.
  */
-renderWelcome() {
+renderWelcome()
+{
     const mainContent = document.getElementById('main-content');
     mainContent.innerHTML = `
         <div class="page-header"><h2>Bem-vindo(a), ${this.currentUser.name}!</h2></div>
@@ -177,7 +181,8 @@ renderWelcome() {
  * @param {string} iconName - O nome do ícone a ser usado.
  * @returns {string} O HTML do link.
  */
-createNavLink(id, text, iconName) {
+createNavLink(id, text, iconName) 
+{
     return `<a href="#" class="nav-link" id="${id}">${this.getIcon(iconName)}<span>${text}</span></a>`;
 }
 
@@ -186,7 +191,8 @@ createNavLink(id, text, iconName) {
  * @param {string} name - O nome do ícone.
  * @returns {string} A string SVG do ícone.
  */
-getIcon(name) {
+getIcon(name) 
+{
     const icons = {
         grid: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>',
         book: '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>',
@@ -206,7 +212,8 @@ getIcon(name) {
  * Renderiza a visualização completa de uma turma, incluindo seus módulos e conteúdos.
  * @param {number} turmaId - O ID da turma a ser renderizada.
  */
-renderTurma(turmaId) {
+renderTurma(turmaId) 
+{
     const turma = this.db.turmas.find(t => t.id === turmaId);
     const mainContent = document.getElementById('main-content');
 
@@ -232,7 +239,8 @@ renderTurma(turmaId) {
  * Renderiza a lista de módulos na barra lateral da página da turma.
  * @param {number} turmaId - O ID da turma.
  */
-renderModuloSidebar(turmaId) {
+renderModuloSidebar(turmaId) 
+{
     const sidebar = document.getElementById('modulo-sidebar');
     const modulos = this.db.modulos.filter(m => m.turmaId === turmaId).sort((a, b) => a.order - b.order);
 
@@ -265,7 +273,8 @@ renderModuloSidebar(turmaId) {
  * Renderiza o conteúdo (páginas, atividades, links) de um módulo específico.
  * @param {number} moduloId - O ID do módulo.
  */
-renderConteudoDoModulo(moduloId) {
+renderConteudoDoModulo(moduloId) 
+{
     const area = document.getElementById('conteudo-area');
     const modulo = this.db.modulos.find(m => m.id === moduloId);
     const conteudos = this.db.conteudos.filter(c => c.moduloId === moduloId);
@@ -316,7 +325,8 @@ renderConteudoDoModulo(moduloId) {
  * Lida com o clique em um link de módulo, atualizando a UI.
  * @param {number} moduloId 
  */
-handleModuloClick(moduloId) {
+handleModuloClick(moduloId) 
+{
     document.querySelectorAll('.modulo-link').forEach(l => l.classList.remove('active'));
     document.getElementById(`modulo-${moduloId}`).classList.add('active');
     this.renderConteudoDoModulo(moduloId);
@@ -329,7 +339,8 @@ handleModuloClick(moduloId) {
 /**
  * Renderiza o Painel de Administração principal com suas abas.
  */
-renderAdminPanel() {
+renderAdminPanel() 
+{
     const mainContent = document.getElementById('main-content');
     mainContent.innerHTML = `
         <div class="page-header">
@@ -360,7 +371,8 @@ renderAdminPanel() {
  * Define qual aba do painel de administração está ativa.
  * @param {string} tabName - O nome da aba ('turmas' or 'alunos').
  */
-setActiveAdminTab(tabName) {
+setActiveAdminTab(tabName) 
+{
     document.querySelectorAll('.tab-link').forEach(t => t.classList.remove('active'));
     document.getElementById(`tab-${tabName}`).classList.add('active');
 }
@@ -368,7 +380,8 @@ setActiveAdminTab(tabName) {
 /**
  * Renderiza a tabela de gerenciamento de turmas.
  */
-renderAdminTurmas() {
+renderAdminTurmas() 
+{
     const container = document.getElementById('admin-content');
     const turmas = this.db.turmas;
 
@@ -414,7 +427,8 @@ renderAdminTurmas() {
 /**
  * Renderiza a tabela de gerenciamento de alunos.
  */
-renderAdminAlunos() {
+renderAdminAlunos() 
+{
     const container = document.getElementById('admin-content');
     const alunos = this.db.users.filter(u => u.role === 'aluno');
 
@@ -459,7 +473,8 @@ renderAdminAlunos() {
 /**
  * Renderiza a página "Minhas Notas" para o aluno.
  */
-renderNotas() {
+renderNotas() 
+{
     const mainContent = document.getElementById('main-content');
     const entregas = this.db.entregas.filter(e => e.alunoEmail === this.currentUser.email);
 
@@ -498,7 +513,8 @@ renderNotas() {
 /**
  * Renderiza a página de Configurações.
  */
-renderSettings() {
+renderSettings() 
+{
     const mainContent = document.getElementById('main-content');
     const isChecked = this.currentTheme === 'dark-theme' ? 'checked' : '';
     
@@ -537,7 +553,8 @@ renderSettings() {
 /**
  * Alterna entre o tema claro e escuro e salva a preferência.
  */
-toggleTheme() {
+toggleTheme() 
+{
     this.currentTheme = this.currentTheme === 'dark-theme' ? 'light-theme' : 'dark-theme';
     document.body.className = this.currentTheme;
     localStorage.setItem('theme', this.currentTheme);
@@ -548,7 +565,8 @@ toggleTheme() {
 /**
  * Configura os listeners globais para fechar o modal.
  */
-setupModalListeners() {
+setupModalListeners() 
+{
     const modal = document.getElementById('modal');
     document.getElementById('modal-close').onclick = () => this.closeModal();
     modal.onclick = (e) => {
@@ -560,7 +578,8 @@ setupModalListeners() {
  * Abre e configura o modal com base na ação solicitada.
  * @param {object} config - Objeto de configuração para o modal.
  */
-openModal(config) {
+openModal(config) 
+{
     const modal = document.getElementById('modal');
     const title = document.getElementById('modal-title');
     const form = document.getElementById('modal-form');
@@ -645,7 +664,8 @@ openModal(config) {
  * Renderiza os campos específicos para cada tipo de conteúdo no modal.
  * @param {string} type - O tipo de conteúdo ('pagina', 'atividade', 'link').
  */
-renderConteudoFields(type) {
+renderConteudoFields(type) 
+{
     const container = document.getElementById('conteudo-fields');
     let fields = '';
     switch (type) {
@@ -670,7 +690,8 @@ renderConteudoFields(type) {
 /**
  * Fecha o modal.
  */
-closeModal() {
+closeModal() 
+{
     document.getElementById('modal').classList.remove('active');
 }
 
@@ -683,7 +704,8 @@ closeModal() {
  * @param {string} type - O tipo de item a ser adicionado.
  * @param {object} context - Dados de contexto, como IDs de turma ou módulo.
  */
-addItem(type, context = {}) {
+addItem(type, context = {}) 
+{
     const newId = Date.now(); // ID simples para novos itens
     switch (type) {
         case 'turma':
@@ -745,7 +767,8 @@ addItem(type, context = {}) {
  * @param {string} type - O tipo de item a ser deletado.
  * @param {number|string} id - O ID (ou email para aluno) do item.
  */
-deleteItem(type, id) {
+deleteItem(type, id) 
+{
     if (!confirm(`Tem certeza que deseja excluir este item? Esta ação não pode ser desfeita.`)) return;
 
     switch (type) {
@@ -783,7 +806,8 @@ deleteItem(type, id) {
  * @param {number} turmaId - O ID da turma.
  * @param {HTMLFormElement} form - O elemento do formulário com os checkboxes.
  */
-updateEnrollment(turmaId, form) {
+updateEnrollment(turmaId, form) 
+{
     const turma = this.db.turmas.find(t => t.id === turmaId);
     const selectedAlunos = Array.from(form.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.value);
     turma.alunos = selectedAlunos;
@@ -792,8 +816,6 @@ updateEnrollment(turmaId, form) {
     this.closeModal();
     this.renderAdminTurmas();
 }
-
-} // ESTE É O '}' QUE FECHA A CLASSE APP
 
 // --- INICIALIZAÇÃO DA APLICAÇÃO ---
 // Cria uma instância da classe App para iniciar tudo.
