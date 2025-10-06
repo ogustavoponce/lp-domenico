@@ -2,23 +2,73 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Login | Suprema</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | EduSuprema Platform</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css" rel="stylesheet">
 </head>
-<body>
-  <div class="login-main">
-    <div class="login-logo"><img src="logo.svg" alt="Logo Suprema" height="48"></div>
-    <h1 class="login-title">Plataforma Suprema</h1>
-    <form id="loginForm" autocomplete="off">
-      <input type="email" id="email" placeholder="E-mail" required>
-      <input type="password" id="password" placeholder="Senha" required>
-      <button type="submit" class="button-accent">Entrar</button>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-brand">
+      <div class="brand-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+          <path d="M8 12h16v2H8zm0 4h12v2H8zm0 4h8v2H8z" fill="white"/>
+          <defs>
+            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+              <stop offset="0%" stop-color="#667eea"/>
+              <stop offset="100%" stop-color="#764ba2"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h1>EduSuprema</h1>
+      <p>Plataforma educacional premium</p>
+    </div>
+
+    <form id="loginForm" class="login-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Digite seu email" required>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Senha</label>
+        <input type="password" id="password" placeholder="Digite sua senha" required>
+      </div>
+
+      <button type="submit" class="btn-primary">
+        <span>Entrar na plataforma</span>
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M4 10h12m-6-6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
     </form>
+
     <div id="loginError" class="error-message"></div>
-    <div class="login-footer">© 2025 Suprema Educação</div>
+
+    <div class="login-demo">
+      <h4>Contas demo:</h4>
+      <div class="demo-accounts">
+        <div class="demo-account" onclick="fillCredentials('prof@edusupreme.com', 'prof2025')">
+          <strong>Professor:</strong> prof@edusupreme.com / prof2025
+        </div>
+        <div class="demo-account" onclick="fillCredentials('aluno@edusupreme.com', 'aluno2025')">
+          <strong>Aluno:</strong> aluno@edusupreme.com / aluno2025
+        </div>
+      </div>
+    </div>
   </div>
+
+  <script>
+    function fillCredentials(email, password) {
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = password;
+    }
+  </script>
+  
   <script src="database.js"></script>
   <script src="script.js"></script>
 </body>
