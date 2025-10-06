@@ -6,13 +6,13 @@
   --card-shadow: 0 4px 18px #2563eb18;
   --border: #e0e7ef;
   --radius: 13px;
-  --font: 'Inter',sans-serif;
+  --font: 'Inter', sans-serif;
 }
 body {margin:0;font-family:var(--font);background:var(--bg);}
 .login-body{display:flex;justify-content:center;align-items:center;min-height:100vh;background:linear-gradient(120deg,#dbeafe 40%,#38bdf8 100%);}
 .login-container{background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--card-shadow);padding:32px 28px;width:320px;margin:24px 0;}
-.login-header{text-align:center}
 .logo-circle{font-size:2.1rem;display:inline-block;background:var(--primary);color:#fff;border-radius:50%;padding:13px;margin-bottom:12px;}
+h1{margin-bottom:4px;}
 .login-form input{width:100%;padding:13px 11px;border:1px solid var(--border);border-radius:8px;font-size:1rem;margin-bottom:13px;}
 .login-form input:focus{outline:none;border-color:var(--primary);}
 .btn-primary{padding:14px;width:100%;border:none;background:var(--primary);color:#fff;border-radius:8px;font-weight:700;cursor:pointer;font-size:1.07rem;box-shadow:0 2px 8px #2563eb44;display:flex;align-items:center;justify-content:center;gap:8px;}

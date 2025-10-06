@@ -6,15 +6,13 @@
   <title>Domenico Classroom+ | Login</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="login-body">
   <div class="login-container">
-    <div class="login-header">
-      <span class="logo-circle material-icons">school</span>
-      <h1>Domenico Classroom+</h1>
-      <p>Painel exclusivo de Língua Portuguesa I</p>
-    </div>
+    <span class="logo-circle material-icons">school</span>
+    <h1>Domenico Classroom+</h1>
+    <p>Painel exclusivo de Língua Portuguesa I</p>
     <form id="loginForm" class="login-form">
       <input type="email" id="email" placeholder="Email" autocomplete="username" required>
       <input type="password" id="password" placeholder="Senha" autocomplete="current-password" required>
@@ -28,8 +26,8 @@
   </div>
   <script>
     function fillLogin(email, pass){
-      document.getElementById('email').value=email;
-      document.getElementById('password').value=pass;
+      document.getElementById('email').value = email;
+      document.getElementById('password').value = pass;
     }
   </script>
   <script src="database.js"></script>

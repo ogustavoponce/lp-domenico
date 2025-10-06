@@ -51,7 +51,7 @@ class App {
         <button class="side-link${this.route==='dashboard'?' active':''}" onclick="app.setRoute('dashboard')"><span class="material-icons">home</span>Meus Painéis</button>
         <button class="side-link${this.route==='admin'?' active':''}" onclick="app.setRoute('admin')"><span class="material-icons">manage_accounts</span>Admin</button>
         ${this.data.turmas.map((t,i)=>`
-        <button class="side-link${this.route==='turma'+t.id?' active':''}" onclick="app.setRoute('turma${t.id}')"><span class="material-icons">class</span>${t.nome}</button>
+        <button class="side-link${this.route==='turma'+t.id?' active':''}" onclick="app.setRoute('turma'+t.id)"><span class="material-icons">class</span>${t.nome}</button>
         `).join('')}
         <button class="side-link" onclick="app.logout()"><span class="material-icons">logout</span>Sair</button>
       `;
