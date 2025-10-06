@@ -6,28 +6,27 @@
   <title>Domenico Classroom+ | Login</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
-<body class="login-body">
-  <div class="login-container">
-    <span class="logo-circle material-icons">school</span>
+<body class="login-bg">
+  <div class="login-card">
+    <div class="login-logo"><span class="material-icons" style="font-size:2.6rem;">school</span></div>
     <h1>Domenico Classroom+</h1>
-    <p>Painel exclusivo de Língua Portuguesa I</p>
     <form id="loginForm" class="login-form">
-      <input type="email" id="email" placeholder="Email" autocomplete="username" required>
-      <input type="password" id="password" placeholder="Senha" autocomplete="current-password" required>
-      <button type="submit" class="btn-primary"><span class="material-icons">login</span>Entrar</button>
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit" class="btn-main"><span class="material-icons">login</span>Entrar</button>
     </form>
-    <div id="loginError" class="error-message"></div>
-    <div class="demo-accounts">
-      <div class="demo-item" onclick="fillLogin('prof@domenico.com','12345')"><span class="material-icons">person</span>Professor<br><small>prof@domenico.com<br>12345</small></div>
-      <div class="demo-item" onclick="fillLogin('ana@ifpr.edu.br','12345')"><span class="material-icons">school</span>Aluno<br><small>ana@ifpr.edu.br<br>12345</small></div>
+    <div id="loginError" class="login-error"></div>
+    <div class="demo-hint">
+      Professor: prof@domenico.com / 12345<br>
+      Aluno: ana@ifpr.edu.br / 12345
     </div>
   </div>
   <script>
-    function fillLogin(email, pass){
-      document.getElementById('email').value = email;
-      document.getElementById('password').value = pass;
+    function fillLogin(e, p) {
+      document.getElementById('email').value = e;
+      document.getElementById('password').value = p;
     }
   </script>
   <script src="database.js"></script>
