@@ -2,73 +2,36 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
+  <title>Login | Domenico Classroom+</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | EduSuprema Platform</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.29.0/feather.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body class="login-page">
-  <div class="login-container">
-    <div class="login-brand">
-      <div class="brand-icon">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-          <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
-          <path d="M8 12h16v2H8zm0 4h12v2H8zm0 4h8v2H8z" fill="white"/>
-          <defs>
-            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-              <stop offset="0%" stop-color="#667eea"/>
-              <stop offset="100%" stop-color="#764ba2"/>
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-      <h1>EduSuprema</h1>
-      <p>Plataforma educacional premium</p>
+  <div class="login-container blur-bg">
+    <div class="login-header">
+      <svg height="48" viewBox="0 0 48 48">ircle cx="24" cy="24" r="22" fillll="url(#gradazul)" /><text x="24" y="32" text-anchor="middle" font-size="24" fill="#fff" font-family="Inter, sans-serif">D</text>
+      <defs>
+        <linearGradient id="gradazul" x1="0" y1="0" x2="48" y2="48">
+          <stop offset="0%" stop-color="#1e3a8a"/>
+          <stop offset="100%" stop-color="#38bdf8"/>
+        </linearGradient>
+      </defs>
+      </svg>
+      <h1>Domenico Classroom+</h1>
+      <p>Plataforma exclusiva para o ensino de Português moderna e fácil</p>
     </div>
-
-    <form id="loginForm" class="login-form">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Digite seu email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Senha</label>
-        <input type="password" id="password" placeholder="Digite sua senha" required>
-      </div>
-
-      <button type="submit" class="btn-primary">
-        <span>Entrar na plataforma</span>
-        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-          <path d="M4 10h12m-6-6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </button>
+    <form id="loginForm">
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit" class="btn-blue" style="margin-top:16px;">Entrar</button>
     </form>
-
     <div id="loginError" class="error-message"></div>
-
-    <div class="login-demo">
-      <h4>Contas demo:</h4>
-      <div class="demo-accounts">
-        <div class="demo-account" onclick="fillCredentials('prof@edusupreme.com', 'prof2025')">
-          <strong>Professor:</strong> prof@edusupreme.com / prof2025
-        </div>
-        <div class="demo-account" onclick="fillCredentials('aluno@edusupreme.com', 'aluno2025')">
-          <strong>Aluno:</strong> aluno@edusupreme.com / aluno2025
-        </div>
-      </div>
+    <div class="demo-box">
+      <b>Professor:</b> prof@domenico.com / 12345<br>
+      <b>Aluno:</b> aluno@domenico.com / 12345
     </div>
   </div>
-
-  <script>
-    function fillCredentials(email, password) {
-      document.getElementById('email').value = email;
-      document.getElementById('password').value = password;
-    }
-  </script>
-  
   <script src="database.js"></script>
   <script src="script.js"></script>
 </body>
