@@ -1,32 +1,31 @@
-// database.js
+const seedData = {
+  users: [
+    { id: 1, email: "prof@suprema.com", password: "prof2025", profile: "professor", name: "Prof. Suprema", avatar: "prof.png" },
+    { id: 2, email: "aluno@suprema.com", password: "aluno2025", profile: "aluno", name: "Ana Premium", avatar: "ana.png" }
+  ],
+  turmas: [
+    { id: 1, name: "Turma Expert", curso: "Algoritmos Avançados", professores: [1], alunos: [2], modulos: [1, 2], badge: "Crown", analytics: { entregas: 83, quarentena: 2 } }
+  ],
+  modulos: [
+    { id: 1, turmaId: 1, title: "Onboarding Premium", conteudos: [1, 2] },
+    { id: 2, turmaId: 1, title: "Gamificação Suprema", conteudos: [3] }
+  ],
+  conteudos: [
+    { id: 1, moduloId: 1, type: "texto", title: "Bem-vindo!", body: "Aqui começa sua jornada suprema no mundo dos algoritmos." },
+    { id: 2, moduloId: 1, type: "atividade", title: "Primeira Missão", description: "Resolva 5 problemas de lógica.", dataEntrega: "2025-10-21" },
+    { id: 3, moduloId: 2, type: "badge", title: "Desbloqueou a 'Crown': 50 pontos!", badge: "Crown", points: 50 }
+  ],
+  entregas: [
+    { conteudoId: 2, alunoId: 2, entregue: true, nota: 9.8, timestamp: "2025-10-01T14:23" }
+  ],
+  badges: [
+    { id: "Crown", label: "Suprema Crown", description: "Exclusivo para quem supera a elite!", color: "#d8b900" }
+  ],
+  analytics: {
+    global: { totalAlunos: 425, totalTurmas: 18, taxaConclusao: 87, taxaEngajamento: 91 }
+  }
+};
 
-function getInitialData() {
-    return {
-        // Usuários agora não precisam estar pré-associados a uma turma
-        users: [
-            { email: 'domenico@prof.com', password: '123', role: 'professor', name: 'Domenico' },
-            { email: 'aluno1@ifpr.edu.br', password: '123', role: 'aluno', name: 'Gustavo Oliveira' },
-            { email: 'aluno2@ifpr.edu.br', password: '123', role: 'aluno', name: 'Isadora Kamille' }
-        ],
-        turmas: [
-            { id: 1, name: 'Informática 1', curso: 'Desenvolvimento de Sistemas', alunos: ['aluno1@ifpr.edu.br'] },
-            { id: 2, name: 'Automação 1', curso: 'Automação Industrial', alunos: ['aluno2@ifpr.edu.br'] },
-            { id: 3, name: 'Mecânica 1', curso: 'Mecânica Industrial', alunos: [] }
-        ],
-        // NOVO: Módulos para organizar o conteúdo das turmas
-        modulos: [
-            { id: 101, turmaId: 1, name: 'Módulo 1: Boas-vindas', order: 1 },
-            { id: 102, turmaId: 1, name: 'Módulo 2: Lógica de Programação', order: 2 }
-        ],
-        // NOVO: Conteúdos unificados, ligados aos módulos
-        conteudos: [
-            { id: 1001, moduloId: 101, type: 'pagina', title: 'Bem-vindo à Disciplina!', content: 'Este é o espaço onde nossa jornada de aprendizado começará. Fique atento aos avisos e materiais.' },
-            { id: 1002, moduloId: 102, type: 'atividade', title: 'Exercício de Pseudocódigo', description: 'Resolver a lista de exercícios sobre estruturas de repetição.', dueDate: '2025-10-20' },
-            { id: 1003, moduloId: 102, type: 'link', title: 'Apostila de Algoritmos', url: '#' }
-        ],
-        // NOVO: Sistema de notas e entregas
-        entregas: [
-            { id: 1, alunoEmail: 'aluno1@ifpr.edu.br', conteudoId: 1002, status: 'Entregue', grade: 9.5 }
-        ]
-    };
+if (!localStorage.getItem('eduSupremeData')) {
+  localStorage.setItem('eduSupremeData', JSON.stringify(seedData));
 }

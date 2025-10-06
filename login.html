@@ -1,31 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Plataforma Educacional</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>Login | Suprema</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="login-wrapper">
-        <div class="login-container">
-            <h1>Plataforma Educacional</h1>
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" class="form-control" required placeholder="seu@email.com">
-                </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" class="form-control" required placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn btn-primary" style="width: 100%;">Entrar</button>
-                <p id="login-error">E-mail ou senha inválidos.</p>
-            </form>
-        </div>
-    </div>
-
-    <script src="database.js"></script>
-    <script src="script.js"></script>
+  <div class="login-main">
+    <div class="login-logo"><img src="logo.svg" alt="Logo Suprema" height="48"></div>
+    <h1 class="login-title">Plataforma Suprema</h1>
+    <form id="loginForm" autocomplete="off">
+      <input type="email" id="email" placeholder="E-mail" required>
+      <input type="password" id="password" placeholder="Senha" required>
+      <button type="submit" class="button-accent">Entrar</button>
+    </form>
+    <div id="loginError" class="error-message"></div>
+    <div class="login-footer">© 2025 Suprema Educação</div>
+  </div>
+  <script src="database.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
