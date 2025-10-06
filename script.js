@@ -1,180 +1,211 @@
 class DomenicoClassroomApp {
   constructor() {
+    this.state = {route:'dashboard'};
+    this.data = JSON.parse(localStorage.getItem('domenicoClassroom'));
     this.isLoginPage = !!document.getElementById('loginForm');
-    this.loadData();
-    if (this.isLoginPage) this.initLogin();
+    if(this.isLoginPage) this.initLogin();
     else this.initSPA();
   }
-  loadData() {
-    this.data = JSON.parse(localStorage.getItem('domenicoData'));
-  }
-  saveData() {
-    localStorage.setItem('domenicoData', JSON.stringify(this.data));
-  }
-  // Login simplificado
+  // Login robusto
   initLogin() {
     document.getElementById('loginForm').onsubmit = (e) => {
       e.preventDefault();
       const email = e.target.email.value.trim().toLowerCase();
-      const password = e.target.password.value.trim();
-      const user = this.data.users.find(u => u.email.toLowerCase() === email && u.password === password);
-      if (user) {
-        sessionStorage.setItem('loggedUser', JSON.stringify(user));
-        window.location = 'index.html';
-      } else {
+      const pass = e.target.password.value.trim();
+      const user = this.data.users.find(u=>u.email.toLowerCase()===email && u.password===pass);
+      if(user){
+        sessionStorage.setItem('loggedUser',JSON.stringify(user));
+        window.location="index.html";
+      }else{
         const err = document.getElementById('loginError');
         err.textContent = 'Email ou senha inválidos';
-        err.style.display = 'block';
-        setTimeout(() => err.style.display = 'none', 4000);
+        err.style.display='block';
+        setTimeout(()=>err.style.display='none',4000);
       }
     };
   }
-  // SPA principal
+  // App principal
   initSPA() {
-    const raw = sessionStorage.getItem('loggedUser');
-    if (!raw) { window.location = 'login.html'; return; }
+    let raw = sessionStorage.getItem('loggedUser');
+    if(!raw){window.location="login.html";return;}
     this.user = JSON.parse(raw);
-    this.renderApp();
+    this.render();
   }
-  renderApp() {
-    const app = document.getElementById('app');
-    app.innerHTML = '';
+  setRoute(route){
+    this.state.route=route;
+    this.render();
+  }
+  render() {
+    const app = document.getElementById('app'); app.innerHTML='';
     app.appendChild(this.renderSidebar());
     app.appendChild(this.renderMain());
   }
+  // Sidebar
   renderSidebar() {
-    const sidebar = document.createElement('div');
-    sidebar.className = 'sidebar';
-
-    if (this.user.profile === 'professor') {
-      const links = [
-        { text: 'Principal', route: 'dashboard' },
-        { text: 'Turma 1º Ano A', route: 'turma-1' },
-        { text: 'Sincronizar Notas SUAP', route: 'suap' },
-        { text: 'Sair', route: 'logout' }
-      ];
-      links.forEach(l => {
-        const btn = document.createElement('button');
-        btn.className = 'nav-link';
-        btn.textContent = l.text;
-        btn.onclick = () => this.handleRoute(l.route);
-        sidebar.appendChild(btn);
-      });
-    } else {
-      const links = [
-        { text: 'Principal', route: 'dashboard' },
-        { text: 'Minha Turma', route: 'turma-1' },
-        { text: 'Sair', route: 'logout' }
-      ];
-      links.forEach(l => {
-        const btn = document.createElement('button');
-        btn.className = 'nav-link';
-        btn.textContent = l.text;
-        btn.onclick = () => this.handleRoute(l.route);
-        sidebar.appendChild(btn);
-      });
-    }
+    let sidebar=document.createElement('div');
+    sidebar.className='sidebar';
+    let links = this.user.profile==='professor' ?
+      [{txt:'Painel',route:'dashboard'},
+       {txt:'Mural de Avisos',route:'avisos'},
+       {txt:'Atividades',route:'atividades'},
+       {txt:'Arquivos',route:'arquivos'},
+       {txt:'Notas e SUAP',route:'suap'},
+       {txt:'Sair',route:'logout'}]
+      : [{txt:'Painel',route:'dashboard'},
+         {txt:'Mural',route:'avisos'},
+         {txt:'Minhas Atividades',route:'atividades'},
+         {txt:'Arquivos',route:'arquivos'},
+         {txt:'Minhas Notas',route:'notas'},
+         {txt:'Sair',route:'logout'}];
+    links.forEach(l=>{
+      let btn=document.createElement('button');
+      btn.className='nav-item'+(this.state.route===l.route?' active':'');
+      btn.textContent=l.txt;
+      btn.onclick=()=>this.setRoute(l.route);
+      sidebar.appendChild(btn);
+    });
     return sidebar;
   }
+  // Topbar
+  renderTopbar() {
+    let bar=document.createElement('div');
+    bar.className='topbar';
+    bar.innerHTML = `<div class="userbox">
+      <div class="avatar">${this.user.avatar}</div>
+      <span class="user-name">${this.user.name}</span>
+      <span class="user-role">${this.user.profile==='professor'?'Professor':'Aluno'}</span>
+      <button class="logout-btn" onclick="app.setRoute('logout')">Sair</button>
+    </div>`;
+    return bar;
+  }
+  // Main content - separa por route
   renderMain() {
-    const main = document.createElement('div');
-    main.className = 'main-content';
-    const route = sessionStorage.getItem('route') || 'dashboard';
-
-    if (route === 'dashboard') {
-      main.innerHTML = this.user.profile === 'professor' ?
-        `<h1>Bem-vindo, Prof. Domenico!</h1>
-         <div class="card">Turma atual: 1º Ano A</div>
-         <div class="card">Últimos avisos:<br>${this.data.turmas[0].avisos.map(a => `<div>• ${a}</div>`).join('')}</div>
-         <button class="button" onclick="app.handleRoute('turma-1')">Ver atividades da turma</button>
-         <div class="avisos-box">
-          <b>Quadro de Avisos:</b>
-          <button class="button" style="margin-left:7px;" onclick="app.addAviso()">Adicionar aviso</button>
-          <ul id="avisos-ul">${this.data.turmas[0].avisos.map(av => `<li>${av}</li>`).join('')}</ul>
-         </div>`
-        :
-        `<h1>Bem-vindo, ${this.user.name}!</h1>
-         <div class="card">Turma: 1º Ano A</div>
-         <div class="card">Atividades e avisos:<br>${this.data.turmas[0].avisos.map(a => `<div>• ${a}</div>`).join('')}</div>
-         <button class="button" onclick="app.handleRoute('turma-1')">Ver minhas atividades</button>`;
-    } else if (route === 'turma-1') {
-      const turma = this.data.turmas[0];
-      main.innerHTML = `<h2>${turma.nome}</h2>
-      <div class="card"><b>Professor:</b> Domenico Sturiale</div>
-      <div class="card"><b>Atividades:</b><ul>
-      ${turma.atividades.map(aid => {
-        const ativ = this.data.atividades.find(at => at.id === aid);
-        return `<li>${ativ.titulo} - Entrega até ${ativ.entrega} <button class="button" style="padding:4px 12px;font-size:0.8rem;" onclick="app.verAtividade(${ativ.id})">Ver</button></li>`;
-      }).join('')}</ul></div>
-      ${this.user.profile === 'professor' ? `<button class="button" onclick="app.addAtividade()">Nova Atividade</button>`:''}
-      <button class="button" onclick="app.handleRoute('dashboard')">Voltar</button>`;
-    } else if (route === 'suap') {
-      main.innerHTML = `<h1>Sincronizar Notas com SUAP</h1>
-        <div class="card">Clique no botão para transferir todas as notas da atividade atual para o SUAP.<br>
-        <button class="button" onclick="app.sincronizarSuap()">Sincronizar</button>
-        </div>
-        <button class="button" onclick="app.handleRoute('dashboard')">Voltar</button>`;
-    } else if (route === 'logout') {
-      sessionStorage.removeItem('loggedUser');
-      sessionStorage.removeItem('route');
-      window.location = 'login.html';
+    let cont=document.createElement('div');
+    cont.className='main-content';
+    cont.appendChild(this.renderTopbar());
+    let turma = this.data.turmas[0], user=this.user;
+    if(this.state.route==='dashboard'){
+      cont.innerHTML+=user.profile==='professor'?
+        `<div class="card card-title">Bem-vindo, ${user.name}!</div>
+         <div class="card">Turma: ${turma.nome}</div>
+         <div class="card"><b>Mural:</b> ${turma.avisos[0].txt}</div>
+         <div class="card">Atividades Pendentes: ${turma.atividades.map(a=>a.titulo).join(", ")}</div>`
+       :`<div class="card card-title">Olá, ${user.name}!</div>
+         <div class="card">Turma: ${turma.nome}</div>
+         <div class="card"><b>Último Aviso:</b> ${turma.avisos[0].txt}</div>
+         <div class="card">Minhas Atividades Pendentes: ${turma.atividades.map(a=>a.titulo).join(", ")}</div>`;
     }
-    return main;
+    else if(this.state.route==='avisos'){
+      cont.innerHTML+=`<div class="avisos-wrap">
+       <h2>Mural de Avisos</h2>
+       <ul class="avisos-list">${turma.avisos.map(a=>`<li class="avisos-item"><b>${a.user}:</b> ${a.txt} <span style="float:right;color:#bae6fd;">${a.ts}</span></li>`).join('')}</ul>
+       ${user.profile==='professor'?`
+         <div class="avisos-add-box">
+           <input class="avisos-add-input" id="avisoTxt" placeholder="Novo aviso">
+           <button class="avisos-add-btn" onclick="app.addAviso()">Publicar</button>
+         </div>`:""}
+      </div>`;
+    }
+    else if(this.state.route==='atividades'){
+      cont.innerHTML+=`<h2>Atividades da Turma</h2>
+      <ul class="atividade-list">
+       ${turma.atividades.map(a=>`
+         <li class="atividade-item">
+          <div class="atividade-left">
+            <div class="atividade-title">${a.titulo}</div>
+            <div class="atividade-date">Entrega: ${a.entrega}</div>
+          </div>
+          <button class="atividade-btn" onclick="app.verAtividade(${a.id})">${user.profile==='professor'?'Ver':'Responder'}</button>
+         </li>`).join('')}
+      </ul>
+      ${user.profile==='professor'?`<button class="atividade-btn" style="margin-top:15px;" onclick="app.addAtividade()">Nova Atividade</button>`:""}`;
+    }
+    else if(this.state.route==='arquivos'){
+      cont.innerHTML+=`<div class="files-wrap">
+        <div class="files-title">Arquivos da Turma</div>
+        <ul>${turma.arquivos.map(f=>`<li>${f}</li>`).join('')}</ul>
+        ${user.profile==='professor'?`
+           <input type="text" placeholder="Novo arquivo" id="fileInput" style="margin-top:11px;">
+           <button class="atividade-btn" onclick="app.addArquivo()">Adicionar</button>
+         `:""}
+      </div>`;
+    }
+    else if(this.state.route==='suap'){
+      cont.innerHTML+=`<div class="suap-wrap">
+        <h2>Lançar notas no SUAP</h2>
+        <button class="suap-btn" onclick="app.suapNotas()">Sincronizar Notas</button>
+      </div>`;
+    }
+    else if(this.state.route==='notas'){
+      let notas = turma.notas.filter(n=>n.alunoId===user.id);
+      cont.innerHTML+=`<h2>Minhas Notas</h2>
+        <ul>${notas.map(n=>{
+          let atividade = turma.atividades.find(a=>a.id===n.atividadeId);
+          return `<li>${atividade.titulo}: <b>${n.nota}</b> (${n.feedback})</li>`;
+        }).join('')}</ul>`;
+    }
+    else if(this.state.route==='logout'){
+      sessionStorage.removeItem('loggedUser');window.location="login.html";
+    }
+    return cont;
   }
-  handleRoute(route) {
-    sessionStorage.setItem('route', route);
-    this.renderApp();
-  }
-  // Criação de Avisos (Professor)
+  // Aviso: professor
   addAviso() {
-    const aviso = prompt('Digite o aviso que deseja publicar:');
-    if (aviso && aviso.trim().length > 0) {
-      this.data.turmas[0].avisos.unshift(aviso.trim());
-      this.saveData();
-      this.renderApp();
+    let txt = document.getElementById("avisoTxt").value;
+    if(txt.trim()){
+      let turma = this.data.turmas[0];
+      turma.avisos.unshift({txt, user:this.user.name, ts:"Agora"});
+      localStorage.setItem('domenicoClassroom',JSON.stringify(this.data));
+      this.setRoute('avisos');
     }
   }
-  // Criação de Atividades (Professor)
+  // Atividade professor
   addAtividade() {
-    const titulo = prompt('Título da Atividade:');
-    const entrega = prompt('Data de entrega (aaaa-mm-dd):');
-    if (titulo && entrega) {
-      const id = Date.now();
-      this.data.atividades.push({ id, turmaId: 1, titulo, tipo: "texto", entrega, conteudo: "Nova atividade." });
-      this.data.turmas[0].atividades.push(id);
-      this.saveData();
-      this.renderApp();
+    let titulo=prompt('Título:');let entrega=prompt('Entrega (aaaa-mm-dd):');
+    if(titulo&&entrega){
+      let turma = this.data.turmas[0];
+      let id=Date.now();
+      turma.atividades.push({id,titulo,entrega,tipo:"texto",conteudo:"Nova atividade criada."});
+      localStorage.setItem('domenicoClassroom',JSON.stringify(this.data));
+      this.setRoute('atividades');
     }
   }
-  // Visualizar e lançamento de Nota (Professor/Aluno)
+  // Arquivo professor
+  addArquivo() {
+    let nome=document.getElementById('fileInput').value;
+    if(nome.trim()){
+      let turma = this.data.turmas[0];
+      turma.arquivos.unshift(nome.trim());
+      localStorage.setItem('domenicoClassroom',JSON.stringify(this.data));
+      this.setRoute('arquivos');
+    }
+  }
+  // Atividade ver
   verAtividade(id) {
-    const ativ = this.data.atividades.find(a => a.id === id);
-    let main = document.querySelector('.main-content');
-    main.innerHTML = `<h2>${ativ.titulo}</h2>
-     <div class="card">${ativ.conteudo}<br>Entrega até <b>${ativ.entrega}</b></div>
-     ${
-      this.user.profile === 'professor'
-      ? `<button class="button" onclick="app.lancarNota(${id})">Lançar Nota</button>`
-      : `<button class="button" onclick="alert('Atividade enviada para o professor!')">Enviar Atividade</button>`
-     }
-     <button class="button" onclick="app.handleRoute('turma-1')">Voltar</button>`;
+    let turma=this.data.turmas[0],a=turma.atividades.find(a=>a.id===id);
+    let cont=document.querySelector('.main-content');cont.innerHTML='';
+    cont.appendChild(this.renderTopbar());
+    cont.innerHTML+= `<div class="card card-title">${a.titulo}</div>
+      <div class="card">${a.conteudo}<br><b>Entrega até:</b> ${a.entrega}</div>
+      ${this.user.profile==='professor'?`
+        <button class="atividade-btn" onclick="app.lancarNota(${id})">Lançar Nota</button>
+      `:`<button class="atividade-btn" onclick="app.enviarResp(${id})">Enviar Resposta</button>`}
+      <button class="atividade-btn" onclick="app.setRoute('atividades')">Voltar</button>`;
   }
-  // Lançar Nota (professor)
-  lancarNota(atividadeId) {
-    const nota = prompt('Digite a nota do aluno (0-10):');
-    if(nota && !isNaN(nota)) {
-      const alunoId = this.data.users.find(u => u.profile === 'aluno').id;
-      let nObj = this.data.notas.find(n => n.atividadeId === atividadeId && n.alunoId === alunoId);
-      if (nObj) nObj.nota = Number(nota);
-      else this.data.notas.push({ atividadeId, alunoId, nota: Number(nota) });
-      this.saveData();
-      alert('Nota lançada com sucesso!');
-      this.renderApp();
-    }
+  // Lançar nota: professor
+  lancarNota(id){
+    let nota=prompt('Nota (0-10):');if(!nota||isNaN(nota))return;
+    let turma=this.data.turmas[0],aluno=turma.alunos[0];
+    let nObj = turma.notas.find(n=>n.atividadeId===id&&n.alunoId===aluno);
+    let feedback=prompt('Feedback para o aluno?');
+    if(nObj){nObj.nota=Number(nota);nObj.feedback=feedback||'';}
+    else turma.notas.push({atividadeId:id,alunoId:aluno,nota:Number(nota),feedback:feedback||''});
+    localStorage.setItem('domenicoClassroom',JSON.stringify(this.data));
+    alert('Nota lançada!');this.setRoute('atividades');
   }
-  // Sincronizar notas com SUAP
-  sincronizarSuap() {
-    alert('Notas enviadas para o SUAP (portal oficial do IFPR)');
-  }
+  // Sincronizar SUAP
+  suapNotas(){alert('Notas sincronizadas no SUAP (simulado)!');}
+  // Resposta aluno
+  enviarResp(id){alert('Resposta enviada ao professor!');}
 }
-window.app = new DomenicoClassroomApp();
+window.app=new DomenicoClassroomApp();

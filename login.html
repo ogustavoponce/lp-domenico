@@ -2,34 +2,24 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Login | Domenico Classroom+</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Domenico Classroom+ | Login</title>
   <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body class="login-page">
-  <div class="login-container blur-bg">
-    <div class="login-header">
-      <svg height="48" viewBox="0 0 48 48">ircle cx="24" cy="24" r="22" fillll="url(#gradazul)" /><text x="24" y="32" text-anchor="middle" font-size="24" fill="#fff" font-family="Inter, sans-serif">D</text>
-      <defs>
-        <linearGradient id="gradazul" x1="0" y1="0" x2="48" y2="48">
-          <stop offset="0%" stop-color="#1e3a8a"/>
-          <stop offset="100%" stop-color="#38bdf8"/>
-        </linearGradient>
-      </defs>
-      </svg>
-      <h1>Domenico Classroom+</h1>
-      <p>Plataforma exclusiva para o ensino de Português moderna e fácil</p>
-    </div>
+<body class="login-bg">
+  <div class="login-wrap blur-card">
+    <div class="logo-circle"><span>D+</span></div>
+    <h1>Domenico Classroom+</h1>
     <form id="loginForm">
       <input type="email" id="email" placeholder="E-mail" required>
       <input type="password" id="password" placeholder="Senha" required>
-      <button type="submit" class="btn-blue" style="margin-top:16px;">Entrar</button>
+      <button type="submit" class="btn-blue">Entrar</button>
     </form>
     <div id="loginError" class="error-message"></div>
-    <div class="demo-box">
-      <b>Professor:</b> prof@domenico.com / 12345<br>
-      <b>Aluno:</b> aluno@domenico.com / 12345
+    <div class="demo-info">
+      Professor: prof@domenico.com / 12345 <br>
+      Aluno: aluno@domenico.com / 12345
     </div>
   </div>
   <script src="database.js"></script>
