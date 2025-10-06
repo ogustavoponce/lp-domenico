@@ -2,60 +2,34 @@
 <html lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Domenico Classroom+ | Login</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body class="login-body">
   <div class="login-container">
     <div class="login-header">
-      <div class="logo-circle">
-        <span class="material-icons">school</span>
-      </div>
+      <span class="logo-circle material-icons">school</span>
       <h1>Domenico Classroom+</h1>
-      <p>Plataforma educacional exclusiva do Prof. Domenico Sturiale</p>
+      <p>Painel exclusivo de Língua Portuguesa I</p>
     </div>
-    
     <form id="loginForm" class="login-form">
-      <div class="input-group">
-        <input type="email" id="email" placeholder="Digite seu e-mail" required>
-      </div>
-      <div class="input-group">
-        <input type="password" id="password" placeholder="Digite sua senha" required>
-      </div>
-      <button type="submit" class="btn-primary">
-        <span class="material-icons">login</span>
-        Entrar
-      </button>
+      <input type="email" id="email" placeholder="Email" autocomplete="username" required>
+      <input type="password" id="password" placeholder="Senha" autocomplete="current-password" required>
+      <button type="submit" class="btn-primary"><span class="material-icons">login</span>Entrar</button>
     </form>
-    
     <div id="loginError" class="error-message"></div>
-    
     <div class="demo-accounts">
-      <h4>Contas de demonstração:</h4>
-      <div class="demo-item" onclick="fillLogin('prof@domenico.com', '12345')">
-        <span class="material-icons">person</span>
-        <div>
-          <strong>Professor</strong>
-          <small>prof@domenico.com / 12345</small>
-        </div>
-      </div>
-      <div class="demo-item" onclick="fillLogin('aluno@domenico.com', '12345')">
-        <span class="material-icons">school</span>
-        <div>
-          <strong>Aluno</strong>
-          <small>aluno@domenico.com / 12345</small>
-        </div>
-      </div>
+      <div class="demo-item" onclick="fillLogin('prof@domenico.com','12345')"><span class="material-icons">person</span>Professor<br><small>prof@domenico.com<br>12345</small></div>
+      <div class="demo-item" onclick="fillLogin('ana@ifpr.edu.br','12345')"><span class="material-icons">school</span>Aluno<br><small>ana@ifpr.edu.br<br>12345</small></div>
     </div>
   </div>
-
   <script>
-    function fillLogin(email, password) {
-      document.getElementById('email').value = email;
-      document.getElementById('password').value = password;
+    function fillLogin(email, pass){
+      document.getElementById('email').value=email;
+      document.getElementById('password').value=pass;
     }
   </script>
   <script src="database.js"></script>
