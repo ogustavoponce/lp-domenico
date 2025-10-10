@@ -1,25 +1,61 @@
-const profTurmas = [
-  { id: 1, nome: "Automação - Língua Portuguesa I", cor: "#2563eb" },
-  { id: 2, nome: "Mecânica - Língua Portuguesa I", cor: "#38bdf8" },
-  { id: 3, nome: "Jogos - Língua Portuguesa I", cor: "#06b6d4" },
-  { id: 4, nome: "Informática - Língua Portuguesa I", cor: "#3b82f6" }
-];
-const seedData = {
+// Estrutura inicial do banco de dados simulado
+
+window.NEXUS_DB_SEED = {
   users: [
-    { id: 1, email: "prof@domenico.com", password: "12345", profile: "professor", name: "Prof. Domenico", avatar: "D" },
-    { id: 2, email: "ana@ifpr.edu.br", password: "12345", profile: "aluno", name: "Ana Demo", avatar: "A", turmaId: 1 },
-    { id: 3, email: "fabio@ifpr.edu.br", password: "12345", profile: "aluno", name: "Fábio Lemos", avatar: "F", turmaId: 2 }
+    // Professores
+    {
+      id: 'u1', email: 'prof@nexus.com', password: 'profnexus', name: 'Prof. Ana Martins', role: 'professor'
+    },
+    // Alunos
+    {
+      id: 'u2', email: 'aluno@nexus.com', password: 'alunonexus', name: 'Lucas Soares', role: 'aluno'
+    }
   ],
-  turmas: profTurmas,
-  mural: [
-    { turmaId: 1, autor: "Prof. Domenico", msg: "Bem-vindos à Automação!", ts: "Hoje" },
-    { turmaId: 2, autor: "Prof. Domenico", msg: "Bem-vindos à Mecânica!", ts: "Hoje" }
+  turmas: [
+    {
+      id: 't1',
+      name: 'Matemática 1',
+      curso: 'Matemática',
+      professorId: 'u1',
+      alunos: ['u2'],
+      modulos: [
+        {
+          id: 'm1', name: 'Módulo 1: Introdução',
+          conteudos: [
+            {
+              id: 'c1',
+              type: 'texto',
+              titulo: 'Bem-vindo!',
+              texto: 'Este é o primeiro módulo de introdução à Matemática.'
+            },
+            {
+              id: 'c2',
+              type: 'atividade',
+              titulo: 'Exercícios de Introdução',
+              descricao: 'Responder as questões da apostila.',
+              dataEntrega: '2025-10-20'
+            },
+            {
+              id: 'c3',
+              type: 'link',
+              titulo: 'Vídeo Aula',
+              url: 'https://www.youtube.com/watch?v=nexus-math'
+            }
+          ]
+        },
+        {
+          id: 'm2', name: 'Projeto Final',
+          conteudos: []
+        }
+      ]
+    }
   ],
-  atividades: [
-    { id: 1, turmaId: 1, titulo: "Resenha", entrega: "2025-10-15", descricao: "Faça uma resenha crítica.", tipo: "texto" }
+  alunos: [
+    { id: 'u2', name: 'Lucas Soares', email: 'aluno@nexus.com' }
   ],
-  arquivos: [
-    { turmaId: 1, nome: "Material Inicial.pdf" }
+  entregas: [
+    {
+      id: 'e1', turmaId: 't1', alunoId: 'u2', conteudoId: 'c2', status: 'Entregue', nota: 9.5
+    }
   ]
 };
-localStorage.setItem('domenicoClassroom', JSON.stringify(seedData));
