@@ -3,18 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nexus - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <title>Domine Português - Login</title>
   <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 </head>
 <body class="theme-light">
+  <header class="dp-header">
+    <img src="logo.jpg" alt="Domine Português" class="dp-logo">
+  </header>
   <main class="login-page">
     <form id="loginForm" class="login-form" novalidate>
-      <h1>NEXUS</h1>
+      <h2 class="login-title">Acesse a plataforma</h2>
       <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" placeholder="professor@dominio.com" required autofocus />
+      <input type="email" id="email" name="email" autocomplete="username" placeholder="professor@domenico.com" required autofocus />
       <label for="password">Senha</label>
-      <input type="password" id="password" name="password" placeholder="Senha" required />
+      <input type="password" id="password" name="password" autocomplete="current-password" placeholder="Senha" required />
       <button type="submit" class="btn-primary">Entrar</button>
       <p class="error-msg" id="loginError"></p>
     </form>
