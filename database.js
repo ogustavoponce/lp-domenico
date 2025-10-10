@@ -1,6 +1,8 @@
 window.NEXUS_DB_SEED = {
   users: [
-    { id: 'u1', email: 'professor@domenico.com', password: 'senha123', name: 'Prof. Domenico', role: 'professor' }
+    { id: 'u1', email: 'professor@domenico.com', password: 'senha123', name: 'Prof. Domenico', role: 'professor' },
+    { id: 'u2', email: 'aluno1@dominio.com', password: 'aluno123', name: 'Maria Silva', role: 'aluno' },
+    { id: 'u3', email: 'aluno2@dominio.com', password: 'aluno123', name: 'João Souza', role: 'aluno' }
   ],
   turmas: [
     {
@@ -9,17 +11,24 @@ window.NEXUS_DB_SEED = {
       name: 'Informática',
       curso: 'Língua Portuguesa',
       professorId: 'u1',
-      alunos: [],
+      alunos: ['u2', 'u3'],
       modulos: [
         {
           id: 'm1',
-          name: 'Gramática Básica',
+          name: 'Gramática Avançada',
           conteudos: [
             {
               id: 'c1',
               type: 'texto',
               titulo: 'Artigo definido e indefinido',
-              texto: 'O artigo definido ora, ora é usado para...'
+              texto: 'O artigo definido é usado para...'
+            },
+            {
+              id: 'c2',
+              type: 'atividade',
+              titulo: 'Exercício sobre artigos',
+              descricao: 'Complete as frases',
+              dataEntrega: '2025-11-01'
             }
           ]
         }
@@ -28,7 +37,7 @@ window.NEXUS_DB_SEED = {
         {
           id: 'a1',
           titulo: 'Introdução à Informática',
-          descricao: 'Material básico dos primeiros conceitos.',
+          descricao: 'Material básico - capítulos 1 a 3',
           url: 'https://exemplo.com/apostila-informatica.pdf'
         }
       ]
@@ -39,7 +48,7 @@ window.NEXUS_DB_SEED = {
       name: 'Jogos',
       curso: 'Língua Portuguesa',
       professorId: 'u1',
-      alunos: [],
+      alunos: ['u2'],
       modulos: [],
       apostilas: []
     },
@@ -49,7 +58,7 @@ window.NEXUS_DB_SEED = {
       name: 'Mecânica',
       curso: 'Língua Portuguesa',
       professorId: 'u1',
-      alunos: [],
+      alunos: ['u3'],
       modulos: [],
       apostilas: []
     },
@@ -65,22 +74,29 @@ window.NEXUS_DB_SEED = {
     }
   ],
   alunos: [
-    // serão adicionados na inscrição
+    { id: 'u2', name: 'Maria Silva', email: 'aluno1@dominio.com' },
+    { id: 'u3', name: 'João Souza', email: 'aluno2@dominio.com' }
   ],
   entregas: [
-    // Cada entrega: id, turmaId, alunoId, avaliação por conceitos e feedbacks
-    // exemplo:
-    /*
     {
       id: 'e1',
       turmaId: 't1',
       alunoId: 'u2',
       avaliacao: {
-        redacao: { conceito: 'A', feedback: 'Ótima argumentação.' },
-        lingua: { conceito: 'B', feedback: 'Atente-se às concordâncias.' },
-        interpretacao: { conceito: 'A', feedback: 'Interpretação exemplar.' }
+        redacao: { conceito: 'A', feedback: 'Excelente coerência e argumentação.' },
+        lingua: { conceito: 'B', feedback: 'Uso correto em grande parte. Atenção à concordância verbal.' },
+        interpretacao: { conceito: 'A', feedback: 'Ótima interpretação do texto.' }
+      }
+    },
+    {
+      id: 'e2',
+      turmaId: 't1',
+      alunoId: 'u3',
+      avaliacao: {
+        redacao: { conceito: 'B', feedback: 'Bom, mas precisa trabalhar mais a conclusão.' },
+        lingua: { conceito: 'C', feedback: 'Evitar erros de ortografia.' },
+        interpretacao: { conceito: 'B', feedback: 'Boa compreensão geral.' }
       }
     }
-    */
   ]
 };
