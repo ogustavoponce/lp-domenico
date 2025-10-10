@@ -1,44 +1,46 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Domine Português - Login</title>
-  <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Domine Português - Login/Cadastro</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-  <header class="dp-header"><img src="logo.jpg" class="dp-logo" alt="Domine Português"></header>
-  <main class="login-page">
-    <form id="loginForm" class="login-form" autocomplete="off">
-      <h2 class="login-title">Acesse a plataforma</h2>
-      <label for="email">E-mail</label>
-      <input type="email" id="email" name="email" required autocomplete="username">
-      <label for="password">Senha</label>
-      <input type="password" id="password" name="password" required autocomplete="current-password">
-      <button type="submit" class="btn-primary">Entrar</button>
-      <p class="error-msg" id="loginError"></p>
-    </form>
-  </main>
-  <script src="database.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const db = window.NEXUS_DB_SEED;
-      const form = document.getElementById('loginForm');
-      const errorMsg = document.getElementById('loginError');
-      form.onsubmit = function(e) {
-        e.preventDefault();
-        const email = form.email.value.trim();
-        const pwd = form.password.value.trim();
-        const user = db.users.find(u => u.email === email && u.password === pwd);
-        if (user) {
-          sessionStorage.setItem('NEXUS_SESSION', JSON.stringify(user));
-          window.location.replace('index.html');
-        } else {
-          errorMsg.textContent = 'Usuário ou senha incorretos.';
-        }
-      }
-    });
-  </script>
+<header class="dp-header">
+  <img src="logo.jpg" alt="Domine Português" class="dp-logo"/>
+</header>
+<main class="login-page">
+  <div class="tab-buttons">
+    <button id="tab-login" class="tab-active">Login</button>
+    <button id="tab-register">Cadastrar</button>
+  </div>
+  <form id="loginForm" class="login-form" autocomplete="off">
+    <h2 class="login-title">Acesse a plataforma</h2>
+    <label for="emailLogin">E-mail</label>
+    <input type="email" id="emailLogin" name="emailLogin" required autocomplete="username"/>
+    <label for="passwordLogin">Senha</label>
+    <input type="password" id="passwordLogin" name="passwordLogin" required autocomplete="current-password"/>
+    <button type="submit" class="btn-primary">Entrar</button>
+    <p class="error-msg" id="loginError"></p>
+  </form>
+  <form id="registerForm" class="login-form hidden" autocomplete="off">
+    <h2 class="login-title">Cadastre-se</h2>
+    <label for="nameRegister">Nome completo</label>
+    <input type="text" id="nameRegister" name="nameRegister" required autocomplete="name"/>
+    <label for="emailRegister">E-mail</label>
+    <input type="email" id="emailRegister" name="emailRegister" required autocomplete="email"/>
+    <label for="passwordRegister">Senha</label>
+    <input type="password" id="passwordRegister" name="passwordRegister" required/>
+    <label for="codeTurma">Código da Turma</label>
+    <input type="text" id="codeTurma" name="codeTurma" required/>
+    <button type="submit" class="btn-primary">Cadastrar</button>
+    <p class="error-msg" id="registerError"></p>
+    <p class="success-msg" id="registerSuccess"></p>
+  </form>
+</main>
+<script src="database.js"></script>
+<script src="script.js"></script>
 </body>
 </html>
