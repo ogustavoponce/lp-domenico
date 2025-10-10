@@ -1,61 +1,63 @@
-// Estrutura inicial do banco de dados simulado
+// Estrutura inicial do banco de dados simulado focado em Língua Portuguesa Prof. Domenico
 
 window.NEXUS_DB_SEED = {
   users: [
-    // Professores
     {
-      id: 'u1', email: 'prof@nexus.com', password: 'profnexus', name: 'Prof. Ana Martins', role: 'professor'
+      id: 'u1', email: 'professor@domenico.com', password: 'senha123', name: 'Prof. Domenico', role: 'professor'
     },
-    // Alunos
     {
-      id: 'u2', email: 'aluno@nexus.com', password: 'alunonexus', name: 'Lucas Soares', role: 'aluno'
+      id: 'u2', email: 'aluno1@exemplo.com', password: 'aluno123', name: 'Maria Silva', role: 'aluno'
+    },
+    {
+      id: 'u3', email: 'aluno2@exemplo.com', password: 'aluno123', name: 'João Souza', role: 'aluno'
     }
   ],
   turmas: [
     {
       id: 't1',
-      name: 'Matemática 1',
-      curso: 'Matemática',
+      name: 'Português Avançado',
+      curso: 'Língua Portuguesa',
       professorId: 'u1',
-      alunos: ['u2'],
+      alunos: ['u2', 'u3'],
       modulos: [
         {
-          id: 'm1', name: 'Módulo 1: Introdução',
+          id: 'm1', name: 'Módulo 1: Gramática Avançada',
           conteudos: [
             {
               id: 'c1',
               type: 'texto',
-              titulo: 'Bem-vindo!',
-              texto: 'Este é o primeiro módulo de introdução à Matemática.'
+              titulo: 'Concordância Verbal',
+              texto: 'A concordância verbal é o acordo do verbo com o sujeito da oração...'
             },
             {
               id: 'c2',
               type: 'atividade',
-              titulo: 'Exercícios de Introdução',
-              descricao: 'Responder as questões da apostila.',
-              dataEntrega: '2025-10-20'
+              titulo: 'Exercício de Concordância',
+              descricao: 'Realize os exercícios 1 a 10 do caderno de atividades.',
+              dataEntrega: '2025-11-15'
             },
             {
               id: 'c3',
               type: 'link',
-              titulo: 'Vídeo Aula',
-              url: 'https://www.youtube.com/watch?v=nexus-math'
+              titulo: 'Vídeo: Concordância Verbal',
+              url: 'https://www.youtube.com/watch?v=video-exemplo'
             }
           ]
         },
         {
-          id: 'm2', name: 'Projeto Final',
+          id: 'm2', name: 'Módulo 2: Redação e Produção Textual',
           conteudos: []
         }
       ]
     }
   ],
   alunos: [
-    { id: 'u2', name: 'Lucas Soares', email: 'aluno@nexus.com' }
+    { id: 'u2', name: 'Maria Silva', email: 'aluno1@exemplo.com' },
+    { id: 'u3', name: 'João Souza', email: 'aluno2@exemplo.com' }
   ],
   entregas: [
     {
-      id: 'e1', turmaId: 't1', alunoId: 'u2', conteudoId: 'c2', status: 'Entregue', nota: 9.5
+      id: 'e1', turmaId: 't1', alunoId: 'u2', conteudoId: 'c2', status: 'Entregue', nota: 9.8
     }
   ]
 };
