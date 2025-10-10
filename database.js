@@ -1,16 +1,8 @@
-// Estrutura inicial do banco de dados simulado focado em Língua Portuguesa Prof. Domenico
-
 window.NEXUS_DB_SEED = {
   users: [
-    {
-      id: 'u1', email: 'professor@domenico.com', password: 'senha123', name: 'Prof. Domenico', role: 'professor'
-    },
-    {
-      id: 'u2', email: 'aluno1@exemplo.com', password: 'aluno123', name: 'Maria Silva', role: 'aluno'
-    },
-    {
-      id: 'u3', email: 'aluno2@exemplo.com', password: 'aluno123', name: 'João Souza', role: 'aluno'
-    }
+    { id: 'u1', email: 'professor@domenico.com', password: 'senha123', name: 'Prof. Domenico', role: 'professor' },
+    { id: 'u2', email: 'aluno1@dominio.com', password: 'aluno123', name: 'Maria Silva', role: 'aluno' },
+    { id: 'u3', email: 'aluno2@dominio.com', password: 'aluno123', name: 'João Souza', role: 'aluno' }
   ],
   turmas: [
     {
@@ -21,7 +13,8 @@ window.NEXUS_DB_SEED = {
       alunos: ['u2', 'u3'],
       modulos: [
         {
-          id: 'm1', name: 'Módulo 1: Gramática Avançada',
+          id: 'm1',
+          name: 'Gramática Avançada',
           conteudos: [
             {
               id: 'c1',
@@ -33,31 +26,30 @@ window.NEXUS_DB_SEED = {
               id: 'c2',
               type: 'atividade',
               titulo: 'Exercício de Concordância',
-              descricao: 'Realize os exercícios 1 a 10 do caderno de atividades.',
+              descricao: 'Realizar os exercícios 1 a 10 do material.',
               dataEntrega: '2025-11-15'
             },
             {
               id: 'c3',
               type: 'link',
               titulo: 'Vídeo: Concordância Verbal',
-              url: 'https://www.youtube.com/watch?v=video-exemplo'
+              url: 'https://www.youtube.com/watch?v=exemplo'
             }
           ]
         },
         {
-          id: 'm2', name: 'Módulo 2: Redação e Produção Textual',
+          id: 'm2',
+          name: 'Redação e Produção Textual',
           conteudos: []
         }
       ]
     }
   ],
   alunos: [
-    { id: 'u2', name: 'Maria Silva', email: 'aluno1@exemplo.com' },
-    { id: 'u3', name: 'João Souza', email: 'aluno2@exemplo.com' }
+    { id: 'u2', name: 'Maria Silva', email: 'aluno1@dominio.com' },
+    { id: 'u3', name: 'João Souza', email: 'aluno2@dominio.com' }
   ],
   entregas: [
-    {
-      id: 'e1', turmaId: 't1', alunoId: 'u2', conteudoId: 'c2', status: 'Entregue', nota: 9.8
-    }
+    { id: 'e1', turmaId: 't1', alunoId: 'u2', conteudoId: 'c2', status: 'Entregue', nota: 9.8 }
   ]
 };
