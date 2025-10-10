@@ -9,14 +9,12 @@
 </head>
 <body class="theme-light">
   <main class="login-page">
-    <form id="loginForm" class="login-form">
+    <form id="loginForm" class="login-form" novalidate>
       <h1>NEXUS</h1>
       <label for="email">E-mail</label>
       <input type="email" id="email" name="email" placeholder="professor@dominio.com" required autofocus />
-
       <label for="password">Senha</label>
       <input type="password" id="password" name="password" placeholder="Senha" required />
-
       <button type="submit" class="btn-primary">Entrar</button>
       <p class="error-msg" id="loginError"></p>
     </form>
