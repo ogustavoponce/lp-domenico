@@ -1,108 +1,168 @@
 class App {
   constructor() { this.init(); }
+
   init() {
     this.loadData();
+    this.user = this.getSession();
+    if (!this.user && !location.pathname.endsWith('login.html')) {
+      location.replace('login.html');
+      return;
+    }
     document.body.classList.add('theme-light');
-    this.route();
+    if(this.user) this.renderApp();
+    else if(location.pathname.endsWith('login.html')) this.renderLoginCadastro();
   }
+
   loadData() {
     if (!localStorage.NEXUS_DATA) localStorage.NEXUS_DATA = JSON.stringify(window.NEXUS_DB_SEED);
     this.data = JSON.parse(localStorage.NEXUS_DATA);
   }
   saveData() { localStorage.NEXUS_DATA = JSON.stringify(this.data); }
-  login(email, password) { return this.data.users.find(u => u.email === email && u.password === password) || null; }
-  setSession(user) { sessionStorage.setItem('NEXUS_SESSION', JSON.stringify(user)); }
-  getSession() { const s = sessionStorage.getItem('NEXUS_SESSION'); return s ? JSON.parse(s) : null; }
+  login(email, password) {
+    return this.data.users.find(u => u.email === email && u.password === password) || null;
+  }
+  setSession(user) { sessionStorage.setItem('NEXUS_SESSION', JSON.stringify(user)); this.user = user; }
+  getSession() {
+    const s = sessionStorage.getItem('NEXUS_SESSION');
+    return s ? JSON.parse(s) : null;
+  }
+
   route() {
-    if (location.pathname.endsWith('login.html')) this.renderLoginCadastro();
-    else { const user = this.getSession(); if (!user) location.replace('login.html'); else this.renderApp(); }
+    const hash = location.hash || '#turmas';
+    const navLinks = document.querySelectorAll('.sidebar-nav a');
+    navLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === hash));
+    const main = document.querySelector('.main-content');
+    main.innerHTML = '';
+    switch(hash) {
+      case '#turmas': this.renderTurmas(main); break;
+      case '#apostilas': this.renderApostilas(main); break;
+      case '#avaliacoes': this.renderAvaliacoes(main); break;
+      case '#admin': this.user.role==='professor' ? this.renderAdmin(main) : main.textContent='Acesso negado!'; break;
+      case '#config': this.renderConfig(main); break;
+      default: main.textContent = 'Página não encontrada.';
+    }
   }
+
   renderLoginCadastro() {
-    const tabLogin = document.getElementById('tab-login');
-    const tabRegister = document.getElementById('tab-register');
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    const errLogin = document.getElementById('loginError');
-    const errRegister = document.getElementById('registerError');
-    const succRegister = document.getElementById('registerSuccess');
-    tabLogin.onclick = () => { tabLogin.classList.add('tab-active'); tabRegister.classList.remove('tab-active'); loginForm.classList.remove('hidden'); registerForm.classList.add('hidden'); errLogin.textContent = ''; errRegister.textContent = ''; succRegister.textContent = ''; };
-    tabRegister.onclick = () => { tabRegister.classList.add('tab-active'); tabLogin.classList.remove('tab-active'); registerForm.classList.remove('hidden'); loginForm.classList.add('hidden'); errLogin.textContent = ''; errRegister.textContent = ''; succRegister.textContent = '';};
-    loginForm.onsubmit = e => { e.preventDefault(); const email = loginForm.emailLogin.value.trim(); const pwd = loginForm.passwordLogin.value.trim(); const user = this.login(email, pwd); if (user) { this.setSession(user); location.replace('index.html'); } else { errLogin.textContent = 'Usuário ou senha incorretos.'; } };
-    registerForm.onsubmit = e => { e.preventDefault();
-      errRegister.textContent = ''; succRegister.textContent = '';
-      const name = registerForm.nameRegister.value.trim(), email = registerForm.emailRegister.value.trim(), pwd = registerForm.passwordRegister.value.trim(), code = registerForm.codeTurma.value.trim();
-      if (!name || !email || !pwd || !code) { errRegister.textContent = 'Preencha todos os campos.'; return; }
-      if (this.data.users.some(u => u.email === email)) { errRegister.textContent = 'Email já cadastrado.'; return; }
-      const turma = this.data.turmas.find(t => t.code === code); if (!turma) { errRegister.textContent = 'Código da turma inválido.'; return; }
-      const id = 'u' + Date.now(); const aluno = { id, email, password: pwd, name, role: 'aluno' };
-      this.data.users.push(aluno); this.data.alunos.push({ id, name, email }); turma.alunos.push(id); this.saveData(); succRegister.textContent = 'Cadastro realizado! Faça login.'; registerForm.reset();
-    };
-    tabLogin.click();
+    // Script de login fornecido no login.html
   }
+
   renderApp() {
-    this.loadData(); const user = this.getSession(); const app = document.getElementById('app'); app.innerHTML = '';
+    const app = document.getElementById('app');
+    app.innerHTML = '';
+
+    // Sidebar
     const sidebar = document.createElement('aside');
-    sidebar.className = 'sidebar'; sidebar.innerHTML = `
+    sidebar.className = 'sidebar';
+    sidebar.innerHTML = `
       <div class="sidebar-header">Domine Português</div>
       <div class="sidebar-profile">
-        <div class="sidebar-avatar">${user.name.charAt(0)}</div>
-        <div><div class="sidebar-info">${user.name}</div>
-        <div class="sidebar-info-small">${user.role === 'professor' ? 'Professor' : 'Aluno'}</div></div></div>
+        <div class="sidebar-avatar">${this.user.name.charAt(0)}</div>
+        <div>
+          <div class="sidebar-info">${this.user.name}</div>
+          <div class="sidebar-info-small">${this.user.role==='professor'?'Professor':'Aluno'}</div>
+        </div>
+      </div>
       <nav class="sidebar-nav"></nav>
-    `; app.appendChild(sidebar);
-    const main = document.createElement('main'); main.className = 'main-content'; app.appendChild(main);
+    `;
+    app.appendChild(sidebar);
+
     const nav = sidebar.querySelector('.sidebar-nav');
-    const links = user.role === 'professor'
-      ?[{label:'Turmas',anchor:'turmas',icon:this.iconClass()},{label:'Apostilas',anchor:'apostilas',icon:this.iconBook()},{label:'Avaliações',anchor:'avaliacoes',icon:this.iconCheck()},{label:'Administração',anchor:'admin',icon:this.iconSettings()},{label:'Configurações',anchor:'config',icon:this.iconUser()}]
-      :[{label:'Minhas Turmas',anchor:'turmas',icon:this.iconClass()},{label:'Apostilas',anchor:'apostilas',icon:this.iconBook()},{label:'Avaliações',anchor:'avaliacoes',icon:this.iconCheck()},{label:'Configurações',anchor:'config',icon:this.iconUser()}];
-    nav.innerHTML=''; links.forEach(lk=>{const a=document.createElement('a');a.href=`#${lk.anchor}`;a.dataset.anchor=lk.anchor;a.innerHTML=`${lk.icon} ${lk.label}`;nav.appendChild(a);});
-    const navigate=()=>{const hash=location.hash||'#turmas';[...nav.children].forEach(link=>link.classList.toggle('active',link.dataset.anchor===hash.slice(1)));main.innerHTML='';switch(hash){
-      case '#turmas': this.renderTurmas(main,user); break;
-      case '#apostilas': this.renderApostilas(main,user); break;
-      case '#avaliacoes': this.renderAvaliacoes(main,user); break;
-      case '#admin': if(user.role==='professor') this.renderAdmin(main,user); else main.innerHTML='<p>Acesso negado</p>'; break;
-      case '#config': this.renderConfig(main,user); break;default:main.innerHTML='<p>Página não encontrada</p>';}};
-    window.onhashchange=navigate;navigate();
+    let links = [];
+    if(this.user.role==='professor') {
+      links = [
+        { label: 'Turmas', href: '#turmas' },
+        { label: 'Apostilas', href: '#apostilas' },
+        { label: 'Avaliações', href: '#avaliacoes' },
+        { label: 'Administração', href: '#admin' },
+        { label: 'Configurações', href: '#config' }
+      ];
+    } else {
+      links = [
+        { label: 'Minhas Turmas', href: '#turmas' },
+        { label: 'Apostilas', href: '#apostilas' },
+        { label: 'Minhas Avaliações', href: '#avaliacoes' },
+        { label: 'Configurações', href: '#config' }
+      ];
+    }
+    links.forEach(l=>{
+      const a = document.createElement('a');
+      a.href = l.href;
+      a.textContent = l.label;
+      nav.appendChild(a);
+    });
+    nav.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', e => {
+        e.preventDefault();
+        location.hash = a.getAttribute('href');
+        this.route();
+      });
+    });
+
+    // Main content
+    const main = document.createElement('main');
+    main.className = 'main-content';
+    app.appendChild(main);
+
+    window.onhashchange = () => this.route();
+    this.route();
   }
-  renderTurmas(main, user) {
-    main.innerHTML = `<h2 class="main-header">Turmas</h2>`;
-    const turmas = user.role === 'professor'
-      ? this.data.turmas.filter(t => t.professorId === user.id)
-      : this.data.turmas.filter(t => t.alunos.includes(user.id));
-    if (!turmas.length) { main.innerHTML += '<div class="dp-card">Nenhuma turma encontrada.</div>'; return; }
-    turmas.forEach(turma=>{
-      const card = document.createElement('div');
-      card.className = 'dp-card';
-      card.innerHTML = `<div class="dp-card-title">${turma.name}</div>
-        <div><span class="dp-code-badge">${turma.code}</span> — ${turma.curso}</div>
-        <div style="margin-top:10px;"><span class="dp-badge turma">Alunos: ${turma.alunos.length}</span></div>`;
-      main.appendChild(card);
+
+  //---- TURMAS ----
+  renderTurmas(main) {
+    main.innerHTML = '<h2 class="main-header">Turmas</h2>';
+    let turmas = [];
+    if(this.user.role==='professor'){
+      turmas = this.data.turmas.filter(t=>t.professorId===this.user.id);
+    } else {
+      turmas = this.data.turmas.filter(t => t.alunos.includes(this.user.id));
+    }
+    if(turmas.length===0){
+      main.innerHTML += '<p>Nenhuma turma disponível.</p>';
+      return;
+    }
+    turmas.forEach(t => {
+      const div = document.createElement('div');
+      div.className = 'dp-card';
+      div.innerHTML = `<div class="dp-card-title">${t.name}</div>
+        <div>Código: <span class="dp-code-badge">${t.code}</span></div>
+        <div>Curso: ${t.curso}</div>
+        <div>Alunos: ${t.alunos.length}</div>`;
+      main.appendChild(div);
     });
   }
-  renderApostilas(main, user) {
-    main.innerHTML = `<h2 class="main-header">Apostilas</h2>`;
-    const turmas = user.role === 'professor'
-      ? this.data.turmas.filter(t => t.professorId === user.id)
-      : this.data.turmas.filter(t => t.alunos.includes(user.id));
-    turmas.forEach(turma=>{
+
+  //---- APOSTILAS ----
+  renderApostilas(main) {
+    main.innerHTML = '<h2 class="main-header">Apostilas</h2>';
+    let turmas = [];
+    if(this.user.role==='professor'){
+      turmas = this.data.turmas.filter(t=>t.professorId===this.user.id);
+    } else {
+      turmas = this.data.turmas.filter(t => t.alunos.includes(this.user.id));
+    }
+    turmas.forEach(t => {
       const section = document.createElement('section');
       section.className = 'dp-card';
-      section.innerHTML = `<div class="dp-card-title">${turma.name}</div>`;
-      const ul = document.createElement('ul'); ul.style.marginTop = '9px'; turma.apostilas.forEach(apo=>{
+      section.innerHTML = `<div class="dp-card-title">${t.name}</div>`;
+      const ul = document.createElement('ul');
+      t.apostilas.forEach(ap=>{
         const li = document.createElement('li');
-        li.innerHTML = `<a href="${apo.url}" class="text-link" target="_blank">${apo.titulo}</a> — <small>${apo.descricao}</small>`;
+        li.innerHTML = `<a href="${ap.url}" class="text-link" target="_blank">${ap.titulo}</a> — <small>${ap.descricao}</small>`;
         ul.appendChild(li);
       });
-      if (user.role === 'professor') {
+      if (this.user.role === 'professor') {
         const btn = document.createElement('button');
         btn.className = 'btn btn-primary';
         btn.textContent = '+ Apostila';
-        btn.onclick = () => this.modalApostila(turma, () => this.renderApostilas(main, user));
+        btn.onclick = () => this.modalApostila(t, () => this.renderApostilas(main));
         section.appendChild(btn);
       }
-      section.appendChild(ul); main.appendChild(section);
+      section.appendChild(ul);
+      main.appendChild(section);
     });
   }
+
   modalApostila(turma, cb) {
     this.modalOpen(`<form>
       <h2>Adicionar Apostila (${turma.name})</h2>
@@ -127,10 +187,12 @@ class App {
       modal.querySelector('.btn-danger').onclick = ()=>this.modalClose();
     });
   }
-  renderAvaliacoes(main, user) {
-    main.innerHTML = `<h2 class="main-header">Avaliações</h2>`;
-    if (user.role === 'professor') {
-      this.data.turmas.filter(t=>t.professorId===user.id).forEach(turma=>{
+
+  //---- AVALIAÇÕES ----
+  renderAvaliacoes(main) {
+    main.innerHTML = '<h2 class="main-header">Avaliações</h2>';
+    if (this.user.role === 'professor') {
+      this.data.turmas.filter(t=>t.professorId===this.user.id).forEach(turma=>{
         const section = document.createElement('section');
         section.className = 'dp-card';
         section.innerHTML = `<div class="dp-card-title">${turma.name}</div>`;
@@ -151,13 +213,14 @@ class App {
           btn.onclick=()=>{
             const aluno=this.data.alunos.find(a=>a.id===btn.getAttribute('data-aluno'));
             const entrega=this.data.entregas.find(e=>e.turmaId===turma.id && e.alunoId===aluno.id)||{ alunoId:aluno.id,turmaId:turma.id,avaliacao:{} };
-            this.modalAvaliacao(turma, aluno, entrega, ()=>this.renderAvaliacoes(main,user));
+            this.modalAvaliacao(turma, aluno, entrega, ()=>this.renderAvaliacoes(main));
           };
         });
       });
     } else {
-      this.data.turmas.filter(t=>t.alunos.includes(user.id)).forEach(turma=>{
-        const entrega = this.data.entregas.find(e=>e.turmaId===turma.id && e.alunoId===user.id);
+      // ALUNO
+      this.data.turmas.filter(t=>t.alunos.includes(this.user.id)).forEach(turma=>{
+        const entrega = this.data.entregas.find(e=>e.turmaId===turma.id && e.alunoId===this.user.id);
         const section = document.createElement('section');
         section.className = 'dp-card';
         section.innerHTML = `<div class="dp-card-title">${turma.name}</div>`;
@@ -167,6 +230,7 @@ class App {
       });
     }
   }
+
   modalAvaliacao(turma, aluno, entrega, cb) {
     this.modalOpen(`<form>
       <h2>Avaliar ${aluno.name} — ${turma.name}</h2>
@@ -218,11 +282,13 @@ class App {
       modal.querySelector('.btn-danger').onclick=()=>this.modalClose();
     });
   }
-  renderConfig(main, user) {
+
+  //---- CONFIG ----
+  renderConfig(main) {
     main.innerHTML = `<h2 class="main-header">Configurações</h2>
-      <p><strong>Nome:</strong> ${user.name}</p>
-      <p><strong>Email:</strong> ${user.email}</p>
-      <p><strong>Tipo:</strong> ${user.role}</p>
+      <p><strong>Nome:</strong> ${this.user.name}</p>
+      <p><strong>Email:</strong> ${this.user.email}</p>
+      <p><strong>Tipo:</strong> ${this.user.role}</p>
       <button id="btnLogout" class="btn btn-primary">Sair</button>
     `;
     document.getElementById('btnLogout').onclick = () => {
@@ -230,16 +296,17 @@ class App {
       location.href = 'login.html';
     };
   }
-  renderAdmin(main, user) {
+
+  //---- ADMINISTRAÇÃO (PROFESSOR) ----
+  renderAdmin(main) {
     main.innerHTML = `<h2 class="main-header">Administração</h2>`;
-    // GERENCIADOR DE TURMAS
     const section = document.createElement('section');
     section.className = 'dp-card';
     section.innerHTML = `<div class="dp-card-title">Turmas Cadastradas</div>`;
     const table = document.createElement('table');
     table.className = 'table';
     table.innerHTML = `<thead><tr><th>Código</th><th>Nome</th><th>Curso</th><th>Alunos</th><th>Ações</th></tr></thead><tbody></tbody>`;
-    this.data.turmas.filter(t=>t.professorId===user.id).forEach(t=>{
+    this.data.turmas.filter(t=>t.professorId===this.user.id).forEach(t=>{
       const tr = document.createElement('tr');
       tr.innerHTML=`
         <td><span class="dp-code-badge">${t.code}</span></td>
@@ -253,23 +320,21 @@ class App {
       table.querySelector('tbody').appendChild(tr);
     });
     section.appendChild(table);
-    // Adicionar Turma
     const btnAdd = document.createElement('button');
     btnAdd.className = 'btn btn-primary';
     btnAdd.textContent = '+ Nova Turma';
     btnAdd.onclick = () => this.modalTurma(null, t=>{
       this.data.turmas.push(t);
       this.saveData();
-      this.renderAdmin(main, user);
+      this.renderAdmin(main);
     });
     section.appendChild(btnAdd);
     main.appendChild(section);
-    // Edição e exclusão
     table.querySelectorAll('.btn.btn-primary').forEach(btn=>{
       btn.onclick=()=>{
         const turma=this.data.turmas.find(t=>t.id===btn.dataset.id);
         this.modalTurma(turma, newData=>{
-          Object.assign(turma,newData);this.saveData();this.renderAdmin(main,user);
+          Object.assign(turma,newData);this.saveData();this.renderAdmin(main);
         },true);
       };
     });
@@ -278,13 +343,13 @@ class App {
         const tId=btn.dataset.id;
         if(confirm('Confirma excluir a turma?')) {
           this.data.turmas=this.data.turmas.filter(t=>t.id!==tId);
-          this.saveData(); this.renderAdmin(main,user);
+          this.saveData(); this.renderAdmin(main);
         }
       };
     });
   }
+
   modalTurma(turma, cb, editing) {
-    // Code auto para nova turma
     const code = turma?.code || (["INF","JOG","MEC","AUT"][Math.floor(Math.random()*4)] + Math.floor(1000+Math.random()*9000));
     this.modalOpen(`<form>
       <h2>${editing?'Editar':'Nova'} Turma</h2>
@@ -312,7 +377,8 @@ class App {
       form.querySelector('.btn-danger').onclick=()=>this.modalClose();
     });
   }
-  // Modal genérico
+
+  //--- MODAL GENERIC ---
   modalOpen(html, cb) {
     if(document.querySelector('#nexus-modal-bg')) return;
     const bg=document.createElement('div');
@@ -329,4 +395,5 @@ class App {
     if(el)document.body.removeChild(el);
   }
 }
+
 document.addEventListener('DOMContentLoaded',()=>{window.NEXUS_APP=new App();});
